@@ -1,6 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext.jsx'
+
+const REMEMBER_KEY = 'fdp-remembered-credentials'
 
 export default function Login() {
   const { signIn } = useAuth()
@@ -8,8 +10,22 @@ export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
+  const [rememberPassword, setRememberPassword] = useState(false)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(REMEMBER_KEY) || 'null')
+      if (saved?.email) {
+        setEmail(saved.email)
+        setPassword(saved.password || '')
+        setRememberPassword(true)
+      }
+    } catch {
+      // localStorage corrupto o inaccesible: se ignora y se deja el formulario vacío.
+    }
+  }, [])
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -21,6 +37,12 @@ export default function Login() {
     if (signInError) {
       setError('Email o contraseña incorrectos. Inténtalo de nuevo.')
       return
+    }
+
+    if (rememberPassword) {
+      localStorage.setItem(REMEMBER_KEY, JSON.stringify({ email, password }))
+    } else {
+      localStorage.removeItem(REMEMBER_KEY)
     }
 
     navigate('/aula')
@@ -92,11 +114,20 @@ export default function Login() {
             </div>
           </div>
 
-          <p className="text-right text-sm">
-            <Link to="/recuperar-contrasena" className="font-medium text-navy hover:underline dark:text-navy-light">
+          <div className="flex items-center justify-between">
+            <label className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+              <input
+                type="checkbox"
+                checked={rememberPassword}
+                onChange={(e) => setRememberPassword(e.target.checked)}
+                className="h-4 w-4 rounded border-gray-300 text-navy focus:ring-navy dark:border-gray-600 dark:bg-gray-800"
+              />
+              Recordar email y contraseña
+            </label>
+            <Link to="/recuperar-contrasena" className="text-sm font-medium text-navy hover:underline dark:text-navy-light">
               ¿Olvidaste tu contraseña?
             </Link>
-          </p>
+          </div>
 
           {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
 

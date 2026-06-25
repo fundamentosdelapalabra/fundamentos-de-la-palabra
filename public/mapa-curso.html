@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fundamentos de la Palabra · Mapa interactivo</title>
+  <style>
+    :root {
+      --ink: #203039;
+      --paper: #fbf4e3;
+      --blue: #295674;
+      --ochre: #a86e29;
+      --wine: #864258;
+      --gold: #bd872d;
+      --teal: #31858a;
+      --green: #417c59;
+    }
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      color: var(--ink);
+      background: #f8efd9;
+    }
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      background: linear-gradient(180deg, rgba(255,250,238,.88), rgba(255,249,235,.48) 45%, rgba(255,248,230,.78));
+      pointer-events: none;
+    }
+    button { font: inherit; }
+    .app {
+      position: relative;
+      width: 100%; height: 100%;
+      min-width: 880px;
+      min-height: 560px;
+      isolation: isolate;
+    }
+    header {
+      position: absolute; z-index: 4;
+      top: 4.2vh; left: 4.3vw;
+      max-width: 68vw;
+      animation: reveal .8s ease-out both;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(34px, 4vw, 68px);
+      line-height: .98;
+      letter-spacing: -.04em;
+    }
+    .lead {
+      margin: 1.2vh 0 0;
+      font-size: clamp(15px, 1.35vw, 23px);
+      color: #526069;
+    }
+    .hint {
+      display: inline-flex; align-items: center; gap: .5rem;
+      margin-top: 1.4vh; padding: .55rem .9rem;
+      border: 1px solid rgba(39,67,73,.18);
+      border-radius: 999px;
+      background: rgba(255,255,255,.62);
+      font-size: clamp(12px, .95vw, 16px);
+      color: #536268;
+      backdrop-filter: blur(6px);
+    }
+    .toolbar {
+      position: absolute; z-index: 8;
+      top: 4.2vh; right: 3.2vw;
+      display: flex; gap: .6rem;
+    }
+    .tool {
+      width: 46px; height: 46px;
+      border: 1px solid rgba(35,57,61,.18);
+      border-radius: 50%;
+      background: rgba(255,255,255,.78);
+      color: #31474f;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(38,46,43,.12);
+      transition: transform .2s, background .2s;
+    }
+    .tool:hover { transform: translateY(-2px); background: white; }
+
+    .journey {
+      position: absolute; z-index: 3;
+      left: 4vw; right: 4vw; top: 27vh; bottom: 8vh;
+    }
+    .path {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      overflow: visible;
+      filter: drop-shadow(0 6px 8px rgba(44,48,38,.13));
+    }
+    .path-base {
+      fill: none;
+      stroke: rgba(255,255,255,.88);
+      stroke-width: 21;
+      stroke-linecap: round;
+    }
+    .path-color {
+      fill: none;
+      stroke: url(#routeGradient);
+      stroke-width: 11;
+      stroke-linecap: round;
+      stroke-dasharray: 12 17;
+      animation: route 25s linear infinite;
+    }
+    .module {
+      --color: var(--blue);
+      position: absolute;
+      width: clamp(145px, 13.7vw, 250px);
+      aspect-ratio: 1.18;
+      transform: translate(-50%, -50%);
+      border: 0;
+      border-radius: 28px;
+      padding: 1.1rem 1rem;
+      color: white;
+      background:
+        radial-gradient(circle at 75% 18%, rgba(255,255,255,.23), transparent 28%),
+        linear-gradient(145deg, color-mix(in srgb, var(--color), white 11%), var(--color));
+      box-shadow: 0 18px 36px color-mix(in srgb, var(--color), transparent 68%);
+      cursor: pointer;
+      text-align: left;
+      transition: transform .25s ease, box-shadow .25s ease, filter .25s;
+      animation: float 5s ease-in-out infinite, reveal .7s ease-out both;
+      animation-delay: calc(var(--i) * .11s);
+    }
+    .module:hover, .module:focus-visible {
+      transform: translate(-50%, -50%) scale(1.07);
+      box-shadow: 0 24px 48px color-mix(in srgb, var(--color), transparent 55%);
+      filter: saturate(1.07);
+      outline: none;
+    }
+    .module::after {
+      content: "";
+      position: absolute;
+      inset: 7px;
+      border: 1px solid rgba(255,255,255,.24);
+      border-radius: 22px;
+      pointer-events: none;
+    }
+    .icon {
+      width: clamp(30px, 2.8vw, 48px);
+      height: clamp(30px, 2.8vw, 48px);
+      margin-bottom: .5rem;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: .95;
+    }
+    .number {
+      display: block;
+      font-weight: 750;
+      font-size: clamp(12px, .85vw, 15px);
+      letter-spacing: .1em;
+      opacity: .78;
+    }
+    .module-title {
+      display: block;
+      margin-top: .24rem;
+      font-weight: 750;
+      font-size: clamp(15px, 1.22vw, 22px);
+      line-height: 1.08;
+    }
+    .weeks {
+      display: block;
+      margin-top: .55rem;
+      font-size: clamp(11px, .82vw, 14px);
+      opacity: .8;
+    }
+    .m1 { --color: var(--blue);  left: 8%;  top: 57%; }
+    .m2 { --color: var(--ochre); left: 25%; top: 30%; }
+    .m3 { --color: var(--wine);  left: 42%; top: 58%; }
+    .m4 { --color: var(--gold);  left: 59%; top: 31%; }
+    .m5 { --color: var(--teal);  left: 76%; top: 58%; }
+    .m6 { --color: var(--green); left: 93%; top: 31%; }
+
+    .start, .finish {
+      position: absolute;
+      font-size: clamp(11px, .8vw, 14px);
+      font-weight: 750;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #52615c;
+    }
+    .start { left: 1%; top: 92%; }
+    .finish { right: 0; top: 2%; }
+
+    .leaf {
+      position: absolute; z-index: 1;
+      width: 18px; height: 9px;
+      border-radius: 100% 0 100% 0;
+      background: rgba(104,132,76,.26);
+      animation: drift 14s linear infinite;
+      pointer-events: none;
+    }
+    .leaf:nth-of-type(1) { left: 10%; top: -5%; animation-delay: -3s; }
+    .leaf:nth-of-type(2) { left: 38%; top: -8%; animation-delay: -9s; transform: scale(.7); }
+    .leaf:nth-of-type(3) { left: 67%; top: -4%; animation-delay: -6s; transform: scale(1.2); }
+    .leaf:nth-of-type(4) { left: 88%; top: -10%; animation-delay: -12s; transform: scale(.8); }
+
+    .overlay {
+      position: fixed; z-index: 20;
+      inset: 0;
+      display: grid; place-items: center;
+      padding: 4vh 4vw;
+      background: rgba(22,35,40,.52);
+      backdrop-filter: blur(10px);
+      opacity: 0; visibility: hidden;
+      transition: opacity .25s, visibility .25s;
+    }
+    .overlay.open { opacity: 1; visibility: visible; }
+    .dialog {
+      --accent: var(--blue);
+      position: relative;
+      width: min(1080px, 88vw);
+      max-height: 86vh;
+      overflow: auto;
+      border-radius: 32px;
+      background: rgba(255,252,245,.98);
+      box-shadow: 0 32px 90px rgba(10,20,22,.35);
+      transform: translateY(20px) scale(.98);
+      transition: transform .3s ease;
+    }
+    .overlay.open .dialog { transform: translateY(0) scale(1); }
+    .dialog-head {
+      position: sticky; top: 0; z-index: 2;
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1.4rem 5rem 1.35rem 1.7rem;
+      color: white;
+      background: var(--accent);
+    }
+    .dialog-head .icon { flex: 0 0 auto; margin: 0; }
+    .dialog-kicker {
+      margin: 0 0 .18rem;
+      font-size: .82rem; font-weight: 750;
+      text-transform: uppercase; letter-spacing: .1em; opacity: .78;
+    }
+    .dialog h2 { margin: 0; font-size: clamp(24px, 2.4vw, 40px); line-height: 1.05; }
+    .close {
+      position: absolute; z-index: 4;
+      top: 1.15rem; right: 1.2rem;
+      width: 44px; height: 44px;
+      border: 1px solid rgba(255,255,255,.36);
+      border-radius: 50%;
+      color: white; background: rgba(255,255,255,.12);
+      cursor: pointer; font-size: 1.7rem; line-height: 1;
+    }
+    .classes {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      padding: 1.5rem;
+    }
+    .class-card {
+      position: relative;
+      min-height: 154px;
+      padding: 1.25rem 1.25rem 1.15rem 4.5rem;
+      border: 1px solid color-mix(in srgb, var(--accent), transparent 79%);
+      border-radius: 20px;
+      background: white;
+      box-shadow: 0 8px 24px rgba(45,50,46,.07);
+      animation: cardIn .36s ease-out both;
+      animation-delay: calc(var(--n) * .06s);
+    }
+    .class-no {
+      position: absolute; left: 1.1rem; top: 1.2rem;
+      display: grid; place-items: center;
+      width: 42px; height: 42px; border-radius: 50%;
+      color: white; background: var(--accent);
+      font-weight: 800;
+    }
+    .class-card h3 { margin: 0; font-size: clamp(17px, 1.35vw, 22px); line-height: 1.14; }
+    .class-card p { margin: .65rem 0 0; color: #5b676a; font-size: clamp(14px, 1vw, 17px); line-height: 1.35; }
+    .dialog-foot {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 1.6rem 1.4rem;
+      color: #667174; font-size: .9rem;
+    }
+    .nav-buttons { display: flex; gap: .55rem; }
+    .nav {
+      padding: .55rem .9rem;
+      border: 1px solid rgba(38,55,59,.18);
+      border-radius: 999px;
+      background: white; color: #34484e; cursor: pointer;
+    }
+    .nav:hover { background: #f2eee4; }
+
+    @keyframes float {
+      0%,100% { translate: 0 0; }
+      50% { translate: 0 -8px; }
+    }
+    @keyframes drift {
+      from { translate: -5vw -12vh; rotate: 0deg; }
+      to { translate: 16vw 112vh; rotate: 520deg; }
+    }
+    @keyframes route { to { stroke-dashoffset: -290; } }
+    @keyframes reveal {
+      from { opacity: 0; translate: 0 12px; }
+      to { opacity: 1; translate: 0 0; }
+    }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
+    @media (max-aspect-ratio: 4/3) {
+      .journey { top: 24vh; }
+      .module { width: clamp(130px, 13.5vw, 210px); }
+    }
+  </style>
+</head>
+<body>
+<main class="app">
+  <header>
+    <h1>Fundamentos de la Palabra</h1>
+    <p class="lead">Un viaje en seis módulos, desde la Escritura hasta el discipulado de otros.</p>
+    <div class="hint">Pulsa un módulo para descubrir sus cuatro clases</div>
+  </header>
+
+  <div class="toolbar">
+    <button class="tool" id="fullscreen" title="Pantalla completa" aria-label="Pantalla completa">⛶</button>
+  </div>
+
+  <section class="journey" aria-label="Recorrido de los seis módulos">
+    <svg class="path" viewBox="0 0 1000 420" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="routeGradient" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#295674"/>
+          <stop offset=".2" stop-color="#a86e29"/>
+          <stop offset=".4" stop-color="#864258"/>
+          <stop offset=".6" stop-color="#bd872d"/>
+          <stop offset=".8" stop-color="#31858a"/>
+          <stop offset="1" stop-color="#417c59"/>
+        </linearGradient>
+      </defs>
+      <path class="path-base" d="M25 360 C120 360, 120 115, 250 115 S350 335, 420 335 S515 115, 590 115 S690 335, 760 335 S860 115, 975 115"/>
+      <path class="path-color" d="M25 360 C120 360, 120 115, 250 115 S350 335, 420 335 S515 115, 590 115 S690 335, 760 335 S860 115, 975 115"/>
+    </svg>
+
+    <span class="start">Comienzo</span>
+    <span class="finish">Madurez y envío</span>
+    <i class="leaf"></i><i class="leaf"></i><i class="leaf"></i><i class="leaf"></i>
+
+    <button class="module m1" style="--i:1" data-module="0">
+      <svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18"/><path d="M9 24h30M24 6c6 6 8 12 8 18s-2 12-8 18c-6-6-8-12-8-18s2-12 8-18Z"/></svg>
+      <span class="number">MÓDULO 1</span><span class="module-title">La Biblia, Dios y el comienzo</span><span class="weeks">Semanas 1–4</span>
+    </button>
+    <button class="module m2" style="--i:2" data-module="1">
+      <svg class="icon" viewBox="0 0 48 48"><path d="M9 40V17l15-9 15 9v23M16 40V25h16v15M13 17h22"/></svg>
+      <span class="number">MÓDULO 2</span><span class="module-title">Pacto, pueblo de Dios y obediencia</span><span class="weeks">Semanas 5–8</span>
+    </button>
+    <button class="module m3" style="--i:3" data-module="2">
+      <svg class="icon" viewBox="0 0 48 48"><path d="m9 17 8 6 7-13 7 13 8-6-3 22H12L9 17ZM14 34h20"/></svg>
+      <span class="number">MÓDULO 3</span><span class="module-title">Reino, sabiduría, profetas y esperanza</span><span class="weeks">Semanas 9–12</span>
+    </button>
+    <button class="module m4" style="--i:4" data-module="3">
+      <svg class="icon" viewBox="0 0 48 48"><path d="M24 6v36M12 17h24"/><path d="M8 39c6-5 11-6 16 0 5-6 10-5 16 0"/></svg>
+      <span class="number">MÓDULO 4</span><span class="module-title">Jesucristo y el evangelio</span><span class="weeks">Semanas 13–16</span>
+    </button>
+    <button class="module m5" style="--i:5" data-module="4">
+      <svg class="icon" viewBox="0 0 48 48"><circle cx="16" cy="18" r="5"/><circle cx="32" cy="18" r="5"/><circle cx="24" cy="11" r="5"/><path d="M7 39c0-8 4-12 9-12M41 39c0-8-4-12-9-12M15 39c0-9 4-14 9-14s9 5 9 14"/></svg>
+      <span class="number">MÓDULO 5</span><span class="module-title">Vida del discípulo y la iglesia</span><span class="weeks">Semanas 17–20</span>
+    </button>
+    <button class="module m6" style="--i:6" data-module="5">
+      <svg class="icon" viewBox="0 0 48 48"><path d="M24 41V18M24 27c-8 0-13-5-13-12 8 0 13 5 13 12ZM24 21c7 0 12-5 12-12-7 0-12 5-12 12Z"/><path d="M12 41h24"/></svg>
+      <span class="number">MÓDULO 6</span><span class="module-title">Madurez, perseverancia y discipulado</span><span class="weeks">Semanas 21–24</span>
+    </button>
+  </section>
+</main>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
+  <article class="dialog" id="dialog">
+    <button class="close" id="close" aria-label="Cerrar">×</button>
+    <div class="dialog-head">
+      <div id="dialog-icon"></div>
+      <div><p class="dialog-kicker" id="dialog-kicker"></p><h2 id="dialog-title"></h2></div>
+    </div>
+    <div class="classes" id="classes"></div>
+    <footer class="dialog-foot">
+      <span>Puedes usar las teclas 1–6 para cambiar de módulo y Esc para cerrar.</span>
+      <div class="nav-buttons">
+        <button class="nav" id="prev">← Anterior</button>
+        <button class="nav" id="next">Siguiente →</button>
+      </div>
+    </footer>
+  </article>
+</div>
+
+<script>
+  const modules = [
+    {
+      color:"#295674", title:"La Biblia, Dios y el comienzo de todo", weeks:"Módulo 1 · Semanas 1–4",
+      icon:'<svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18"/><path d="M9 24h30M24 6c6 6 8 12 8 18s-2 12-8 18c-6-6-8-12-8-18s2-12 8-18Z"/></svg>',
+      classes:[
+        ["Qué es la Biblia y por qué debemos aprender a leerla bien","Inspiración, utilidad de la Escritura y lectura responsable."],
+        ["El gran mapa de la Biblia","Antiguo Testamento, Nuevo Testamento y el hilo general de la historia bíblica."],
+        ["Dios Creador y el origen de todo","Creación, dignidad humana, propósito y dependencia de Dios."],
+        ["La caída, el pecado y la primera promesa","Génesis 3, desobediencia y necesidad de salvación."]
+      ]
+    },
+    {
+      color:"#a86e29", title:"Pacto, pueblo de Dios y obediencia", weeks:"Módulo 2 · Semanas 5–8",
+      icon:'<svg class="icon" viewBox="0 0 48 48"><path d="M9 40V17l15-9 15 9v23M16 40V25h16v15M13 17h22"/></svg>',
+      classes:[
+        ["Abraham y el Dios que llama","Fe, promesa, pacto y obediencia."],
+        ["Moisés, liberación y formación del pueblo","Éxodo, esclavitud, liberación y confianza en Dios."],
+        ["La ley, el pacto y la santidad de Dios","Mandamientos, santidad, obediencia y relación con Dios."],
+        ["Idolatría, desierto y fidelidad de Dios","Corazón humano, queja, confianza y misericordia."]
+      ]
+    },
+    {
+      color:"#864258", title:"Reino, sabiduría, profetas y esperanza", weeks:"Módulo 3 · Semanas 9–12",
+      icon:'<svg class="icon" viewBox="0 0 48 48"><path d="m9 17 8 6 7-13 7 13 8-6-3 22H12L9 17ZM14 34h20"/></svg>',
+      classes:[
+        ["David y el reino: liderazgo bajo Dios","Corazón, arrepentimiento, promesa y reino."],
+        ["Salmos y Proverbios: oración y sabiduría para vivir","Adoración, temor de Jehová, sabiduría práctica y carácter."],
+        ["Los profetas: volver a Dios con justicia y verdad","Arrepentimiento, justicia, misericordia y fidelidad."],
+        ["Esperanza mesiánica: la promesa que apunta hacia Cristo","Promesas, restauración, siervo, reino y esperanza."]
+      ]
+    },
+    {
+      color:"#bd872d", title:"Jesucristo y el evangelio", weeks:"Módulo 4 · Semanas 13–16",
+      icon:'<svg class="icon" viewBox="0 0 48 48"><path d="M24 6v36M12 17h24"/><path d="M8 39c6-5 11-6 16 0 5-6 10-5 16 0"/></svg>',
+      classes:[
+        ["Jesús: nacimiento, identidad y misión","Quién es Jesús y por qué su venida cambia la historia."],
+        ["El Reino de Dios y las enseñanzas de Jesús","Reino, parábolas, discipulado y vida transformada."],
+        ["La cruz: pecado, perdón y gracia","Sacrificio, redención, perdón y amor de Dios."],
+        ["La resurrección y la buena noticia del evangelio","Victoria, fe, arrepentimiento, salvación y esperanza."]
+      ]
+    },
+    {
+      color:"#31858a", title:"Vida del discípulo y la iglesia", weeks:"Módulo 5 · Semanas 17–20",
+      icon:'<svg class="icon" viewBox="0 0 48 48"><circle cx="16" cy="18" r="5"/><circle cx="32" cy="18" r="5"/><circle cx="24" cy="11" r="5"/><path d="M7 39c0-8 4-12 9-12M41 39c0-8-4-12-9-12M15 39c0-9 4-14 9-14s9 5 9 14"/></svg>',
+      classes:[
+        ["El Espíritu Santo y la vida nueva","Nuevo nacimiento, guía, fruto y transformación."],
+        ["Oración, comunión y vida diaria con Dios","Oración bíblica, dependencia, perseverancia y confianza."],
+        ["La iglesia: familia, cuerpo y servicio","Comunidad, dones, edificación y cuidado mutuo."],
+        ["Misión: compartir la Palabra con humildad","Testimonio, evangelio, servicio y amor al prójimo."]
+      ]
+    },
+    {
+      color:"#417c59", title:"Madurez, perseverancia y discipulado a otros", weeks:"Módulo 6 · Semanas 21–24",
+      icon:'<svg class="icon" viewBox="0 0 48 48"><path d="M24 41V18M24 27c-8 0-13-5-13-12 8 0 13 5 13 12ZM24 21c7 0 12-5 12-12-7 0-12 5-12 12Z"/><path d="M12 41h24"/></svg>',
+      classes:[
+        ["Cómo leer un pasaje bíblico sin perderse","Observación, interpretación, aplicación y errores comunes."],
+        ["Cómo preparar una pequeña enseñanza bíblica","Idea central, contexto, explicación, aplicación y claridad."],
+        ["Perseverancia, pruebas y esperanza final","Madurez, fidelidad, sufrimiento, esperanza y regreso del Señor."],
+        ["Cierre del curso: repaso final y envío a discipular","Evaluación final, aprendizajes, próximos pasos y servicio."]
+      ]
+    }
+  ];
+
+  const overlay = document.querySelector("#overlay");
+  const dialog = document.querySelector("#dialog");
+  const classes = document.querySelector("#classes");
+  let active = 0;
+
+  function openModule(index) {
+    active = (index + modules.length) % modules.length;
+    const m = modules[active];
+    dialog.style.setProperty("--accent", m.color);
+    document.querySelector("#dialog-icon").innerHTML = m.icon;
+    document.querySelector("#dialog-kicker").textContent = m.weeks;
+    document.querySelector("#dialog-title").textContent = m.title;
+    classes.innerHTML = m.classes.map((item, i) => `
+      <section class="class-card" style="--n:${i}">
+        <span class="class-no">${active * 4 + i + 1}</span>
+        <h3>${item[0]}</h3>
+        <p>${item[1]}</p>
+      </section>`).join("");
+    overlay.classList.add("open");
+    document.querySelector("#close").focus();
+  }
+  function closeModule() { overlay.classList.remove("open"); }
+
+  document.querySelectorAll(".module").forEach(button =>
+    button.addEventListener("click", () => openModule(Number(button.dataset.module))));
+  document.querySelector("#close").addEventListener("click", closeModule);
+  document.querySelector("#prev").addEventListener("click", () => openModule(active - 1));
+  document.querySelector("#next").addEventListener("click", () => openModule(active + 1));
+  overlay.addEventListener("click", e => { if (e.target === overlay) closeModule(); });
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") closeModule();
+    if (/^[1-6]$/.test(e.key)) openModule(Number(e.key) - 1);
+    if (overlay.classList.contains("open") && e.key === "ArrowRight") openModule(active + 1);
+    if (overlay.classList.contains("open") && e.key === "ArrowLeft") openModule(active - 1);
+  });
+  document.querySelector("#fullscreen").addEventListener("click", async () => {
+    if (!document.fullscreenElement) await document.documentElement.requestFullscreen();
+    else await document.exitFullscreen();
+  });
+</script>
+</body>
+</html>

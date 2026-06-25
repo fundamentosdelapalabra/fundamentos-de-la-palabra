@@ -10,6 +10,7 @@ export default function Registro() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
+  const [rememberPassword, setRememberPassword] = useState(false)
   const [error, setError] = useState('')
   const [info, setInfo] = useState('')
   const [loading, setLoading] = useState(false)
@@ -26,6 +27,12 @@ export default function Registro() {
     if (signUpError) {
       setError(signUpError.message || 'No se ha podido completar el registro.')
       return
+    }
+
+    if (rememberPassword) {
+      localStorage.setItem('fdp-remembered-credentials', JSON.stringify({ email, password }))
+    } else {
+      localStorage.removeItem('fdp-remembered-credentials')
     }
 
     if (data?.session) {
@@ -126,6 +133,16 @@ export default function Registro() {
               </button>
             </div>
           </div>
+
+          <label className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+            <input
+              type="checkbox"
+              checked={rememberPassword}
+              onChange={(e) => setRememberPassword(e.target.checked)}
+              className="h-4 w-4 rounded border-gray-300 text-navy focus:ring-navy dark:border-gray-600 dark:bg-gray-800"
+            />
+            Recordar email y contraseña
+          </label>
 
           {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
           {info && <p className="text-sm text-navy dark:text-navy-light">{info}</p>}

@@ -67,6 +67,10 @@ function ModuleIcon({ id }) {
   )
 }
 
+// Interruptor para el mapa interactivo de la Landing: ponlo en `true` el día
+// que José confirme que se puede publicar (igual que "disponible" en las lecciones).
+const MOSTRAR_MAPA_INTERACTIVO = false
+
 const DETAILS = [
   { label: 'Grupo pequeño por Meet' },
   { label: 'Sábados a las 10:00 PM (hora española)' },
@@ -141,6 +145,25 @@ export default function Landing() {
           </div>
         </div>
       </section>
+
+      {/* Mapa interactivo del curso */}
+      {MOSTRAR_MAPA_INTERACTIVO && (
+        <section className="border-t border-gray-100 bg-white py-16 sm:py-20 dark:border-gray-800 dark:bg-gray-900">
+          <div className="mx-auto max-w-5xl px-6">
+            <h2 className="text-center font-serif text-2xl font-bold text-ink sm:text-3xl dark:text-gray-100">
+              Explora el recorrido completo
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl text-center text-gray-500 dark:text-gray-400">
+              Pulsa cada módulo del mapa para ver sus cuatro clases.
+            </p>
+            <iframe
+              src="/mapa-curso.html"
+              title="Mapa interactivo del curso"
+              className="mt-10 h-[560px] w-full rounded-2xl border border-gray-100 shadow-soft sm:h-[620px] dark:border-gray-800"
+            />
+          </div>
+        </section>
+      )}
 
       {/* Detalles del curso */}
       <section className="border-t border-gray-100 py-16 sm:py-20 dark:border-gray-800">
