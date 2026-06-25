@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { AuthProvider, useAuth } from './context/AuthContext.jsx'
+import { useAuth } from './context/AuthContext.jsx'
 import Landing from './pages/Landing.jsx'
 import Login from './pages/Login.jsx'
 import Registro from './pages/Registro.jsx'
@@ -165,9 +165,5 @@ function AppRoutes() {
 }
 
 export default function App() {
-  return (
-    <AuthProvider>
-      <AppRoutes />
-    </AuthProvider>
-  )
+  return <AppRoutes />
 }

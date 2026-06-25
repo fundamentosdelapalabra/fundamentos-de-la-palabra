@@ -263,7 +263,7 @@ export default function Sidebar({ onNavigate }) {
               }`
             }
           >
-            ✅ Asistencia
+            📊 Seguimiento
           </NavLink>
         )}
       </div>

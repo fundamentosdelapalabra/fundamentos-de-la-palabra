@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import { useAuth } from '../context/AuthContext.jsx'
+import { useProgress } from '../context/ProgressContext.jsx'
+import { supabase } from '../lib/supabaseClient.js'
 
 const TABS = [
   { key: 'resumen', label: 'Resumen' },
@@ -9,6 +12,18 @@ const TABS = [
 
 export default function LessonTabs({ lesson }) {
   const [active, setActive] = useState('resumen')
+  const { user } = useAuth()
+  const { isActivityDone, toggleActivityDone } = useProgress()
+  const actividadHecha = isActivityDone(lesson.id)
+
+  function registrarDescarga() {
+    if (!user) return
+    supabase.from('descargas').insert({
+      alumno_id: user.id,
+      leccion_id: lesson.id,
+      recurso: 'material',
+    })
+  }
 
   return (
     <div className="rounded-xl bg-white shadow-soft dark:bg-gray-900">
@@ -39,10 +54,33 @@ export default function LessonTabs({ lesson }) {
         )}
 
         {active === 'actividad' && (
-          <div
-            className="lesson-content text-[15px] leading-relaxed text-gray-700 whitespace-pre-line dark:text-gray-300"
-            dangerouslySetInnerHTML={{ __html: lesson.activity }}
-          />
+          <div className="flex flex-col gap-5">
+            <div
+              className="lesson-content text-[15px] leading-relaxed text-gray-700 whitespace-pre-line dark:text-gray-300"
+              dangerouslySetInnerHTML={{ __html: lesson.activity }}
+            />
+
+            <button
+              type="button"
+              onClick={() => toggleActivityDone(lesson.id)}
+              className={`inline-flex w-fit items-center gap-2 rounded-lg border px-5 py-2.5 text-sm font-semibold transition-colors ${
+                actividadHecha
+                  ? 'border-navy bg-navy text-white hover:bg-navy-dark'
+                  : 'border-navy text-navy hover:bg-navy/5 dark:border-navy-light dark:text-navy-light dark:hover:bg-navy-light/10'
+              }`}
+            >
+              {actividadHecha ? (
+                <>
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Actividad hecha
+                </>
+              ) : (
+                'Ya he hecho la actividad'
+              )}
+            </button>
+          </div>
         )}
 
         {active === 'test' && (
@@ -86,6 +124,7 @@ export default function LessonTabs({ lesson }) {
               href={lesson.materialDriveUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={registrarDescarga}
               className="inline-flex items-center gap-2 rounded-lg border border-navy px-5 py-2.5 text-sm font-semibold text-navy transition-colors hover:bg-navy/5 dark:border-navy-light dark:text-navy-light dark:hover:bg-navy-light/10"
             >
               Abrir carpeta en Google Drive

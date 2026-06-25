@@ -1,43 +1,116 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+// ProgressContext.jsx
+// -----------------------------------------------------------------------------
+// Progreso del alumno (lecciones completadas y actividades autodeclaradas
+// como hechas). Antes se guardaba solo en el navegador (localStorage); ahora
+// se guarda en Supabase (tabla "progreso") para que el profesor pueda verlo
+// desde el panel de Seguimiento, y para que no se pierda al cambiar de
+// dispositivo o de navegador.
+// -----------------------------------------------------------------------------
 
-const STORAGE_KEY = 'fundamentos-progreso'
+import { createContext, useContext, useEffect, useState } from 'react'
+import { useAuth } from './AuthContext.jsx'
+import { supabase } from '../lib/supabaseClient.js'
 
 const ProgressContext = createContext(null)
 
-function loadFromStorage() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    if (!raw) return []
-    const parsed = JSON.parse(raw)
-    return Array.isArray(parsed) ? parsed : []
-  } catch {
-    return []
-  }
-}
-
 export function ProgressProvider({ children }) {
-  const [completedIds, setCompletedIds] = useState(loadFromStorage)
+  const { user } = useAuth()
+  const [completedIds, setCompletedIds] = useState([])
+  const [activityIds, setActivityIds] = useState([])
 
+  // Cuando cambia el usuario logueado (o al cargar), traemos su progreso.
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(completedIds))
-  }, [completedIds])
+    if (!user) {
+      setCompletedIds([])
+      setActivityIds([])
+      return
+    }
 
-  function markAsCompleted(id) {
-    setCompletedIds((prev) => (prev.includes(id) ? prev : [...prev, id]))
+    supabase
+      .from('progreso')
+      .select('leccion_id, tipo')
+      .eq('alumno_id', user.id)
+      .then(({ data, error }) => {
+        if (error || !data) return
+        setCompletedIds(data.filter((r) => r.tipo === 'leccion').map((r) => r.leccion_id))
+        setActivityIds(data.filter((r) => r.tipo === 'actividad').map((r) => r.leccion_id))
+      })
+  }, [user])
+
+  async function setProgreso(id, tipo, completado) {
+    if (!user) return
+    const { error } = await supabase.from('progreso').upsert(
+      {
+        alumno_id: user.id,
+        leccion_id: id,
+        tipo,
+        completado,
+        fecha: new Date().toISOString(),
+      },
+      { onConflict: 'alumno_id,leccion_id,tipo' }
+    )
+    return !error
   }
 
-  function unmarkAsCompleted(id) {
-    setCompletedIds((prev) => prev.filter((x) => x !== id))
+  async function quitarProgreso(id, tipo) {
+    if (!user) return
+    const { error } = await supabase
+      .from('progreso')
+      .delete()
+      .match({ alumno_id: user.id, leccion_id: id, tipo })
+    return !error
+  }
+
+  // --- Lecciones completadas ---
+
+  async function markAsCompleted(id) {
+    if (await setProgreso(id, 'leccion', true)) {
+      setCompletedIds((prev) => (prev.includes(id) ? prev : [...prev, id]))
+    }
+  }
+
+  async function unmarkAsCompleted(id) {
+    if (await quitarProgreso(id, 'leccion')) {
+      setCompletedIds((prev) => prev.filter((x) => x !== id))
+    }
   }
 
   function toggleCompleted(id) {
-    setCompletedIds((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
-    )
+    if (completedIds.includes(id)) {
+      unmarkAsCompleted(id)
+    } else {
+      markAsCompleted(id)
+    }
   }
 
   function isCompleted(id) {
     return completedIds.includes(id)
+  }
+
+  // --- Actividades hechas ---
+
+  async function markActivityDone(id) {
+    if (await setProgreso(id, 'actividad', true)) {
+      setActivityIds((prev) => (prev.includes(id) ? prev : [...prev, id]))
+    }
+  }
+
+  async function unmarkActivityDone(id) {
+    if (await quitarProgreso(id, 'actividad')) {
+      setActivityIds((prev) => prev.filter((x) => x !== id))
+    }
+  }
+
+  function toggleActivityDone(id) {
+    if (activityIds.includes(id)) {
+      unmarkActivityDone(id)
+    } else {
+      markActivityDone(id)
+    }
+  }
+
+  function isActivityDone(id) {
+    return activityIds.includes(id)
   }
 
   const value = {
@@ -46,6 +119,11 @@ export function ProgressProvider({ children }) {
     unmarkAsCompleted,
     toggleCompleted,
     isCompleted,
+    activityIds,
+    markActivityDone,
+    unmarkActivityDone,
+    toggleActivityDone,
+    isActivityDone,
   }
 
   return (
