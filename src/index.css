@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #fafaf9;
+  color: #1f2937;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.15s ease;
+}
+
+html.dark body {
+  background-color: #0a0a0c;
+  color: #e5e7eb;
+}
+
+/* Scrollbar discreto para el sidebar */
+.thin-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.thin-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(31, 41, 55, 0.18);
+  border-radius: 9999px;
+}
+.thin-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Transición suave para acordeones */
+.accordion-content {
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+/* Contenido de lecciones (summary/activity en courseData.js).
+   Da estilo automático a párrafos, negritas, listas, imágenes e iframes
+   (Canva, Google Slides) que se peguen dentro del texto de una lección,
+   sin que haya que añadir clases a mano cada vez. */
+.lesson-content p {
+  margin-bottom: 1rem;
+}
+.lesson-content strong {
+  font-weight: 700;
+}
+.lesson-content ul,
+.lesson-content ol {
+  margin: 0 0 1rem 1.25rem;
+}
+.lesson-content ul {
+  list-style-type: disc;
+}
+.lesson-content ol {
+  list-style-type: decimal;
+}
+.lesson-content img {
+  max-width: 100%;
+  border-radius: 0.75rem;
+  margin: 1.25rem 0;
+}
+.lesson-content iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: 0.75rem;
+  margin: 1.25rem 0;
+}
