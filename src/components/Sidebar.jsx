@@ -252,6 +252,19 @@ export default function Sidebar({ onNavigate }) {
           📅 Ver Calendario del Curso
         </a>
 
+        <NavLink
+          to="/aula/certificado"
+          className={({ isActive }) =>
+            `mt-3 flex w-full items-center justify-center gap-2 rounded-lg border-2 px-4 py-2.5 text-sm font-semibold transition-colors ${
+              isActive
+                ? 'border-navy bg-navy text-white'
+                : 'border-navy text-navy hover:bg-navy/5 dark:border-navy-light dark:text-navy-light dark:hover:bg-gray-800'
+            }`
+          }
+        >
+          🎓 Mi Certificado
+        </NavLink>
+
         {isAdmin(user?.email) && (
           <NavLink
             to="/aula/asistencia"

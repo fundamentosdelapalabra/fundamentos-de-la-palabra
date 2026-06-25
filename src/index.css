@@ -69,3 +69,25 @@ html.dark body {
   border-radius: 0.75rem;
   margin: 1.25rem 0;
 }
+
+/* Certificado de finalización: al imprimir (o "Guardar como PDF"), solo se
+   muestra el propio certificado, sin menú ni botones. */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body * {
+    visibility: hidden;
+  }
+  #certificado,
+  #certificado * {
+    visibility: visible;
+  }
+  #certificado {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+  }
+}

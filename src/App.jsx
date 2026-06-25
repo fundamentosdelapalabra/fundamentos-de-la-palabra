@@ -12,6 +12,7 @@ import Faq from './pages/Faq.jsx'
 import Sidebar from './components/Sidebar.jsx'
 import LessonView from './components/LessonView.jsx'
 import Asistencia from './pages/Asistencia.jsx'
+import Certificado from './pages/Certificado.jsx'
 
 function LoadingScreen() {
   return (
@@ -145,6 +146,14 @@ function AppRoutes() {
         element={
           <RequireConsentedUser>
             <AulaLayout>{(onOpenMenu) => <Asistencia onOpenMenu={onOpenMenu} />}</AulaLayout>
+          </RequireConsentedUser>
+        }
+      />
+      <Route
+        path="/aula/certificado"
+        element={
+          <RequireConsentedUser>
+            <AulaLayout>{(onOpenMenu) => <Certificado onOpenMenu={onOpenMenu} />}</AulaLayout>
           </RequireConsentedUser>
         }
       />

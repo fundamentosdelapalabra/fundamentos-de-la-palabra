@@ -18,17 +18,30 @@ export function AuthProvider({ children }) {
     supabase.auth.getSession().then(({ data }) => {
       setUser(data.session?.user ?? null)
       setLoading(false)
+      registrarVisita(data.session?.user)
     })
 
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null)
       setLoading(false)
+      registrarVisita(session?.user)
     })
 
     return () => {
       listener.subscription.unsubscribe()
     }
   }, [])
+
+  // Anota la fecha/hora de la última vez que este alumno entró en la web,
+  // para que el profesor pueda ver en su panel quién lleva tiempo sin entrar.
+  function registrarVisita(authUser) {
+    if (!authUser) return
+    supabase
+      .from('perfiles')
+      .update({ ultima_visita: new Date().toISOString() })
+      .eq('id', authUser.id)
+      .then(() => {})
+  }
 
   async function signUp({ email, password, nombre, apellido }) {
     const result = await supabase.auth.signUp({
