@@ -4,6 +4,7 @@ import { modules, getModuleLessons } from '../data/courseData.js'
 import { useProgress } from '../context/ProgressContext.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
 import { useTheme } from '../context/ThemeContext.jsx'
+import { isAdmin } from '../lib/admins.js'
 
 const MEET_URL = 'https://meet.google.com/fxy-wzpq-xxa'
 const CONTACT_EMAIL = 'fundamentosdelapalabra@gmail.com'
@@ -250,6 +251,21 @@ export default function Sidebar({ onNavigate }) {
         >
           📅 Ver Calendario del Curso
         </a>
+
+        {isAdmin(user?.email) && (
+          <NavLink
+            to="/aula/asistencia"
+            className={({ isActive }) =>
+              `mt-3 flex w-full items-center justify-center gap-2 rounded-lg border-2 px-4 py-2.5 text-sm font-semibold transition-colors ${
+                isActive
+                  ? 'border-navy bg-navy text-white'
+                  : 'border-navy text-navy hover:bg-navy/5 dark:border-navy-light dark:text-navy-light dark:hover:bg-gray-800'
+              }`
+            }
+          >
+            ✅ Asistencia
+          </NavLink>
+        )}
       </div>
 
       {/* Índice del curso */}

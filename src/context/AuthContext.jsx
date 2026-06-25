@@ -31,7 +31,7 @@ export function AuthProvider({ children }) {
   }, [])
 
   async function signUp({ email, password, nombre, apellido }) {
-    return supabase.auth.signUp({
+    const result = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -43,6 +43,19 @@ export function AuthProvider({ children }) {
         },
       },
     })
+
+    // Si el registro fue bien, guardamos también una copia básica del
+    // alumno en la tabla "perfiles" (necesaria para el panel de asistencia).
+    if (result.data?.user && !result.error) {
+      await supabase.from('perfiles').insert({
+        id: result.data.user.id,
+        nombre,
+        apellido,
+        email,
+      })
+    }
+
+    return result
   }
 
   async function signIn({ email, password }) {

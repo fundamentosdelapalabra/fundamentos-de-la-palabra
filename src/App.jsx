@@ -11,6 +11,7 @@ import Cookies from './pages/Cookies.jsx'
 import Faq from './pages/Faq.jsx'
 import Sidebar from './components/Sidebar.jsx'
 import LessonView from './components/LessonView.jsx'
+import Asistencia from './pages/Asistencia.jsx'
 
 function LoadingScreen() {
   return (
@@ -50,7 +51,10 @@ function RedirectIfAuthed({ children }) {
   return children
 }
 
-function Aula() {
+// Estructura común del Aula Virtual (sidebar + contenido). Recibe el
+// contenido a mostrar como función "children(onOpenMenu)" para poder
+// reutilizarla tanto para una lección como para el panel de Asistencia.
+function AulaLayout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
@@ -86,7 +90,7 @@ function Aula() {
 
       {/* Contenido principal */}
       <main className="flex flex-1 flex-col overflow-hidden">
-        <LessonView onOpenMenu={() => setMenuOpen(true)} />
+        {children(() => setMenuOpen(true))}
       </main>
     </div>
   )
@@ -132,7 +136,15 @@ function AppRoutes() {
         path="/aula/clase/:id"
         element={
           <RequireConsentedUser>
-            <Aula />
+            <AulaLayout>{(onOpenMenu) => <LessonView onOpenMenu={onOpenMenu} />}</AulaLayout>
+          </RequireConsentedUser>
+        }
+      />
+      <Route
+        path="/aula/asistencia"
+        element={
+          <RequireConsentedUser>
+            <AulaLayout>{(onOpenMenu) => <Asistencia onOpenMenu={onOpenMenu} />}</AulaLayout>
           </RequireConsentedUser>
         }
       />
