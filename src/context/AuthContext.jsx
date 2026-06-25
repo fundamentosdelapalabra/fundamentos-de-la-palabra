@@ -79,11 +79,35 @@ export function AuthProvider({ children }) {
     return supabase.auth.signOut()
   }
 
+  // Envía al email indicado un enlace para restablecer la contraseña. El
+  // enlace lleva al alumno a /restablecer-contrasena ya autenticado con una
+  // sesión temporal de recuperación.
+  async function resetPasswordForEmail(email) {
+    return supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/restablecer-contrasena`,
+    })
+  }
+
+  // Cambia la contraseña del usuario que ya tiene la sesión de recuperación
+  // abierta (llegó desde el enlace del email anterior).
+  async function updatePassword(newPassword) {
+    return supabase.auth.updateUser({ password: newPassword })
+  }
+
   const metadata = user?.user_metadata ?? {}
   const isConsented =
     metadata.consentimiento_video === true && metadata.consentimiento_privacidad === true
 
-  const value = { user, loading, signUp, signIn, signOut, isConsented }
+  const value = {
+    user,
+    loading,
+    signUp,
+    signIn,
+    signOut,
+    resetPasswordForEmail,
+    updatePassword,
+    isConsented,
+  }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }

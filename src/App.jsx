@@ -4,6 +4,8 @@ import { useAuth } from './context/AuthContext.jsx'
 import Landing from './pages/Landing.jsx'
 import Login from './pages/Login.jsx'
 import Registro from './pages/Registro.jsx'
+import RecuperarContrasena from './pages/RecuperarContrasena.jsx'
+import RestablecerContrasena from './pages/RestablecerContrasena.jsx'
 import Consentimiento from './pages/Consentimiento.jsx'
 import AvisoLegal from './pages/AvisoLegal.jsx'
 import Privacidad from './pages/Privacidad.jsx'
@@ -117,6 +119,8 @@ function AppRoutes() {
           </RedirectIfAuthed>
         }
       />
+      <Route path="/recuperar-contrasena" element={<RecuperarContrasena />} />
+      <Route path="/restablecer-contrasena" element={<RestablecerContrasena />} />
       <Route
         path="/consentimiento"
         element={
