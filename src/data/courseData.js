@@ -119,12 +119,12 @@ export const courseData = [
     "weekLabel": "Clase 0",
     "title": "Presentación del grupo y cómo vamos a estudiar la Biblia juntos",
     "date": "2026-06-27",
-    "disponible": false,
+    "disponible": true,
     "verse": null,
     "verseRef": null,
     "summary": `<p>Bienvenido a «Fundamentos de la Palabra». Antes de la primera clase en vivo, mira este vídeo de presentación para conocer cómo vamos a estudiar la Biblia juntos durante los próximos 6 meses.</p>
 <video controls preload="metadata" style="width:100%;max-width:720px;border-radius:12px;margin-top:1rem" src="/videos/bienvenida.mp4"></video>`,
-    "activity": `Estamos preparando esta lección con cuidado. Estará disponible próximamente.`,
+    "activity": `Esta semana no hay actividad: solo te pedimos ver el vídeo de presentación y unirte a la primera clase en vivo el sábado.`,
     "testMakeupUrl": "#",
     "materialDriveUrl": "#"
   },
