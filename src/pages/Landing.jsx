@@ -172,17 +172,17 @@ export default function Landing() {
             Detalles del curso
           </h2>
 
-          <div className="mt-10 flex flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center sm:gap-0">
+          <div className="mt-10 flex flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-stretch sm:gap-0">
             {DETAILS.map((item, idx) => (
               <div
                 key={item.label}
-                className="flex flex-1 items-center justify-center gap-3 px-4 py-4"
+                className="flex flex-1 items-start justify-center gap-3 px-4 py-4"
               >
                 <span className="text-sm font-medium text-gray-600 sm:text-[15px] dark:text-gray-300">
                   {item.label}
                 </span>
                 {idx < DETAILS.length - 1 && (
-                  <span className="hidden h-5 w-px bg-gray-200 sm:ml-2 sm:block dark:bg-gray-700" />
+                  <span className="hidden w-px self-stretch bg-gray-200 sm:ml-2 sm:block dark:bg-gray-700" />
                 )}
               </div>
             ))}
