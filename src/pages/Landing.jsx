@@ -69,7 +69,7 @@ function ModuleIcon({ id }) {
 
 // Interruptor para el mapa interactivo de la Landing: ponlo en `true` el día
 // que José confirme que se puede publicar (igual que "disponible" en las lecciones).
-const MOSTRAR_MAPA_INTERACTIVO = false
+const MOSTRAR_MAPA_INTERACTIVO = true
 
 const DETAILS = [
   { label: 'Grupo pequeño por Meet' },
