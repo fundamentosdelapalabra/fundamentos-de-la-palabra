@@ -151,8 +151,8 @@ export const courseData = [
 <p>Explora el mapa bíblico interactivo para ver cómo encaja esta lección en el gran relato de la Escritura.</p>
 <a href="https://notebooklm.google.com/notebook/7daa5f63-7b5a-4e39-ae72-b9677f23c703/artifact/a580ed30-ecd8-4a0c-be0a-f0606aa4e637" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🗺️ Abrir Mapa Bíblico</a>
 <p style="margin-top:1.5rem;font-weight:600">Infografía interactiva</p>
-<p>Explora los cuatro puntos clave de la lección de forma visual e interactiva. Puedes usar el <em>modo profesor</em> para guiar el debate en clase.</p>
-<iframe src="/infografia-semana1.html" title="Infografía: La Palabra de Dios" style="width:100%;height:520px;border:0;border-radius:12px;margin-top:0.75rem;box-shadow:0 4px 16px rgba(0,0,0,0.10)" allowfullscreen></iframe>`,
+<p>Explora los cuatro puntos clave de forma visual. Incluye modo profesor y pregunta rápida para usar en clase.</p>
+<a href="/infografia-semana1.html" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">📊 Abrir Infografía</a>`,
     "activity": `<p>Esta semana repasa los conceptos clave con las tarjetas interactivas. Es una forma rápida y efectiva de fijar lo aprendido antes de la próxima clase.</p>
 <a href="https://notebooklm.google.com/notebook/7daa5f63-7b5a-4e39-ae72-b9677f23c703/artifact/4f4bb64a-9584-426f-b3d2-9d2596991464" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🃏 Abrir Tarjetas Bíblicas</a>`,
     "testMakeupUrl": "https://notebooklm.google.com/notebook/7daa5f63-7b5a-4e39-ae72-b9677f23c703/artifact/73629ab1-e437-40ae-a190-d701d0dc3744",
