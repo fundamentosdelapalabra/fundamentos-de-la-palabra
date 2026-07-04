@@ -140,9 +140,16 @@ export const courseData = [
     "disponible": true,
     "verse": null,
     "verseRef": null,
-    "summary": `Estamos preparando el resumen de esta lección. Estará disponible próximamente.`,
-    "activity": `Estamos preparando la actividad de esta semana. Estará disponible próximamente.`,
-    "testMakeupUrl": "#",
+    "summary": `<p>Esta semana descubrimos qué es la Biblia, cómo fue escrita y por qué aprender a leerla bien cambia todo. Mira el vídeo antes de la clase del sábado.</p>
+<div style="position:relative;width:100%;max-width:720px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;margin-top:1rem">
+  <iframe src="https://www.youtube.com/embed/7Nr9GJNpd3w" title="La Palabra: Dios Hablando" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<p style="margin-top:1.5rem;font-weight:600">Mapa Bíblico</p>
+<p>Explora el mapa bíblico interactivo para ver cómo encaja esta lección en el gran relato de la Escritura.</p>
+<a href="https://notebooklm.google.com/notebook/7daa5f63-7b5a-4e39-ae72-b9677f23c703/artifact/a580ed30-ecd8-4a0c-be0a-f0606aa4e637" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🗺️ Abrir Mapa Bíblico</a>`,
+    "activity": `<p>Esta semana repasa los conceptos clave con las tarjetas interactivas. Es una forma rápida y efectiva de fijar lo aprendido antes de la próxima clase.</p>
+<a href="https://notebooklm.google.com/notebook/7daa5f63-7b5a-4e39-ae72-b9677f23c703/artifact/4f4bb64a-9584-426f-b3d2-9d2596991464" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🃏 Abrir Tarjetas Bíblicas</a>`,
+    "testMakeupUrl": "https://notebooklm.google.com/notebook/7daa5f63-7b5a-4e39-ae72-b9677f23c703/artifact/73629ab1-e437-40ae-a190-d701d0dc3744",
     "materialDriveUrl": "#"
   },
   {
