@@ -86,30 +86,19 @@ export default function LessonTabs({ lesson }) {
         {active === 'test' && (
           <div className="flex flex-col items-start gap-4">
             <p className="text-[15px] leading-relaxed text-gray-700 dark:text-gray-300">
-              El test de esta semana se juega en directo, todos juntos, durante la
-              clase del sábado por Google Meet, usando Kahoot.
-            </p>
-            <p className="text-[15px] leading-relaxed text-gray-700 dark:text-gray-300">
-              No hace falta hacer nada aquí: cuando llegue el momento en la clase,
-              el profesor compartirá el PIN para entrar en{' '}
-              <span className="font-semibold text-navy dark:text-navy-light">kahoot.it</span>{' '}
-              desde el móvil u ordenador.
+              El cuestionario de esta semana está en NotebookLM. Puedes hacerlo
+              a tu propio ritmo cuando quieras.
             </p>
 
             {lesson.testMakeupUrl && lesson.testMakeupUrl !== '#' && (
-              <>
-                <p className="text-[15px] leading-relaxed text-gray-700 dark:text-gray-300">
-                  ¿No pudiste asistir a la clase? Recupera el test por tu cuenta:
-                </p>
-                <a
-                  href={lesson.testMakeupUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg bg-navy px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-navy-dark"
-                >
-                  Recuperar el Test
-                </a>
-              </>
+              <a
+                href={lesson.testMakeupUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg bg-navy px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-navy-dark"
+              >
+                Hacer el Test
+              </a>
             )}
           </div>
         )}
