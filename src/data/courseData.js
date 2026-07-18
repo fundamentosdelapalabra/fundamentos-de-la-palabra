@@ -165,7 +165,7 @@ export const courseData = [
     "weekLabel": "Semana 2",
     "title": "El gran mapa de la Biblia",
     "date": "2026-07-12",
-    "disponible": false,
+    "disponible": true,
     "verse": null,
     "verseRef": null,
     "summary": `Estamos preparando esta lección con cuidado. Estará disponible próximamente.`,
