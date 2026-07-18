@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Infografía interactiva · Bloque 1 · Lección 2</title>
+  <style>
+    :root{
+      --navy:#08213f;
+      --navy2:#0f355d;
+      --blue:#1d5b8f;
+      --cream:#fff8ea;
+      --paper:#fffdf7;
+      --gold:#d9a441;
+      --gold2:#f2cf75;
+      --soft:#eaf3fb;
+      --ink:#172033;
+      --muted:#5e6b7d;
+      --danger:#8a3b25;
+      --shadow:0 18px 45px rgba(8,33,63,.18);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(242,207,117,.24), transparent 28rem),
+        radial-gradient(circle at top right, rgba(29,91,143,.18), transparent 30rem),
+        linear-gradient(180deg, #f7f0df 0%, #f2f6fb 50%, #fff8ea 100%);
+      min-height:100vh;
+    }
+    .hero{
+      position:relative;
+      overflow:hidden;
+      color:#fff;
+      background:linear-gradient(135deg, #061a32 0%, #0c3159 65%, #061a32 100%);
+      padding:42px 18px 34px;
+      text-align:center;
+      box-shadow:0 12px 35px rgba(0,0,0,.22);
+    }
+    .hero:before,.hero:after{
+      content:"";
+      position:absolute;
+      width:280px;height:280px;border:1px solid rgba(242,207,117,.2);border-radius:50%;
+      transform:rotate(25deg);
+    }
+    .hero:before{left:-80px;top:-90px}.hero:after{right:-90px;bottom:-130px}
+    .kicker{font-weight:800;color:var(--gold2);letter-spacing:.04em;font-size:clamp(1rem,2.3vw,1.35rem)}
+    h1{margin:.3rem 0 .5rem;font-size:clamp(2rem,5vw,4.6rem);line-height:.96;letter-spacing:.02em;text-transform:uppercase}
+    .subtitle{font-size:clamp(1.1rem,2.3vw,1.7rem);max-width:980px;margin:0 auto;color:#f5f7fb;font-weight:700}
+    .badge-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+    .badge{border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);backdrop-filter:blur(8px);border-radius:999px;padding:10px 16px;font-weight:700;color:#fff}
+    .badge.gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#10233c;border:none}
+    .wrap{max-width:1180px;margin:0 auto;padding:28px 18px 80px}
+    .toolbar{
+      position:sticky;top:0;z-index:10;
+      display:flex;gap:10px;flex-wrap:wrap;justify-content:center;
+      margin:0 -18px 24px;padding:12px 18px;background:rgba(255,248,234,.82);backdrop-filter:blur(10px);border-bottom:1px solid rgba(8,33,63,.08)
+    }
+    button,.linkbtn{
+      cursor:pointer;border:none;border-radius:999px;padding:11px 15px;font-weight:800;
+      background:#fff;color:var(--navy);box-shadow:0 6px 18px rgba(8,33,63,.1);transition:.2s ease;text-decoration:none;font-size:.95rem
+    }
+    button:hover,.linkbtn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(8,33,63,.16)}
+    button.primary{background:var(--navy);color:#fff}
+    button.gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#10233c}
+    .grid{display:grid;grid-template-columns:1fr 1.35fr;gap:22px;align-items:start}
+    @media(max-width:900px){.grid{grid-template-columns:1fr}.toolbar{position:relative}}
+    .card{
+      background:rgba(255,253,247,.94);border:1px solid rgba(8,33,63,.1);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;overflow:hidden;
+    }
+    .card.soft{background:linear-gradient(180deg,#fff,#eef6ff)}
+    .card.dark{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff}
+    .card.goldline{border-top:7px solid var(--gold)}
+    .card h2,.card h3{margin:0 0 12px;color:var(--navy);line-height:1.1}
+    .card.dark h2,.card.dark h3{color:#fff}
+    .eyebrow{font-size:.82rem;text-transform:uppercase;color:var(--gold);font-weight:900;letter-spacing:.08em;margin-bottom:6px}
+    .verse{
+      background:#f8f3e7;border-left:5px solid var(--gold);padding:14px 16px;border-radius:14px;margin:14px 0;font-size:1.04rem;font-weight:650;color:#1a2942
+    }
+    .muted{color:var(--muted)}
+    .pill-list{display:flex;flex-direction:column;gap:10px}.pill{
+      display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid rgba(8,33,63,.1);border-radius:15px;padding:12px 14px
+    }
+    .ico{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;flex:0 0 36px;background:var(--navy);color:var(--gold2);font-size:1.1rem;font-weight:900}
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.tab{border-radius:12px;padding:10px 13px;background:#edf4fb;color:var(--navy);box-shadow:none}.tab.active{background:var(--navy);color:#fff}
+    .tab-panel{display:none;animation:fade .28s ease}.tab-panel.active{display:block}
+    @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    .timeline{display:flex;flex-direction:column;gap:14px}
+    details{
+      background:#fff;border:1px solid rgba(8,33,63,.12);border-radius:18px;box-shadow:0 10px 24px rgba(8,33,63,.08);overflow:hidden
+    }
+    summary{list-style:none;cursor:pointer;padding:18px 18px;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;font-weight:900;color:var(--navy)}
+    summary::-webkit-details-marker{display:none}
+    .num{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#10233c;font-weight:1000}
+    .chev{transition:.22s ease;font-size:1.25rem;color:var(--gold)}
+    details[open] .chev{transform:rotate(90deg)}
+    .detail-body{padding:0 18px 18px 72px;animation:fade .25s ease}.detail-body p{margin:10px 0;line-height:1.55}
+    .label{font-weight:900;color:var(--navy)}
+    .teach{background:#eef7f1;border-left:5px solid #4f9d69;padding:12px 14px;border-radius:12px;margin-top:12px}.apply{background:#eef4ff;border-left:5px solid var(--blue);padding:12px 14px;border-radius:12px;margin-top:10px}
+    .lexicon{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+    @media(max-width:700px){.lexicon{grid-template-columns:1fr}.detail-body{padding-left:18px}}
+    .lex{
+      background:#fff;border:1px dashed rgba(8,33,63,.25);border-radius:16px;padding:14px;text-align:center;min-height:128px
+    }
+    .lex strong{display:block;color:var(--navy);font-size:1.08rem;margin-bottom:6px}.lex small{color:var(--muted);font-weight:700}
+    .flow{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:12px}.dot{width:9px;height:9px;border-radius:50%;background:var(--gold)}
+    .doctrine{margin-top:24px;padding:24px;border-radius:var(--radius);background:linear-gradient(135deg,var(--navy),#123e6b);color:#fff;box-shadow:var(--shadow)}
+    .doctrine h2{margin:0 0 8px;color:#fff}.doctrine p{font-size:1.12rem;line-height:1.55;margin:0}
+    .drawer{display:none;margin-top:16px}.drawer.show{display:block;animation:fade .25s ease}
+    .mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.mini{background:#fff;border-radius:16px;padding:15px;border:1px solid rgba(8,33,63,.1)}@media(max-width:700px){.mini-grid{grid-template-columns:1fr}}
+    .footer{text-align:center;margin-top:30px;color:var(--muted);font-size:.9rem}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="kicker">Bloque 1 · Lección 2</div>
+    <h1>Fundamentos de la Palabra</h1>
+    <p class="subtitle">Biblia, lectura responsable, creación, caída, pecado y primera promesa</p>
+    <div class="badge-row">
+      <span class="badge gold">Bosquejo exegético principal</span>
+      <span class="badge">Base bíblica: Reina-Valera 1960</span>
+      <span class="badge">Infografía interactiva</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <nav class="toolbar" aria-label="Controles de la infografía">
+      <button class="primary" onclick="openAll()">Abrir todo</button>
+      <button onclick="closeAll()">Cerrar todo</button>
+      <button class="gold" onclick="toggleDoctrine()">Mostrar doctrina central</button>
+      <a class="linkbtn" href="#bosquejo">Ir al bosquejo</a>
+      <a class="linkbtn" href="#lectura">Lectura trinitaria</a>
+    </nav>
+
+    <section class="grid">
+      <aside class="leftcol">
+        <article class="card goldline">
+          <div class="eyebrow">1 · Idea central</div>
+          <h2>El principio ordena toda la lectura</h2>
+          <p>La Biblia comienza presentando a Dios como Creador, al ser humano como criatura digna y responsable, el pecado como ruptura de la obediencia y la primera promesa como señal temprana de la misericordia de Dios.</p>
+        </article>
+
+        <article class="card soft" style="margin-top:22px">
+          <div class="eyebrow">2 · Textos base</div>
+          <h2>Pasajes de la clase</h2>
+          <div class="pill-list">
+            <div class="pill"><span class="ico">📖</span><strong>Génesis 1:1-2</strong></div>
+            <div class="pill"><span class="ico">👥</span><strong>Génesis 1:26-28</strong></div>
+            <div class="pill"><span class="ico">🌳</span><strong>Génesis 2:15-17</strong></div>
+            <div class="pill"><span class="ico">🐍</span><strong>Génesis 3:1-15</strong></div>
+          </div>
+          <div class="verse"><strong>Lectura principal en clase:</strong> Génesis 3:1-15. Se recomienda leer el pasaje completo en voz alta.</div>
+        </article>
+
+        <article class="card" style="margin-top:22px">
+          <div class="eyebrow">3 · Lectura responsable</div>
+          <h2>Cuatro claves</h2>
+          <div class="pill-list">
+            <div class="pill"><span class="ico">1</span>Leer el texto antes de opinar.</div>
+            <div class="pill"><span class="ico">2</span>No añadir lo que el texto no dice.</div>
+            <div class="pill"><span class="ico">3</span>No suavizar lo que el texto sí dice.</div>
+            <div class="pill"><span class="ico">4</span>Ver la misericordia de Dios sin negar su justicia.</div>
+          </div>
+        </article>
+
+        <article class="card soft" style="margin-top:22px">
+          <div class="eyebrow">4 · Contexto bíblico e histórico</div>
+          <h2>Génesis frente al mundo antiguo</h2>
+          <p>Génesis abre la Escritura mostrando que todo comienza con Dios. Frente a relatos antiguos del entorno, como <em>Enuma Elish</em>, donde aparecen conflictos entre divinidades y fuerzas caóticas, Génesis presenta a un solo Dios soberano que crea con orden, autoridad y propósito.</p>
+          <p class="muted">La clase no se centra en comparar mitologías, sino en entender el contraste: la creación bíblica nace de la voluntad del Dios vivo, no de una guerra entre dioses.</p>
+        </article>
+      </aside>
+
+      <section class="rightcol">
+        <article id="lectura" class="card dark">
+          <div class="eyebrow">5 · Génesis 1:1-2</div>
+          <h2>Lectura cristiana trinitaria</h2>
+          <div class="verse">“En el principio creó Dios los cielos y la tierra. Y la tierra estaba desordenada y vacía, y las tinieblas estaban sobre la faz del abismo, y el Espíritu de Dios se movía sobre la faz de las aguas.”</div>
+          <div class="lexicon">
+            <div class="lex"><strong>“En el principio”</strong><small>bereshit · hebreo<br>relación explicativa con arché · griego</small></div>
+            <div class="lex"><strong>“Dios”</strong><small>Elohim / YHWH<br>identidad divina en el marco bíblico</small></div>
+            <div class="lex"><strong>“Espíritu de Dios”</strong><small>ruaj · hebreo<br>relación explicativa con pneuma · griego</small></div>
+          </div>
+          <div class="flow"><span class="dot"></span><strong>Lectura cristiana trinitaria, no unitarista</strong><span class="dot"></span></div>
+        </article>
+
+        <section id="bosquejo" class="timeline" style="margin-top:22px">
+          <details open>
+            <summary><span class="num">I</span><span>La Biblia debe comenzar donde Dios comienza</span><span class="chev">›</span></summary>
+            <div class="detail-body">
+              <div class="verse">“En el principio creó Dios los cielos y la tierra.”</div>
+              <p>La Escritura no empieza con el ser humano, sino con Dios. La lectura responsable pone a Dios en el centro y reconoce su autoridad antes que nuestras opiniones.</p>
+              <div class="teach"><span class="label">Enseñanza:</span> La lectura responsable de la Biblia empieza reconociendo que Dios es el Creador y la autoridad primera.</div>
+              <div class="apply"><span class="label">Aplicación:</span> No leemos la Biblia para decidir si estamos de acuerdo con Dios, sino para escuchar al Dios que tiene autoridad sobre nuestra vida.</div>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="num">II</span><span>Dios crea al ser humano con dignidad y propósito</span><span class="chev">›</span></summary>
+            <div class="detail-body">
+              <div class="verse">“Entonces dijo Dios: Hagamos al hombre a nuestra imagen, conforme a nuestra semejanza...”</div>
+              <p>El plural “hagamos” se resalta desde una lectura cristiana trinitaria. El ser humano, varón y hembra, posee dignidad por haber sido creado a imagen de Dios.</p>
+              <div class="teach"><span class="label">Enseñanza:</span> La creación enseña que la vida humana tiene dignidad porque procede de Dios y refleja a Dios.</div>
+              <div class="apply"><span class="label">Aplicación:</span> Una lectura responsable no permite despreciar al ser humano ni colocarlo como dueño absoluto de sí mismo.</div>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="num">III</span><span>Dios entrega responsabilidad, no autonomía rebelde</span><span class="chev">›</span></summary>
+            <div class="detail-body">
+              <div class="verse">“Y los bendijo Dios, y les dijo: Fructificad y multiplicaos; llenad la tierra, y sojuzgadla...”</div>
+              <p>El mandato de señorear no autoriza abuso, sino mayordomía. El ser humano administra la creación bajo Dios, incluyendo naturaleza, animales y toda la creación.</p>
+              <div class="teach"><span class="label">Palabra clave:</span> <strong>mashal</strong> (Strong H4910) puede expresar gobernar, representar o ejercer autoridad responsable. En esta lección se aplica como mayordomía, cuidado y administración.</div>
+              <div class="apply"><span class="label">Aplicación:</span> No existimos solo para consumir; vivimos bajo Dios para cuidar lo recibido.</div>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="num">IV</span><span>La libertad humana nace dentro de la Palabra de Dios</span><span class="chev">›</span></summary>
+            <div class="detail-body">
+              <div class="verse">“De todo árbol del huerto podrás comer; mas del árbol de la ciencia del bien y del mal no comerás; porque el día que de él comieres, ciertamente morirás.”</div>
+              <p>Dios da abundancia y también límite. El límite no es crueldad, sino enseñanza de dependencia.</p>
+              <div class="teach"><span class="label">Enseñanza:</span> La verdadera libertad no consiste en vivir sin límites, sino en vivir confiando y obedeciendo la Palabra de Dios.</div>
+              <div class="apply"><span class="label">Aplicación:</span> Cuando vemos los mandamientos de Dios como enemigos de nuestra felicidad, comenzamos a mirar como la serpiente quería que miraran.</div>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="num">V</span><span>La caída comienza cuando se cuestiona la Palabra de Dios</span><span class="chev">›</span></summary>
+            <div class="detail-body">
+              <div class="verse">“¿Conque Dios os ha dicho: No comáis de todo árbol del huerto?”</div>
+              <p>La serpiente no empieza negando directamente a Dios. Empieza sembrando sospecha sobre lo que Dios dijo y distorsionando el mandato.</p>
+              <div class="teach"><span class="label">Enseñanza:</span> Torcer la Palabra de Dios abre la puerta a una visión torcida de Dios.</div>
+              <div class="apply"><span class="label">Aplicación:</span> Hay que distinguir entre estudiar el texto y usar interpretaciones para evitar obedecerlo.</div>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="num">VI</span><span>El pecado nace de desconfiar de Dios y desobedecer su mandato</span><span class="chev">›</span></summary>
+            <div class="detail-body">
+              <div class="verse">“Entonces la serpiente dijo a la mujer: No moriréis.”</div>
+              <p>El pecado coloca otra voz por encima de la voz de Dios. No es solo romper una norma externa: es rebelión interior contra Dios.</p>
+              <div class="teach"><span class="label">Enseñanza:</span> El pecado es desconfianza, rebelión y desobediencia contra la Palabra de Dios.</div>
+              <div class="apply"><span class="label">Aplicación:</span> Cuando justificamos la desobediencia porque algo parece agradable o conveniente, repetimos el patrón de Génesis 3.</div>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="num">VII</span><span>La caída rompe la relación con Dios, con uno mismo y con el otro</span><span class="chev">›</span></summary>
+            <div class="detail-body">
+              <div class="mini-grid">
+                <div class="mini"><strong>Vergüenza</strong><br>“Conocieron que estaban desnudos...”</div>
+                <div class="mini"><strong>Miedo</strong><br>“Tuve miedo, porque estaba desnudo; y me escondí.”</div>
+                <div class="mini"><strong>Ocultamiento</strong><br>“Se escondieron de la presencia de Jehová Dios...”</div>
+                <div class="mini"><strong>Acusación</strong><br>“La mujer que me diste por compañera...”</div>
+              </div>
+              <div class="teach"><span class="label">Enseñanza:</span> El pecado promete abrir los ojos, pero termina produciendo vergüenza, miedo, ruptura y distancia de Dios.</div>
+              <div class="apply"><span class="label">Aplicación:</span> Dios pregunta “¿Dónde estás tú?” para confrontar la condición humana, no porque ignore dónde está Adán.</div>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="num">VIII</span><span>Dios juzga el pecado, pero también anuncia la primera promesa</span><span class="chev">›</span></summary>
+            <div class="detail-body">
+              <div class="verse">“Y pondré enemistad entre ti y la mujer, y entre tu simiente y la simiente suya; ésta te herirá en la cabeza, y tú le herirás en el calcañar.”</div>
+              <p>Dios no trata el pecado como algo pequeño. Hay juicio. Pero en medio del juicio aparece una promesa: el mal no tendrá la última palabra.</p>
+              <div class="teach"><span class="label">Enseñanza:</span> Desde el comienzo, Dios responde al pecado con juicio justo y con una promesa de esperanza.</div>
+              <div class="apply"><span class="label">Aplicación:</span> La Biblia no presenta al ser humano como capaz de salvarse a sí mismo. Desde Génesis 3, la esperanza nace de la iniciativa de Dios.</div>
+            </div>
+          </details>
+        </section>
+      </section>
+    </section>
+
+    <section id="doctrine" class="doctrine drawer">
+      <h2>Doctrina central</h2>
+      <p>Dios es el Creador; el ser humano fue creado con dignidad y responsabilidad; el pecado entró por desconfiar y desobedecer la Palabra de Dios; y desde el principio Dios anunció una promesa de victoria sobre el mal.</p>
+    </section>
+
+    <p class="footer">Fundamentos de la Palabra · Bloque 1 · Lección 2 · Infografía interactiva HTML</p>
+  </main>
+
+  <script>
+    function openAll(){ document.querySelectorAll('details').forEach(d => d.open = true); }
+    function closeAll(){ document.querySelectorAll('details').forEach(d => d.open = false); }
+    function toggleDoctrine(){ document.getElementById('doctrine').classList.toggle('show'); }
+  </script>
+</body>
+</html>

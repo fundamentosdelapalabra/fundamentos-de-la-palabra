@@ -175,7 +175,8 @@ export const courseData = [
 <p style="margin-top:1.5rem;font-weight:600">Mapa Bíblico</p>
 <p>Explora el mapa bíblico interactivo para ver cómo encaja esta lección en el gran relato de la Escritura.</p>
 <a href="https://notebooklm.google.com/notebook/ac251be9-c239-4e79-81c9-6757c2512146/artifact/3489db0b-60d7-4837-9779-14343869eb63" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🗺️ Abrir Mapa Bíblico</a>`,
-    "activity": `Estamos preparando la actividad de esta semana. Estará disponible próximamente.`,
+    "activity": `<p>Explora la infografía interactiva de esta semana para repasar y fijar los conceptos del gran mapa de la Biblia.</p>
+<a href="/infografia-semana2.html" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">📊 Abrir Infografía Interactiva</a>`,
     "testMakeupUrl": "#",
     "materialDriveUrl": "#"
   },
