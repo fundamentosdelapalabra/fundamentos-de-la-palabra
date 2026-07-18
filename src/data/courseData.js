@@ -171,7 +171,10 @@ export const courseData = [
     "summary": `<p>Esta semana trazamos el gran mapa de la Biblia: cómo se divide el Antiguo y el Nuevo Testamento, y el hilo que recorre toda la historia bíblica de principio a fin.</p>
 <div style="position:relative;width:100%;max-width:720px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;margin-top:1rem">
   <iframe src="https://www.youtube.com/embed/jdAaLjViYw4" title="El gran mapa de la Biblia" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>`,
+</div>
+<p style="margin-top:1.5rem;font-weight:600">Mapa Bíblico</p>
+<p>Explora el mapa bíblico interactivo para ver cómo encaja esta lección en el gran relato de la Escritura.</p>
+<a href="https://notebooklm.google.com/notebook/ac251be9-c239-4e79-81c9-6757c2512146/artifact/3489db0b-60d7-4837-9779-14343869eb63" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🗺️ Abrir Mapa Bíblico</a>`,
     "activity": `Estamos preparando la actividad de esta semana. Estará disponible próximamente.`,
     "testMakeupUrl": "#",
     "materialDriveUrl": "#"
