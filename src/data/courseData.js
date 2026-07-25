@@ -200,7 +200,7 @@ export const courseData = [
     "activity": `<p>Explora la infografía interactiva de esta semana para repasar y fijar los conceptos sobre Dios Creador y el origen de todo.</p>
 <a href="/infografia-semana3.html" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">📊 Abrir Infografía Interactiva</a>`,
     "testMakeupUrl": "#",
-    "materialDriveUrl": "#"
+    "materialDriveUrl": "https://notebooklm.google.com/notebook/821fe7c2-b49f-4d5c-871d-c1ecfe371071/artifact/d23d2f00-2427-40fa-ad2f-c96b740955d0"
   },
   {
     "id": 4,
