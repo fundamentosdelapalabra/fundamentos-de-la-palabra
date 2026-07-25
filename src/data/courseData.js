@@ -187,11 +187,14 @@ export const courseData = [
     "weekLabel": "Semana 3",
     "title": "Dios Creador y el origen de todo",
     "date": "2026-07-19",
-    "disponible": false,
+    "disponible": true,
     "verse": null,
     "verseRef": null,
-    "summary": `Estamos preparando esta lección con cuidado. Estará disponible próximamente.`,
-    "activity": `Estamos preparando esta lección con cuidado. Estará disponible próximamente.`,
+    "summary": `<p>Esta semana exploramos quién es Dios como Creador y qué nos revela el origen de todo sobre su carácter y propósito.</p>
+<div style="position:relative;width:100%;max-width:720px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;margin-top:1rem">
+  <iframe src="https://www.youtube.com/embed/sFTNO8OQGbQ" title="Dios Creador y el origen de todo" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>`,
+    "activity": `Estamos preparando la actividad de esta semana. Estará disponible próximamente.`,
     "testMakeupUrl": "#",
     "materialDriveUrl": "#"
   },
