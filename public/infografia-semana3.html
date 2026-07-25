@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Infografía interactiva · Bloque 1 · Lección 3</title>
+  <style>
+    :root{
+      --navy:#08213f;
+      --navy2:#0f355d;
+      --blue:#1d5b8f;
+      --cream:#fff8ea;
+      --paper:#fffdf7;
+      --gold:#d9a441;
+      --gold2:#f2cf75;
+      --soft:#eaf3fb;
+      --ink:#172033;
+      --muted:#5e6b7d;
+      --green:#4f9d69;
+      --green2:#eef7f1;
+      --shadow:0 18px 45px rgba(8,33,63,.18);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(242,207,117,.24), transparent 28rem),
+        radial-gradient(circle at top right, rgba(29,91,143,.18), transparent 30rem),
+        linear-gradient(180deg, #f7f0df 0%, #f2f6fb 50%, #fff8ea 100%);
+      min-height:100vh;
+    }
+    .hero{
+      position:relative;
+      overflow:hidden;
+      color:#fff;
+      background:linear-gradient(135deg, #061a32 0%, #0c3159 65%, #061a32 100%);
+      padding:42px 18px 34px;
+      text-align:center;
+      box-shadow:0 12px 35px rgba(0,0,0,.22);
+    }
+    .hero:before,.hero:after{
+      content:"";
+      position:absolute;
+      width:280px;height:280px;border:1px solid rgba(242,207,117,.2);border-radius:50%;
+      transform:rotate(25deg);
+    }
+    .hero:before{left:-80px;top:-90px}.hero:after{right:-90px;bottom:-130px}
+    .hero-art{
+      position:absolute; inset:0; pointer-events:none; opacity:.17;
+      background:
+        radial-gradient(circle at 10% 45%, rgba(255,230,170,.95), transparent 10%),
+        radial-gradient(circle at 90% 20%, rgba(255,230,170,.95), transparent 10%),
+        linear-gradient(transparent 65%, rgba(126,171,94,.22) 66%, transparent 70%),
+        linear-gradient(120deg, transparent 0 12%, rgba(170,205,255,.18) 12% 18%, transparent 18% 100%);
+    }
+    .kicker{font-weight:800;color:var(--gold2);letter-spacing:.04em;font-size:clamp(1rem,2.3vw,1.35rem)}
+    h1{margin:.3rem 0 .5rem;font-size:clamp(2rem,5vw,4.6rem);line-height:.96;letter-spacing:.02em;text-transform:uppercase}
+    .subtitle{font-size:clamp(1.1rem,2.3vw,1.7rem);max-width:980px;margin:0 auto;color:#f5f7fb;font-weight:700}
+    .badge-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+    .badge{border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);backdrop-filter:blur(8px);border-radius:999px;padding:10px 16px;font-weight:700;color:#fff}
+    .badge.gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#10233c;border:none}
+    .wrap{max-width:1180px;margin:0 auto;padding:28px 18px 80px}
+    .toolbar{
+      position:sticky;top:0;z-index:10;
+      display:flex;gap:10px;flex-wrap:wrap;justify-content:center;
+      margin:0 -18px 24px;padding:12px 18px;background:rgba(255,248,234,.82);backdrop-filter:blur(10px);border-bottom:1px solid rgba(8,33,63,.08)
+    }
+    button,.linkbtn{
+      cursor:pointer;border:none;border-radius:999px;padding:11px 15px;font-weight:800;
+      background:#fff;color:var(--navy);box-shadow:0 6px 18px rgba(8,33,63,.1);transition:.2s ease;text-decoration:none;font-size:.95rem
+    }
+    button:hover,.linkbtn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(8,33,63,.16)}
+    button.primary{background:var(--navy);color:#fff}
+    button.gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#10233c}
+    button.blue{background:#1f5e93;color:#fff}
+    button.green{background:#2d8a4e;color:#fff}
+    .grid{display:grid;grid-template-columns:1fr 1.35fr;gap:22px;align-items:start}
+    @media(max-width:900px){.grid{grid-template-columns:1fr}.toolbar{position:relative}}
+    .card{
+      background:rgba(255,253,247,.94);border:1px solid rgba(8,33,63,.1);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;overflow:hidden;
+    }
+    .card.soft{background:linear-gradient(180deg,#fff,#eef6ff)}
+    .card.dark{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff}
+    .card.goldline{border-top:7px solid var(--gold)}
+    .card h2,.card h3{margin:0 0 12px;color:var(--navy);line-height:1.1}
+    .card.dark h2,.card.dark h3{color:#fff}
+    .eyebrow{font-size:.82rem;text-transform:uppercase;color:var(--gold);font-weight:900;letter-spacing:.08em;margin-bottom:6px}
+    .verse{background:#f8f3e7;border-left:5px solid var(--gold);padding:14px 16px;border-radius:14px;margin:14px 0;font-size:1.04rem;font-weight:650;color:#1a2942}
+    .verse.darkverse{background:rgba(255,255,255,.08);border-left-color:var(--gold2);color:#fff}
+    .muted{color:var(--muted)}
+    .pill-list{display:flex;flex-direction:column;gap:10px}
+    .pill{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid rgba(8,33,63,.1);border-radius:15px;padding:12px 14px}
+    .ico{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;flex:0 0 36px;background:var(--navy);color:var(--gold2);font-size:1.1rem;font-weight:900}
+    .scripture-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    @media(max-width:500px){.scripture-grid{grid-template-columns:1fr}}
+    .timeline{display:flex;flex-direction:column;gap:14px}
+    details{background:#fff;border:1px solid rgba(8,33,63,.12);border-radius:18px;box-shadow:0 10px 24px rgba(8,33,63,.08);overflow:hidden}
+    summary{list-style:none;cursor:pointer;padding:18px 18px;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;font-weight:900;color:var(--navy)}
+    summary::-webkit-details-marker{display:none}
+    .num{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#10233c;font-weight:1000}
+    .chev{transition:.22s ease;font-size:1.25rem;color:var(--gold)}
+    details[open] .chev{transform:rotate(90deg)}
+    .detail-body{padding:0 18px 18px 72px;animation:fade .25s ease}.detail-body p{margin:10px 0;line-height:1.55}
+    .label{font-weight:900;color:var(--navy)}
+    .split-boxes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+    @media(max-width:700px){.split-boxes{grid-template-columns:1fr}.detail-body{padding-left:18px}}
+    .teach,.apply{padding:12px 14px;border-radius:12px}
+    .teach{background:#eef4ff;border-left:5px solid var(--blue)}
+    .apply{background:var(--green2);border-left:5px solid var(--green)}
+    .doctrine{margin-top:24px;padding:24px;border-radius:var(--radius);background:linear-gradient(135deg,var(--navy),#123e6b);color:#fff;box-shadow:var(--shadow)}
+    .doctrine h2{margin:0 0 8px;color:#fff}.doctrine p{font-size:1.12rem;line-height:1.55;margin:0}
+    .drawer{display:none;margin-top:16px}.drawer.show{display:block;animation:fade .25s ease}
+    .mini-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:10px}
+    .mini{background:#fff;border-radius:16px;padding:15px;border:1px solid rgba(8,33,63,.1);text-align:center}
+    @media(max-width:900px){.mini-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:520px){.mini-grid{grid-template-columns:1fr}}
+    .days{margin-top:24px}
+    .days-row{display:grid;grid-template-columns:repeat(7,1fr);gap:12px;margin-top:12px}
+    @media(max-width:980px){.days-row{grid-template-columns:repeat(4,1fr)}}
+    @media(max-width:700px){.days-row{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:420px){.days-row{grid-template-columns:1fr}}
+    .day{background:#fff;border:1px solid rgba(8,33,63,.1);border-radius:18px;padding:14px;text-align:center;box-shadow:0 8px 18px rgba(8,33,63,.08)}
+    .daynum{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;margin:0 auto 10px;background:#1f5e93;color:#fff;font-weight:900}
+    .orb{width:82px;height:82px;border-radius:50%;margin:0 auto 10px;border:4px solid #dce8f7;background:radial-gradient(circle at 35% 35%, #fff4a7 0%, #ffdd66 24%, #8cc3ff 25%, #1d5b8f 100%)}
+    .orb.sky{background:radial-gradient(circle at 35% 25%, #ffffff 0%, #c9ecff 32%, #79b5ee 62%, #2f6ea5 100%)}
+    .orb.land{background:radial-gradient(circle at 60% 20%, #fff2ab 0%, #8fddff 20%, #6ab4ea 40%, #79c05d 41%, #467d2e 100%)}
+    .orb.lights{background:radial-gradient(circle at 35% 35%, #ffe476 0%, #ffcb49 16%, transparent 17%), radial-gradient(circle at 68% 65%, #f2f2ff 0%, #c9d3ff 13%, transparent 14%), radial-gradient(circle at 50% 50%, #0d1f49, #1f5e93)}
+    .orb.life{background:radial-gradient(circle at 50% 50%, #d9f4ff 0%, #7fc6ef 45%, #1d5b8f 46%, #3b7f3f 100%)}
+    .orb.human{background:radial-gradient(circle at 50% 20%, #fff1bf 0%, #cbe1ff 30%, #9ec17c 31%, #7b9357 60%, #524738 100%)}
+    .orb.rest{background:radial-gradient(circle at 35% 35%, #fff5b3 0%, #9ed1ff 26%, #69b8ea 42%, #9fd196 43%, #5c8b47 100%)}
+    .day h4{margin:0 0 6px;color:var(--navy)}
+    .footer{text-align:center;margin-top:30px;color:var(--muted);font-size:.9rem}
+    @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+    .passage-btn{width:100%;text-align:left;background:#fff;border:1px solid rgba(8,33,63,.1);border-radius:15px;padding:12px 14px;display:flex;gap:10px;align-items:center;color:var(--navy);box-shadow:none}
+    .passage-btn:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(8,33,63,.12)}
+    .passage-btn .ico{background:var(--navy);color:var(--gold2)}
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(4,17,34,.72);z-index:1000;backdrop-filter:blur(6px)}
+    .modal.show{display:flex;animation:fade .2s ease}
+    .modal-card{width:min(860px,96vw);max-height:88vh;overflow:auto;background:var(--paper);border-radius:24px;box-shadow:0 28px 80px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.3)}
+    .modal-head{position:sticky;top:0;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:18px 20px;background:linear-gradient(135deg,var(--navy),var(--navy2));color:white;z-index:2}
+    .modal-head h2{margin:0;color:white;font-size:1.35rem}
+    .modal-close{width:42px;height:42px;padding:0;border-radius:50%;font-size:1.35rem;background:rgba(255,255,255,.14);color:white;box-shadow:none}
+    .modal-body{padding:22px}
+    .passage-text{white-space:pre-line;line-height:1.72;font-family:Georgia, 'Times New Roman', serif;font-size:1.08rem;color:#18243a}
+    .passage-note{margin-top:18px;padding:13px 15px;border-left:5px solid var(--gold);background:#fff5d8;border-radius:12px;color:#473719}
+    .quiz{margin-top:24px}
+    .question{background:#fff;border:1px solid rgba(8,33,63,.1);border-radius:18px;padding:18px;margin-top:14px;box-shadow:0 8px 20px rgba(8,33,63,.07)}
+    .question h3{margin:0 0 12px;color:var(--navy);font-size:1.05rem}
+    .option{display:block;padding:9px 10px;border-radius:10px;margin:6px 0;background:#f6f8fb;cursor:pointer}
+    .option:hover{background:#edf3fa}
+    .feedback{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;font-weight:700}
+    .feedback.good{display:block;background:#eaf7ee;color:#24613a}
+    .feedback.bad{display:block;background:#fff0eb;color:#8a3b25}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-art"></div>
+    <div class="kicker">Bloque 1 · Lección 3</div>
+    <h1>Fundamentos de la Palabra</h1>
+    <p class="subtitle">El Dios que ordena, llena, bendice y sostiene</p>
+    <div class="badge-row">
+      <span class="badge gold">Bosquejo principal</span>
+      <span class="badge">Base bíblica: Reina-Valera 1960</span>
+      <span class="badge">Infografía interactiva</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <nav class="toolbar" aria-label="Controles de la infografía">
+      <button class="primary" onclick="openAll()">Abrir todo</button>
+      <button onclick="closeAll()">Cerrar todo</button>
+      <button class="gold" onclick="toggleDoctrine()">Doctrina central</button>
+      <a class="linkbtn" href="#bosquejo">Bosquejo</a>
+      <a class="linkbtn" href="#dias">Los 7 días</a>
+      <a class="linkbtn" href="#aplicacion">Aplicación</a>
+    </nav>
+
+    <section class="grid">
+      <aside class="leftcol">
+        <article class="card goldline">
+          <div class="eyebrow">1 · Idea central</div>
+          <h2>Dios ordena, llena, bendice y sostiene</h2>
+          <p>La creación no nace del caos autónomo, sino de la palabra de Dios. Él transforma el desorden en un mundo habitable, lo llena de vida, bendice su obra y la sostiene en Cristo.</p>
+        </article>
+
+        <article class="card soft" style="margin-top:22px">
+          <div class="eyebrow">2 · Textos base</div>
+          <h2>Pasajes de la clase</h2>
+          <div class="scripture-grid">
+            <button class="passage-btn" data-passage="gen1a"><span class="ico">📖</span><strong>Génesis 1:3-13</strong></button>
+            <button class="passage-btn" data-passage="gen1b"><span class="ico">📖</span><strong>Génesis 1:14-25</strong></button>
+            <button class="passage-btn" data-passage="gen1c"><span class="ico">📖</span><strong>Génesis 1:28-31</strong></button>
+            <button class="passage-btn" data-passage="gen2"><span class="ico">📖</span><strong>Génesis 2:1-3</strong></button>
+            <button class="passage-btn" data-passage="juan1"><span class="ico">📖</span><strong>Juan 1:1-3</strong></button>
+            <button class="passage-btn" data-passage="col1"><span class="ico">📖</span><strong>Colosenses 1:15-17</strong></button>
+            <button class="passage-btn" data-passage="heb11"><span class="ico">📖</span><strong>Hebreos 11:3</strong></button>
+            <button class="passage-btn" data-passage="sal104"><span class="ico">📖</span><strong>Salmo 104:24, 27-30</strong></button>
+          </div>
+          <div class="verse"><strong>Versículo clave:</strong><br><em>“En el principio creó Dios los cielos y la tierra.”</em><br>Génesis 1:1</div>
+        </article>
+
+        <article class="card" style="margin-top:22px">
+          <div class="eyebrow">3 · Verdades clave</div>
+          <h2>Lo que debe quedar claro</h2>
+          <div class="pill-list">
+            <div class="pill"><span class="ico">💬</span>Dios crea con su palabra.</div>
+            <div class="pill"><span class="ico">🎯</span>La creación tiene orden y propósito.</div>
+            <div class="pill"><span class="ico">❤️</span>La creación es buena y depende de Dios.</div>
+            <div class="pill"><span class="ico">✝️</span>Todo existe por Cristo y para Cristo.</div>
+          </div>
+        </article>
+
+        <article id="aplicacion" class="card soft" style="margin-top:22px">
+          <div class="eyebrow">4 · Aplicación</div>
+          <h2>Respuesta del discípulo</h2>
+          <div class="pill-list">
+            <div class="pill"><span class="ico">🙏</span>Vive con gratitud delante de Dios.</div>
+            <div class="pill"><span class="ico">🌿</span>Cuida lo que Dios creó.</div>
+            <div class="pill"><span class="ico">🛏️</span>Descansa confiando en Dios.</div>
+            <div class="pill"><span class="ico">👑</span>Recuerda que Cristo es el centro.</div>
+          </div>
+        </article>
+      </aside>
+
+      <section class="rightcol">
+        <article class="card dark">
+          <div class="eyebrow">5 · Lectura principal</div>
+          <h2>Dios ordena, llena, bendice y sostiene</h2>
+          <div class="verse darkverse">“Dijo Dios: Sea la luz; y fue la luz” (Gn 1:3).<br>
+          “Haya lumbreras en la expansión de los cielos” (Gn 1:14).<br>
+          “Fructificad y multiplicaos; llenad la tierra” (Gn 1:28).<br>
+          “Y reposó el día séptimo de toda la obra que hizo” (Gn 2:2-3).</div>
+          <div class="pill-list" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+            <div class="pill" style="justify-content:center"><span class="ico">⚖️</span><strong>Orden</strong></div>
+            <div class="pill" style="justify-content:center"><span class="ico">🌱</span><strong>Vida</strong></div>
+            <div class="pill" style="justify-content:center"><span class="ico">🎁</span><strong>Bendición</strong></div>
+            <div class="pill" style="justify-content:center"><span class="ico">🎯</span><strong>Propósito</strong></div>
+          </div>
+        </article>
+
+        <section id="bosquejo" class="timeline" style="margin-top:22px">
+          <details open>
+            <summary><span class="num">I</span><span>Dios ordena lo que estaba desordenado</span><span class="chev">›</span></summary>
+            <div class="detail-body">
+              <div class="verse">Génesis 1:3-13 — Dios separa la luz de las tinieblas, establece cielos, mares y tierra, y prepara la vegetación.</div>
+              <p>Dios transforma el desorden en un mundo habitable. La creación no avanza por caos, sino por la palabra soberana del Creador.</p>
+              <div class="split-boxes">
+                <div class="teach"><span class="label">Enseñanza:</span> Dios crea con orden y propósito, no por azar ni desorden.</div>
+                <div class="apply"><span class="label">Aplicación:</span> Confía en que Dios puede poner orden en tu vida.</div>
+              </div>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="num">II</span><span>Dios llena lo que estaba vacío</span><span class="chev">›</span></summary>
+            <div class="detail-body">
+              <div class="verse">Génesis 1:14-25 — Dios pone lumbreras en los cielos y llena el mundo de aves, peces y animales.</div>
+              <p>El mundo se llena de vida según el diseño soberano de Dios. La diversidad de la creación no es un accidente: revela sabiduría, belleza y abundancia.</p>
+              <div class="split-boxes">
+                <div class="teach"><span class="label">Enseñanza:</span> Dios da vida donde antes había vacío.</div>
+                <div class="apply"><span class="label">Aplicación:</span> Agradece a Dios por la belleza y diversidad de su creación.</div>
+              </div>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="num">III</span><span>Dios bendice y provee</span><span class="chev">›</span></summary>
+            <div class="detail-body">
+              <div class="verse">Génesis 1:28-31 — Dios bendice la creación, manda fructificar, provee alimento y establece dependencia de Él.</div>
+              <p>La creación es buena y la provisión viene de Dios. La vida no se sostiene a sí misma; depende del Creador que bendice y provee.</p>
+              <div class="split-boxes">
+                <div class="teach"><span class="label">Enseñanza:</span> Todo lo bueno procede del Dios bueno.</div>
+                <div class="apply"><span class="label">Aplicación:</span> Vive agradecido y usa con responsabilidad los recursos recibidos.</div>
+              </div>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="num">IV</span><span>Dios sostiene y da propósito</span><span class="chev">›</span></summary>
+            <div class="detail-body">
+              <div class="verse">Génesis 2:1-3 · Juan 1:1-3 · Colosenses 1:15-17 · Hebreos 11:3</div>
+              <p>Dios culmina su obra y reposa. El Nuevo Testamento revela que todo fue hecho por medio de Cristo y que todas las cosas subsisten en Él.</p>
+              <div class="split-boxes">
+                <div class="teach"><span class="label">Enseñanza:</span> Todo existe por Cristo y para Cristo; Él sostiene todo.</div>
+                <div class="apply"><span class="label">Aplicación:</span> Pon a Cristo en el centro de tu vida cada día.</div>
+              </div>
+            </div>
+          </details>
+        </section>
+      </section>
+    </section>
+
+    <section id="doctrine" class="doctrine drawer">
+      <h2>Doctrina central</h2>
+      <p>El único Dios creó, ordenó, llenó y bendijo los cielos y la tierra; todo fue hecho por medio de Cristo y para Cristo, y toda la creación sigue dependiendo de Él.</p>
+    </section>
+
+    <section id="dias" class="card days">
+      <div class="eyebrow">6 · Los 7 días</div>
+      <h2>Panorama visual de la creación</h2>
+      <div class="days-row">
+        <div class="day"><div class="daynum">1</div><div class="orb"></div><h4>Día 1</h4><div>Luz</div></div>
+        <div class="day"><div class="daynum">2</div><div class="orb sky"></div><h4>Día 2</h4><div>Cielos</div></div>
+        <div class="day"><div class="daynum">3</div><div class="orb land"></div><h4>Día 3</h4><div>Tierra y vegetación</div></div>
+        <div class="day"><div class="daynum">4</div><div class="orb lights"></div><h4>Día 4</h4><div>Lumbreras</div></div>
+        <div class="day"><div class="daynum">5</div><div class="orb life"></div><h4>Día 5</h4><div>Aves y peces</div></div>
+        <div class="day"><div class="daynum">6</div><div class="orb human"></div><h4>Día 6</h4><div>Animales y ser humano</div></div>
+        <div class="day"><div class="daynum">7</div><div class="orb rest"></div><h4>Día 7</h4><div>Reposo</div></div>
+      </div>
+    </section>
+
+
+    <section class="card quiz" id="test">
+      <div class="eyebrow">7 · Test interactivo</div>
+      <h2>Comprueba lo aprendido</h2>
+      <div class="question" data-answer="b">
+        <h3>1. ¿Qué muestra la expresión “Y dijo Dios”?</h3>
+        <label class="option"><input type="radio" name="q1" value="a"> Que Dios consulta a la creación.</label>
+        <label class="option"><input type="radio" name="q1" value="b"> Que la iniciativa y la autoridad pertenecen a Dios.</label>
+        <label class="option"><input type="radio" name="q1" value="c"> Que el universo se forma solo.</label>
+        <div class="feedback"></div>
+      </div>
+      <div class="question" data-answer="c">
+        <h3>2. ¿Cómo responde Génesis 1 al desorden y al vacío?</h3>
+        <label class="option"><input type="radio" name="q2" value="a"> Mediante una lucha entre dioses.</label>
+        <label class="option"><input type="radio" name="q2" value="b"> Ignorándolos.</label>
+        <label class="option"><input type="radio" name="q2" value="c"> Estableciendo ámbitos y llenándolos.</label>
+        <div class="feedback"></div>
+      </div>
+      <div class="question" data-answer="b">
+        <h3>3. ¿Por qué reposó Dios el séptimo día?</h3>
+        <label class="option"><input type="radio" name="q3" value="a"> Porque estaba agotado.</label>
+        <label class="option"><input type="radio" name="q3" value="b"> Porque la obra creadora descrita estaba concluida.</label>
+        <label class="option"><input type="radio" name="q3" value="c"> Porque abandonó el universo.</label>
+        <div class="feedback"></div>
+      </div>
+      <button class="primary" style="margin-top:16px" onclick="checkQuiz()">Corregir test</button>
+    </section>
+
+    <p class="footer">Fundamentos de la Palabra · Bloque 1 · Lección 3 · Infografía interactiva HTML</p>
+  </main>
+
+
+  <div class="modal" id="passageModal" role="dialog" aria-modal="true" aria-labelledby="passageTitle">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h2 id="passageTitle">Pasaje bíblico</h2>
+        <button class="modal-close" id="modalClose" aria-label="Cerrar">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="passage-text" id="passageText"></div>
+        <div class="passage-note">Texto base: Biblia Reina-Valera 1960.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const passages = {
+      gen1a: {
+        title: 'Génesis 1:3-13',
+        text: `3 Y dijo Dios: Sea la luz; y fue la luz.
+4 Y vio Dios que la luz era buena; y separó Dios la luz de las tinieblas.
+5 Y llamó Dios a la luz Día, y a las tinieblas llamó Noche. Y fue la tarde y la mañana un día.
+
+6 Luego dijo Dios: Haya expansión en medio de las aguas, y separe las aguas de las aguas.
+7 E hizo Dios la expansión, y separó las aguas que estaban debajo de la expansión, de las aguas que estaban sobre la expansión. Y fue así.
+8 Y llamó Dios a la expansión Cielos. Y fue la tarde y la mañana el día segundo.
+
+9 Dijo también Dios: Júntense las aguas que están debajo de los cielos en un lugar, y descúbrase lo seco. Y fue así.
+10 Y llamó Dios a lo seco Tierra, y a la reunión de las aguas llamó Mares. Y vio Dios que era bueno.
+11 Después dijo Dios: Produzca la tierra hierba verde, hierba que dé semilla; árbol de fruto que dé fruto según su género, que su semilla esté en él, sobre la tierra. Y fue así.
+12 Produjo, pues, la tierra hierba verde, hierba que da semilla según su naturaleza, y árbol que da fruto, cuya semilla está en él, según su género. Y vio Dios que era bueno.
+13 Y fue la tarde y la mañana el día tercero.`
+      },
+      gen1b: {
+        title: 'Génesis 1:14-25',
+        text: `14 Dijo luego Dios: Haya lumbreras en la expansión de los cielos para separar el día de la noche; y sirvan de señales para las estaciones, para días y años,
+15 y sean por lumbreras en la expansión de los cielos para alumbrar sobre la tierra. Y fue así.
+16 E hizo Dios las dos grandes lumbreras; la lumbrera mayor para que señorease en el día, y la lumbrera menor para que señorease en la noche; hizo también las estrellas.
+17 Y las puso Dios en la expansión de los cielos para alumbrar sobre la tierra,
+18 y para señorear en el día y en la noche, y para separar la luz de las tinieblas. Y vio Dios que era bueno.
+19 Y fue la tarde y la mañana el día cuarto.
+
+20 Dijo Dios: Produzcan las aguas seres vivientes, y aves que vuelen sobre la tierra, en la abierta expansión de los cielos.
+21 Y creó Dios los grandes monstruos marinos, y todo ser viviente que se mueve, que las aguas produjeron según su género, y toda ave alada según su especie. Y vio Dios que era bueno.
+22 Y Dios los bendijo, diciendo: Fructificad y multiplicaos, y llenad las aguas en los mares, y multiplíquense las aves en la tierra.
+23 Y fue la tarde y la mañana el día quinto.
+
+24 Luego dijo Dios: Produzca la tierra seres vivientes según su género, bestias y serpientes y animales de la tierra según su especie. Y fue así.
+25 E hizo Dios animales de la tierra según su género, y ganado según su género, y todo animal que se arrastra sobre la tierra según su especie. Y vio Dios que era bueno.`
+      },
+      gen1c: {
+        title: 'Génesis 1:28-31',
+        text: `28 Y los bendijo Dios, y les dijo: Fructificad y multiplicaos; llenad la tierra, y sojuzgadla, y señoread en los peces del mar, en las aves de los cielos, y en todas las bestias que se mueven sobre la tierra.
+29 Y dijo Dios: He aquí que os he dado toda planta que da semilla, que está sobre toda la tierra, y todo árbol en que hay fruto y que da semilla; os serán para comer.
+30 Y a toda bestia de la tierra, y a todas las aves de los cielos, y a todo lo que se arrastra sobre la tierra, en que hay vida, toda planta verde les será para comer. Y fue así.
+31 Y vio Dios todo lo que había hecho, y he aquí que era bueno en gran manera. Y fue la tarde y la mañana el día sexto.`
+      },
+      gen2: {
+        title: 'Génesis 2:1-3',
+        text: `1 Fueron, pues, acabados los cielos y la tierra, y todo el ejército de ellos.
+2 Y acabó Dios en el día séptimo la obra que hizo; y reposó el día séptimo de toda la obra que hizo.
+3 Y bendijo Dios al día séptimo, y lo santificó, porque en él reposó de toda la obra que había hecho en la creación.`
+      },
+      juan1: {
+        title: 'Juan 1:1-3',
+        text: `1 En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios.
+2 Este era en el principio con Dios.
+3 Todas las cosas por él fueron hechas, y sin él nada de lo que ha sido hecho, fue hecho.`
+      },
+      col1: {
+        title: 'Colosenses 1:15-17',
+        text: `15 Él es la imagen del Dios invisible, el primogénito de toda creación.
+16 Porque en él fueron creadas todas las cosas, las que hay en los cielos y las que hay en la tierra, visibles e invisibles; sean tronos, sean dominios, sean principados, sean potestades; todo fue creado por medio de él y para él.
+17 Y él es antes de todas las cosas, y todas las cosas en él subsisten.`
+      },
+      heb11: {
+        title: 'Hebreos 11:3',
+        text: `3 Por la fe entendemos haber sido constituido el universo por la palabra de Dios, de modo que lo que se ve fue hecho de lo que no se veía.`
+      },
+      sal104: {
+        title: 'Salmo 104:24, 27-30',
+        text: `24 ¡Cuán innumerables son tus obras, oh Jehová! Hiciste todas ellas con sabiduría; la tierra está llena de tus beneficios.
+
+27 Todos ellos esperan en ti, para que les des su comida a su tiempo.
+28 Les das, recogen; abres tu mano, se sacian de bien.
+29 Escondes tu rostro, se turban; les quitas el hálito, dejan de ser, y vuelven al polvo.
+30 Envías tu Espíritu, son creados, y renuevas la faz de la tierra.`
+      }
+    };
+
+    function openAll(){ document.querySelectorAll('details').forEach(d => d.open = true); }
+    function closeAll(){ document.querySelectorAll('details').forEach(d => d.open = false); }
+    function toggleDoctrine(){ document.getElementById('doctrine').classList.toggle('show'); }
+
+    const modal = document.getElementById('passageModal');
+    const modalTitle = document.getElementById('passageTitle');
+    const modalText = document.getElementById('passageText');
+    document.querySelectorAll('[data-passage]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = passages[btn.dataset.passage];
+        modalTitle.textContent = item.title;
+        modalText.textContent = item.text;
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    function closeModal(){
+      modal.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+    function checkQuiz(){
+      document.querySelectorAll('.question').forEach(q => {
+        const chosen = q.querySelector('input:checked');
+        const feedback = q.querySelector('.feedback');
+        if(!chosen){
+          feedback.className = 'feedback bad';
+          feedback.textContent = 'Selecciona una respuesta.';
+        } else if(chosen.value === q.dataset.answer){
+          feedback.className = 'feedback good';
+          feedback.textContent = 'Correcto.';
+        } else {
+          feedback.className = 'feedback bad';
+          feedback.textContent = 'No es correcto. Revisa el pasaje y vuelve a intentarlo.';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
