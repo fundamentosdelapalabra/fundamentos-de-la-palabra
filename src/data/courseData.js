@@ -193,7 +193,10 @@ export const courseData = [
     "summary": `<p>Esta semana exploramos quién es Dios como Creador y qué nos revela el origen de todo sobre su carácter y propósito.</p>
 <div style="position:relative;width:100%;max-width:720px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;margin-top:1rem">
   <iframe src="https://www.youtube.com/embed/sFTNO8OQGbQ" title="Dios Creador y el origen de todo" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>`,
+</div>
+<p style="margin-top:1.5rem;font-weight:600">Mapa Bíblico</p>
+<p>Explora el mapa bíblico interactivo para ver cómo encaja esta lección en el gran relato de la Escritura.</p>
+<a href="https://notebooklm.google.com/notebook/821fe7c2-b49f-4d5c-871d-c1ecfe371071/artifact/3dfc1ab6-842e-4a95-b7c0-f28ecf0722a5" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🗺️ Abrir Mapa Bíblico</a>`,
     "activity": `<p>Explora la infografía interactiva de esta semana para repasar y fijar los conceptos sobre Dios Creador y el origen de todo.</p>
 <a href="/infografia-semana3.html" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">📊 Abrir Infografía Interactiva</a>`,
     "testMakeupUrl": "#",
