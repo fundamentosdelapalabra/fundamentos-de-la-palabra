@@ -197,8 +197,11 @@ export const courseData = [
 <p style="margin-top:1.5rem;font-weight:600">Mapa Bíblico</p>
 <p>Explora el mapa bíblico interactivo para ver cómo encaja esta lección en el gran relato de la Escritura.</p>
 <a href="https://notebooklm.google.com/notebook/821fe7c2-b49f-4d5c-871d-c1ecfe371071/artifact/3dfc1ab6-842e-4a95-b7c0-f28ecf0722a5" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🗺️ Abrir Mapa Bíblico</a>`,
-    "activity": `<p>Explora la infografía interactiva de esta semana para repasar y fijar los conceptos sobre Dios Creador y el origen de todo.</p>
-<a href="/infografia-semana3.html" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">📊 Abrir Infografía Interactiva</a>`,
+    "activity": `<p>Repasa los conceptos de esta semana con las tarjetas interactivas y la infografía.</p>
+<div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:0.75rem">
+  <a href="https://notebooklm.google.com/notebook/821fe7c2-b49f-4d5c-871d-c1ecfe371071/artifact/29882f4e-b228-4fa5-ba60-5948bd68fc76" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🃏 Tarjetas Bíblicas</a>
+  <a href="/infografia-semana3.html" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">📊 Infografía Interactiva</a>
+</div>`,
     "testMakeupUrl": "https://notebooklm.google.com/notebook/821fe7c2-b49f-4d5c-871d-c1ecfe371071/artifact/72d7c133-8025-4adf-afaf-98fa3c73618a",
     "materialDriveUrl": "https://notebooklm.google.com/notebook/821fe7c2-b49f-4d5c-871d-c1ecfe371071/artifact/d23d2f00-2427-40fa-ad2f-c96b740955d0"
   },
