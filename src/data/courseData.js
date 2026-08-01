@@ -218,10 +218,17 @@ export const courseData = [
     "summary": `<p>Esta semana descubrimos qué ocurrió en la caída, cómo entró el pecado en la historia humana y cuál fue la primera promesa de Dios.</p>
 <div style="position:relative;width:100%;max-width:720px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;margin-top:1rem">
   <iframe src="https://www.youtube.com/embed/i5bXFA-MaJU" title="La caída, el pecado y la primera promesa" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<p style="margin-top:1.5rem;font-weight:600">Mapa Bíblico</p>
+<p>Explora el mapa bíblico interactivo para ver cómo encaja esta lección en el gran relato de la Escritura.</p>
+<a href="https://notebook.google.com/notebook/9a83a2b1-16ce-4e2f-90a6-5d6dc870f0de/artifact/8a216e82-a2ed-42ea-af68-3abba77c521b" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🗺️ Abrir Mapa Bíblico</a>`,
+    "activity": `<p>Repasa los conceptos de esta semana con las tarjetas interactivas y la infografía.</p>
+<div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:0.75rem">
+  <a href="https://notebook.google.com/notebook/9a83a2b1-16ce-4e2f-90a6-5d6dc870f0de/artifact/e99bd336-c28e-448a-b87f-0272ea7b5d67" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🃏 Tarjetas Bíblicas</a>
+  <a href="/infografia-semana4.html" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">📊 Infografía Interactiva</a>
 </div>`,
-    "activity": `Estamos preparando la actividad de esta semana. Estará disponible próximamente.`,
-    "testMakeupUrl": "#",
-    "materialDriveUrl": "#"
+    "testMakeupUrl": "https://notebook.google.com/notebook/9a83a2b1-16ce-4e2f-90a6-5d6dc870f0de/artifact/e18a2b98-bd91-4b78-8131-f3020a38c3f1",
+    "materialDriveUrl": "/material-semana4.pptx"
   },
   {
     "id": 5,
