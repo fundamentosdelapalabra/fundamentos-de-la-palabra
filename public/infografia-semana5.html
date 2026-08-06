@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Infografía | Abraham y el Dios que llama</title>
+  <style>
+    :root{
+      --bg:#f5efe3;
+      --bg2:#fffaf2;
+      --paper:#fffdf9;
+      --ink:#2b2116;
+      --muted:#6d6254;
+      --gold:#c99d3d;
+      --gold-soft:#f3dfac;
+      --olive:#6f7e4f;
+      --olive-soft:#eaf0de;
+      --terracotta:#b3694a;
+      --terracotta-soft:#f5e2d9;
+      --line:rgba(85,60,30,.12);
+      --shadow:0 18px 45px rgba(77,57,27,.12);
+      --radius:24px;
+      --radius-sm:18px;
+      --max:1200px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(201,157,61,.15), transparent 22%),
+        radial-gradient(circle at 90% 20%, rgba(111,126,79,.12), transparent 20%),
+        linear-gradient(180deg, #fbf6ec 0%, #f6eedf 50%, #fbf8f1 100%);
+      overflow-x:hidden;
+    }
+
+    .grain::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.05;
+      background-image:
+        radial-gradient(#000 0.4px, transparent 0.4px),
+        radial-gradient(#000 0.4px, transparent 0.4px);
+      background-position:0 0, 12px 12px;
+      background-size:24px 24px;
+      z-index:1;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter: blur(16px);
+      background:rgba(251,246,236,.75);
+      border-bottom:1px solid rgba(85,60,30,.08);
+    }
+
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .brand{
+      display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.02em;
+    }
+    .brand-badge{
+      width:42px;height:42px;border-radius:14px;
+      background:linear-gradient(135deg, var(--gold), #e7c775);
+      display:grid;place-items:center;color:#fff;box-shadow:var(--shadow);
+      font-size:1.15rem;
+    }
+    .brand small{display:block;color:var(--muted);font-weight:600}
+
+    .topnav{
+      display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;
+    }
+    .topnav a{
+      text-decoration:none;color:var(--muted);font-weight:700;font-size:.92rem;
+      padding:10px 14px;border-radius:999px;transition:.25s ease;
+    }
+    .topnav a:hover,.topnav a.active{background:#fff;color:var(--ink);box-shadow:0 8px 18px rgba(60,45,20,.08)}
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:28px 20px 80px;position:relative;z-index:2}
+
+    .hero{
+      position:relative;
+      background:linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,242,.92));
+      border:1px solid rgba(85,60,30,.08);
+      box-shadow:var(--shadow);
+      border-radius:36px;
+      overflow:hidden;
+      padding:36px;
+      display:grid;
+      grid-template-columns:1.25fr .8fr;
+      gap:28px;
+      align-items:stretch;
+    }
+
+    .hero::before,
+    .hero::after{
+      content:"";
+      position:absolute;border-radius:50%;filter:blur(8px);opacity:.55;
+    }
+    .hero::before{width:340px;height:340px;background:radial-gradient(circle, rgba(201,157,61,.24), transparent 70%);top:-80px;right:-70px;animation:float 8s ease-in-out infinite}
+    .hero::after{width:280px;height:280px;background:radial-gradient(circle, rgba(111,126,79,.18), transparent 70%);left:-90px;bottom:-90px;animation:float 10s ease-in-out infinite reverse}
+
+    @keyframes float{0%,100%{transform:translateY(0) translateX(0)}50%{transform:translateY(12px) translateX(-8px)}}
+    @keyframes pulseSoft{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.03);opacity:1}}
+    @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;
+      background:rgba(255,255,255,.84);border:1px solid rgba(85,60,30,.08);font-weight:800;color:var(--olive);
+      box-shadow:0 8px 18px rgba(60,45,20,.06);
+      margin-bottom:18px;
+    }
+
+    .hero h1{
+      margin:0;font-size:clamp(2rem, 4vw, 4rem);line-height:.95;letter-spacing:-.03em;
+    }
+    .hero .subtitle{
+      margin:16px 0 20px;font-size:1.08rem;line-height:1.7;color:var(--muted);max-width:60ch;
+    }
+    .hero-quote{
+      margin-top:24px;padding:18px 20px;border-radius:22px;background:rgba(255,255,255,.74);
+      border:1px solid rgba(85,60,30,.08);box-shadow:0 8px 20px rgba(74,54,24,.05)
+    }
+    .hero-quote strong{display:block;font-size:1rem;margin-bottom:8px;color:var(--terracotta)}
+
+    .hero-right{display:grid;gap:16px;align-content:start}
+
+    .summary-card{
+      background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(253,248,240,.92));
+      border:1px solid rgba(85,60,30,.08);
+      border-radius:26px;padding:20px;box-shadow:0 14px 28px rgba(67,50,22,.08);
+      animation:pulseSoft 6s ease-in-out infinite;
+    }
+    .summary-card h3{margin:0 0 10px;font-size:1.05rem}
+    .summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+    .summary-item{
+      background:#fff;border-radius:18px;padding:14px;border:1px solid rgba(85,60,30,.08)
+    }
+    .summary-item span{display:block;color:var(--muted);font-size:.8rem;text-transform:uppercase;font-weight:800;letter-spacing:.08em}
+    .summary-item strong{display:block;margin-top:8px;font-size:1rem;line-height:1.35}
+
+    .section{margin-top:28px;animation:rise .7s ease both}
+    .panel{
+      background:rgba(255,255,255,.84);border:1px solid rgba(85,60,30,.08);border-radius:32px;
+      padding:28px;box-shadow:var(--shadow);position:relative;overflow:hidden
+    }
+    .section-title{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:20px}
+    .section-title h2{margin:0;font-size:clamp(1.35rem,2vw,2.2rem)}
+    .section-title p{margin:0;color:var(--muted);max-width:58ch;line-height:1.65}
+
+    .pill-row{display:flex;gap:12px;flex-wrap:wrap}
+    .pill{
+      padding:10px 14px;border-radius:999px;background:#fff;border:1px solid rgba(85,60,30,.08);
+      font-weight:700;color:var(--muted)
+    }
+
+    .promise-grid{
+      display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:18px
+    }
+    .promise-card{
+      background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(250,244,232,.92));
+      border:1px solid rgba(85,60,30,.08);border-radius:24px;padding:20px;min-height:210px;
+      position:relative;overflow:hidden;transition:transform .28s ease, box-shadow .28s ease
+    }
+    .promise-card:hover{transform:translateY(-6px);box-shadow:0 18px 35px rgba(59,43,18,.12)}
+    .promise-card .num{
+      width:44px;height:44px;display:grid;place-items:center;border-radius:14px;font-weight:900;
+      color:#fff;background:linear-gradient(135deg, var(--gold), #e1bc61);margin-bottom:14px
+    }
+    .promise-card h3{margin:0 0 10px;font-size:1.1rem}
+    .promise-card p{margin:0;color:var(--muted);line-height:1.65}
+
+    .path{
+      display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:18px;position:relative
+    }
+    .path::before{
+      content:"";position:absolute;left:7%;right:7%;top:34px;height:3px;
+      background:linear-gradient(90deg, var(--gold), var(--olive), var(--terracotta));border-radius:999px;opacity:.35
+    }
+    .step{
+      position:relative;background:#fff;border-radius:22px;border:1px solid rgba(85,60,30,.08);padding:20px 16px 18px;
+      box-shadow:0 10px 24px rgba(61,45,18,.06)
+    }
+    .step .dot{
+      width:18px;height:18px;border-radius:50%;background:var(--gold);margin:0 auto 18px;position:relative;z-index:2;box-shadow:0 0 0 8px rgba(201,157,61,.15)
+    }
+    .step h4{margin:0 0 8px;text-align:center;font-size:1rem}
+    .step p{margin:0;color:var(--muted);line-height:1.58;font-size:.95rem;text-align:center}
+
+    .two-col{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}
+
+    .toggle-shell{
+      display:grid;gap:12px
+    }
+    .toggle-tabs{display:flex;gap:10px;flex-wrap:wrap}
+    .toggle-btn{
+      border:none;cursor:pointer;padding:12px 16px;border-radius:999px;font-weight:800;
+      background:#fff;color:var(--muted);border:1px solid rgba(85,60,30,.08);transition:.25s ease
+    }
+    .toggle-btn.active{background:linear-gradient(135deg, var(--gold), #e7c775);color:#fff;box-shadow:0 10px 22px rgba(201,157,61,.22)}
+    .toggle-card{
+      background:linear-gradient(180deg, rgba(255,255,255,.98), rgba(251,247,239,.95));border:1px solid rgba(85,60,30,.08);
+      border-radius:24px;padding:22px;min-height:280px
+    }
+    .toggle-card h3{margin-top:0}
+    .toggle-card ul{padding-left:18px;margin:0}
+    .toggle-card li{margin:10px 0;line-height:1.65;color:var(--muted)}
+
+    .word-card,.doctrine-card,.apply-card,.quiz-card,.task-card,.note-card{
+      background:linear-gradient(180deg, rgba(255,255,255,.97), rgba(250,246,239,.95));
+      border:1px solid rgba(85,60,30,.08);border-radius:24px;padding:22px;height:100%
+    }
+
+    .hebrew{
+      display:inline-flex;align-items:center;gap:12px;padding:14px 16px;border-radius:20px;background:var(--gold-soft);font-weight:900;font-size:1.15rem;margin-bottom:14px
+    }
+    .root-badge{display:inline-block;padding:8px 12px;background:var(--olive-soft);color:var(--olive);border-radius:999px;font-weight:800;margin-top:14px}
+
+    .doctrine-highlight{
+      margin-top:14px;padding:18px;border-left:6px solid var(--terracotta);background:var(--terracotta-soft);border-radius:18px;line-height:1.7
+    }
+
+    .apply-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .apply-card ul{padding-left:18px;margin:0}
+    .apply-card li{margin:10px 0;line-height:1.65;color:var(--muted)}
+
+    .exercise{
+      margin-top:16px;padding:20px;border-radius:22px;background:linear-gradient(135deg, rgba(111,126,79,.1), rgba(201,157,61,.08));border:1px dashed rgba(85,60,30,.16)
+    }
+    .exercise ol{margin:10px 0 0;padding-left:20px}
+    .exercise li{margin:8px 0;line-height:1.6}
+
+
+    .scripture-list{display:grid;gap:14px;margin-top:18px}
+    .scripture-box{background:#fff;border:1px solid rgba(85,60,30,.08);border-radius:22px;padding:0 18px;box-shadow:0 8px 18px rgba(61,45,18,.05)}
+    .scripture-box summary{padding:18px 4px;font-size:1rem;color:var(--ink)}
+    .scripture-ref{display:inline-block;margin-top:4px;color:var(--olive);font-size:.9rem;font-weight:700}
+    .verse-block{padding:0 4px 18px;display:grid;gap:10px}
+    .verse{line-height:1.7;color:var(--muted);background:linear-gradient(180deg, rgba(251,248,242,.95), rgba(255,255,255,.95));border:1px solid rgba(85,60,30,.06);padding:12px 14px;border-radius:16px}
+    .verse-num{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;border-radius:999px;background:var(--gold-soft);color:var(--ink);font-weight:900;font-size:.9rem;margin-right:10px}
+
+    .accordion{display:grid;gap:12px}
+    details{
+      background:#fff;border:1px solid rgba(85,60,30,.08);border-radius:18px;padding:0 18px;overflow:hidden
+    }
+    summary{
+      cursor:pointer;list-style:none;padding:16px 4px;font-weight:800;color:var(--ink)
+    }
+    summary::-webkit-details-marker{display:none}
+    details p, details ul{color:var(--muted);line-height:1.65;margin:0 0 16px}
+    details ul{padding-left:18px}
+
+    .big-quote{
+      font-size:clamp(1.15rem, 2vw, 1.7rem);line-height:1.45;font-weight:900;letter-spacing:-.02em
+    }
+
+    .five{
+      display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:16px
+    }
+    .five .mini{
+      background:#fff;border:1px solid rgba(85,60,30,.08);padding:16px;border-radius:18px;text-align:center;font-weight:800;color:var(--muted)
+    }
+
+    .footer{
+      margin-top:26px;padding:26px;border-radius:28px;background:linear-gradient(135deg, rgba(43,33,22,.95), rgba(67,50,22,.95));color:#f8f1e5;box-shadow:var(--shadow)
+    }
+    .footer strong{color:#fff}
+    .footer p{color:rgba(248,241,229,.86);line-height:1.7}
+
+    .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease, transform .7s ease}
+    .reveal.show{opacity:1;transform:translateY(0)}
+
+    @media (max-width: 1100px){
+      .hero,.two-col{grid-template-columns:1fr}
+      .promise-grid{grid-template-columns:repeat(2,1fr)}
+      .path{grid-template-columns:repeat(2,1fr)}
+      .path::before{display:none}
+      .five{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width: 720px){
+      .topbar-inner{align-items:flex-start;flex-direction:column}
+      .hero{padding:24px}
+      .panel{padding:22px}
+      .promise-grid,.apply-grid,.summary-grid,.path,.five{grid-template-columns:1fr}
+      .brand{align-items:flex-start}
+      .topnav{justify-content:flex-start}
+      .hero h1{font-size:2.2rem}
+    }
+  </style>
+</head>
+<body class="grain">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-badge">✦</div>
+        <div>
+          Fundamentos de la Palabra
+          <small>Módulo 2 · Semana 5 · Infografía interactiva</small>
+        </div>
+      </div>
+      <nav class="topnav">
+        <a href="#inicio">Inicio</a>
+        <a href="#lecturas">Lecturas</a>
+        <a href="#promesa">Promesa</a>
+        <a href="#explicacion">Texto</a>
+        <a href="#pacto">Pacto</a>
+        <a href="#aplicacion">Aplicación</a>
+        <a href="#tarea">Tarea</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero reveal" id="inicio">
+      <div>
+        <div class="eyebrow">✧ Primera clase del segundo bloque</div>
+        <h1>Abraham y el<br> Dios que llama</h1>
+        <p class="subtitle">
+          Una lección sobre <strong>fe, promesa, pacto y obediencia</strong>. Después de la caída y de la primera promesa,
+          Dios avanza en su plan llamando a una persona concreta para caminar con Él, formar una familia
+          y levantar un pueblo que será de bendición para otros.
+        </p>
+        <div class="pill-row">
+          <div class="pill">Lectura principal: Génesis 12:1–9</div>
+          <div class="pill">Apoyos: Génesis 15 · Génesis 17 · Hebreos 11 · Gálatas 3</div>
+        </div>
+        <div class="hero-quote">
+          <strong>Idea central</strong>
+          Dios llama por gracia, promete con fidelidad y pide una respuesta de <b>fe obediente</b>.
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="summary-card">
+          <h3>Ficha rápida de la clase</h3>
+          <div class="summary-grid">
+            <div class="summary-item"><span>Módulo</span><strong>2 · Pacto, pueblo de Dios y obediencia</strong></div>
+            <div class="summary-item"><span>Semana</span><strong>5</strong></div>
+            <div class="summary-item"><span>Tema</span><strong>Fe, promesa, pacto y obediencia</strong></div>
+            <div class="summary-item"><span>Verdad clave</span><strong>Creer y obedecer</strong></div>
+          </div>
+        </div>
+        <div class="summary-card" style="animation-delay:.8s">
+          <h3>Versículo eje</h3>
+          <p class="big-quote">“Y creyó a Jehová, y le fue contado por justicia.”</p>
+          <p style="margin:10px 0 0;color:var(--muted);font-weight:700">Génesis 15:6</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="lecturas">
+      <div class="panel">
+        <div class="section-title">
+          <div>
+            <h2>Lecturas bíblicas completas</h2>
+            <p>Para que los alumnos no tengan que buscar los textos, aquí puedes desplegar los pasajes principales y de apoyo directamente dentro de la infografía.</p>
+          </div>
+        </div>
+
+        <div class="scripture-list">
+          <details class="scripture-box" open>
+            <summary>Lectura principal <span class="scripture-ref">Génesis 12:1–9</span></summary>
+            <div class="verse-block">
+              <div class="verse"><span class="verse-num">1</span>Pero Jehová había dicho a Abram: Vete de tu tierra y de tu parentela, y de la casa de tu padre, a la tierra que te mostraré.</div>
+              <div class="verse"><span class="verse-num">2</span>Y haré de ti una nación grande, y te bendeciré, y engrandeceré tu nombre, y serás bendición.</div>
+              <div class="verse"><span class="verse-num">3</span>Bendeciré a los que te bendijeren, y a los que te maldijeren maldeciré; y serán benditas en ti todas las familias de la tierra.</div>
+              <div class="verse"><span class="verse-num">4</span>Y se fue Abram, como Jehová le dijo; y Lot fue con él. Y era Abram de edad de setenta y cinco años cuando salió de Harán.</div>
+              <div class="verse"><span class="verse-num">5</span>Tomó, pues, Abram a Sarai su mujer, y a Lot hijo de su hermano, y todos sus bienes que habían ganado y las personas que habían adquirido en Harán, y salieron para ir a tierra de Canaán; y a tierra de Canaán llegaron.</div>
+              <div class="verse"><span class="verse-num">6</span>Y pasó Abram por aquella tierra hasta el lugar de Siquem, hasta el encino de More; y el cananeo estaba entonces en la tierra.</div>
+              <div class="verse"><span class="verse-num">7</span>Y apareció Jehová a Abram, y le dijo: A tu descendencia daré esta tierra. Y edificó allí un altar a Jehová, quien le había aparecido.</div>
+              <div class="verse"><span class="verse-num">8</span>Luego se pasó de allí a un monte al oriente de Bet-el, y plantó su tienda, teniendo a Bet-el al occidente y Hai al oriente; y edificó allí altar a Jehová, e invocó el nombre de Jehová.</div>
+              <div class="verse"><span class="verse-num">9</span>Y Abram partió de allí, caminando y yendo hacia el Neguev.</div>
+            </div>
+          </details>
+
+          <details class="scripture-box">
+            <summary>Lectura de apoyo <span class="scripture-ref">Génesis 15:1–6</span></summary>
+            <div class="verse-block">
+              <div class="verse"><span class="verse-num">1</span>Después de estas cosas vino la palabra de Jehová a Abram en visión, diciendo: No temas, Abram; yo soy tu escudo, y tu galardón será sobremanera grande.</div>
+              <div class="verse"><span class="verse-num">2</span>Y respondió Abram: Señor Jehová, ¿qué me darás, siendo así que ando sin hijo, y el mayordomo de mi casa es ese damasceno Eliezer?</div>
+              <div class="verse"><span class="verse-num">3</span>Dijo también Abram: Mira que no me has dado prole, y he aquí que será mi heredero un esclavo nacido en mi casa.</div>
+              <div class="verse"><span class="verse-num">4</span>Luego vino a él palabra de Jehová, diciendo: No te heredará éste, sino un hijo tuyo será el que te heredará.</div>
+              <div class="verse"><span class="verse-num">5</span>Y lo llevó fuera, y le dijo: Mira ahora los cielos, y cuenta las estrellas, si las puedes contar. Y le dijo: Así será tu descendencia.</div>
+              <div class="verse"><span class="verse-num">6</span>Y creyó a Jehová, y le fue contado por justicia.</div>
+            </div>
+          </details>
+
+          <details class="scripture-box">
+            <summary>Lectura de apoyo <span class="scripture-ref">Génesis 17:1–8</span></summary>
+            <div class="verse-block">
+              <div class="verse"><span class="verse-num">1</span>Era Abram de edad de noventa y nueve años, cuando le apareció Jehová y le dijo: Yo soy el Dios Todopoderoso; anda delante de mí y sé perfecto.</div>
+              <div class="verse"><span class="verse-num">2</span>Y pondré mi pacto entre mí y ti, y te multiplicaré en gran manera.</div>
+              <div class="verse"><span class="verse-num">3</span>Entonces Abram se postró sobre su rostro, y Dios habló con él, diciendo:</div>
+              <div class="verse"><span class="verse-num">4</span>He aquí mi pacto es contigo, y serás padre de muchedumbre de gentes.</div>
+              <div class="verse"><span class="verse-num">5</span>Y no se llamará más tu nombre Abram, sino que será tu nombre Abraham, porque te he puesto por padre de muchedumbre de gentes.</div>
+              <div class="verse"><span class="verse-num">6</span>Y te multiplicaré en gran manera, y haré naciones de ti, y reyes saldrán de ti.</div>
+              <div class="verse"><span class="verse-num">7</span>Y estableceré mi pacto entre mí y ti, y tu descendencia después de ti en sus generaciones, por pacto perpetuo, para ser tu Dios, y el de tu descendencia después de ti.</div>
+              <div class="verse"><span class="verse-num">8</span>Y te daré a ti, y a tu descendencia después de ti, la tierra en que moras, toda la tierra de Canaán en heredad perpetua; y seré el Dios de ellos.</div>
+            </div>
+          </details>
+
+          <details class="scripture-box">
+            <summary>Lectura de apoyo <span class="scripture-ref">Hebreos 11:8–10</span></summary>
+            <div class="verse-block">
+              <div class="verse"><span class="verse-num">8</span>Por la fe Abraham, siendo llamado, obedeció para salir al lugar que había de recibir como herencia; y salió sin saber a dónde iba.</div>
+              <div class="verse"><span class="verse-num">9</span>Por la fe habitó como extranjero en la tierra prometida como en tierra ajena, morando en tiendas con Isaac y Jacob, coherederos de la misma promesa;</div>
+              <div class="verse"><span class="verse-num">10</span>porque esperaba la ciudad que tiene fundamentos, cuyo arquitecto y constructor es Dios.</div>
+            </div>
+          </details>
+
+          <details class="scripture-box">
+            <summary>Lectura de apoyo <span class="scripture-ref">Gálatas 3:6–9</span></summary>
+            <div class="verse-block">
+              <div class="verse"><span class="verse-num">6</span>Así Abraham creyó a Dios, y le fue contado por justicia.</div>
+              <div class="verse"><span class="verse-num">7</span>Sabed, por tanto, que los que son de fe, éstos son hijos de Abraham.</div>
+              <div class="verse"><span class="verse-num">8</span>Y la Escritura, previendo que Dios había de justificar por la fe a los gentiles, dio de antemano la buena nueva a Abraham, diciendo: En ti serán benditas todas las naciones.</div>
+              <div class="verse"><span class="verse-num">9</span>De modo que los de la fe son bendecidos con el creyente Abraham.</div>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="promesa">
+      <div class="panel">
+        <div class="section-title">
+          <div>
+            <h2>Las 4 dimensiones de la promesa</h2>
+            <p>La promesa dada a Abram no termina en su propia vida. Dios bendice para convertir en bendición.</p>
+          </div>
+        </div>
+        <div class="promise-grid">
+          <article class="promise-card">
+            <div class="num">1</div>
+            <h3>Descendencia</h3>
+            <p><strong>“Haré de ti una nación grande.”</strong> Dios promete levantar un pueblo a partir de Abram.</p>
+          </article>
+          <article class="promise-card">
+            <div class="num">2</div>
+            <h3>Bendición</h3>
+            <p>Dios promete bendecirlo, engrandecer su nombre y mostrar su favor sobre su vida.</p>
+          </article>
+          <article class="promise-card">
+            <div class="num">3</div>
+            <h3>Protección</h3>
+            <p>Dios se compromete a actuar frente a quienes bendigan o maldigan a Abram.</p>
+          </article>
+          <article class="promise-card">
+            <div class="num">4</div>
+            <h3>Misión universal</h3>
+            <p><strong>“Serán benditas en ti todas las familias de la tierra.”</strong> La elección tiene alcance para otros.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="panel">
+        <div class="section-title">
+          <div>
+            <h2>El camino de Abraham</h2>
+            <p>El relato muestra un movimiento claro: Dios habla, Abram escucha, sale, camina y adora.</p>
+          </div>
+        </div>
+        <div class="path">
+          <div class="step">
+            <div class="dot"></div>
+            <h4>1. Dios llama</h4>
+            <p>La iniciativa nace en Dios. Abram no se escoge a sí mismo.</p>
+          </div>
+          <div class="step">
+            <div class="dot"></div>
+            <h4>2. Dejar atrás</h4>
+            <p>Debe salir de su tierra, su parentela y la casa de su padre.</p>
+          </div>
+          <div class="step">
+            <div class="dot"></div>
+            <h4>3. Caminar sin mapa completo</h4>
+            <p>Dios no le da todos los detalles; le da una palabra suficiente.</p>
+          </div>
+          <div class="step">
+            <div class="dot"></div>
+            <h4>4. Llegar y creer</h4>
+            <p>Abraza la promesa aun antes de poseer la tierra prometida.</p>
+          </div>
+          <div class="step">
+            <div class="dot"></div>
+            <h4>5. Levantar altar</h4>
+            <p>Adora durante el camino. El altar acompaña la peregrinación.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="explicacion">
+      <div class="panel">
+        <div class="section-title">
+          <div>
+            <h2>Qué dice · qué no dice · qué enseña</h2>
+            <p>Pulsa los botones para recorrer la explicación central de la clase.</p>
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="toggle-shell">
+            <div class="toggle-tabs">
+              <button class="toggle-btn active" data-target="dice">Qué dice</button>
+              <button class="toggle-btn" data-target="no-dice">Qué no dice</button>
+              <button class="toggle-btn" data-target="ensena">Qué enseña</button>
+            </div>
+            <div class="toggle-card" id="toggle-content">
+              <div class="toggle-pane" data-pane="dice">
+                <h3>Qué dice el texto</h3>
+                <ul>
+                  <li>Dios toma la iniciativa y habla primero.</li>
+                  <li>El llamado exige dejar seguridades y caminar por fe.</li>
+                  <li>La promesa incluye descendencia, bendición, protección y misión universal.</li>
+                  <li>Abram responde obedeciendo: <strong>“Y se fue Abram, como Jehová le dijo.”</strong></li>
+                  <li>La tienda muestra peregrinación; el altar, adoración y dependencia.</li>
+                </ul>
+              </div>
+              <div class="toggle-pane" data-pane="no-dice" hidden>
+                <h3>Qué no dice el texto</h3>
+                <ul>
+                  <li>No dice que Abraham fuera perfecto o que nunca dudara.</li>
+                  <li>No enseña que la fe elimine la espera, el conflicto o las pruebas.</li>
+                  <li>No autoriza a llamar “voz de Dios” a cualquier impulso interior.</li>
+                  <li>No presenta la bendición como acumulación egoísta, sino como servicio a otros.</li>
+                </ul>
+              </div>
+              <div class="toggle-pane" data-pane="ensena" hidden>
+                <h3>Qué enseña claramente</h3>
+                <ul>
+                  <li>La relación con Dios comienza porque Dios se revela, llama y promete.</li>
+                  <li>La fe bíblica no es confianza ciega; responde a la palabra de Dios.</li>
+                  <li>La obediencia no compra la promesa, pero sí demuestra que la fe es real.</li>
+                  <li>Dios bendice con un propósito que alcanza a otros.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="note-card">
+            <h3>Dos imágenes poderosas del texto</h3>
+            <p><strong>Tienda:</strong> Abraham vive como peregrino. Todavía no ha poseído lo prometido.</p>
+            <p><strong>Altar:</strong> Abraham adora al Dios que ya ha hablado, aunque aún no vea el cumplimiento completo.</p>
+            <div class="doctrine-highlight">
+              <strong>Clave visual de la clase:</strong><br>
+              vivir en tienda y levantar altar significa caminar en esta vida con dependencia, adoración y esperanza.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="pacto">
+      <div class="panel">
+        <div class="section-title">
+          <div>
+            <h2>Palabras clave: pacto y creer</h2>
+            <p>Las raíces bíblicas se usan aquí de forma sencilla, para iluminar el texto sin complicarlo.</p>
+          </div>
+        </div>
+        <div class="two-col">
+          <article class="word-card">
+            <div class="hebrew">Berit · בְּרִית</div>
+            <p><strong>Pacto.</strong> Un compromiso establecido por Dios que define una relación, contiene promesas y reclama una respuesta fiel.</p>
+            <p>No es una negociación entre iguales. Dios toma la iniciativa, declara lo que hará y confirma su palabra.</p>
+            <span class="root-badge">Génesis 15 y 17 amplían esta realidad</span>
+          </article>
+          <article class="doctrine-card">
+            <div class="hebrew" style="background:var(--olive-soft);color:var(--olive)">Aman · אָמַן</div>
+            <p><strong>Creer.</strong> La idea se relaciona con firmeza, confianza y fiabilidad.</p>
+            <p>Creer no es desear intensamente que algo ocurra; es apoyarse en la fidelidad del Dios que ha hablado.</p>
+            <div class="doctrine-highlight">
+              <strong>Doctrina central:</strong><br>
+              La promesa descansa en la fidelidad de Dios; la respuesta humana adecuada es <strong>creer y obedecer</strong>.
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="aplicacion">
+      <div class="panel">
+        <div class="section-title">
+          <div>
+            <h2>Aplicación personal y comunitaria</h2>
+            <p>La lección no se queda en teoría: conecta la fe con la vida, la espera, la obediencia y el servicio.</p>
+          </div>
+        </div>
+        <div class="apply-grid">
+          <article class="apply-card">
+            <h3>Aplicación personal</h3>
+            <ul>
+              <li>Escuchar antes de actuar.</li>
+              <li>Dar el siguiente paso aunque no veamos todo el recorrido.</li>
+              <li>Revisar nuestras falsas seguridades.</li>
+              <li>Aprender a esperar entre promesa y cumplimiento.</li>
+              <li>Adorar durante el camino, no solo al final.</li>
+            </ul>
+          </article>
+          <article class="apply-card">
+            <h3>Aplicación comunitaria</h3>
+            <ul>
+              <li>No medir a las personas solo por resultados visibles.</li>
+              <li>Ayudar a escuchar la Palabra con claridad.</li>
+              <li>Sostener durante la espera con humildad y verdad.</li>
+              <li>Recordar que toda bendición recibida debe servir a otros.</li>
+            </ul>
+          </article>
+        </div>
+        <div class="exercise">
+          <strong>Ejercicio práctico: “Promesa, paso y altar”</strong>
+          <ol>
+            <li>Una verdad de Dios que necesito recordar.</li>
+            <li>Un paso de obediencia concreto y prudente para esta semana.</li>
+            <li>Una forma de agradecer a Dios antes de ver el resultado.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="panel">
+        <div class="section-title">
+          <div>
+            <h2>Resumen y test rápido</h2>
+            <p>Una síntesis visual para fijar la lección y recordar lo esencial.</p>
+          </div>
+        </div>
+        <div class="five">
+          <div class="mini">Dios llama por iniciativa propia</div>
+          <div class="mini">La promesa nace de la gracia</div>
+          <div class="mini">Abraham cree y obedece</div>
+          <div class="mini">El pacto revela la fidelidad de Dios</div>
+          <div class="mini">La bendición debe servir a otros</div>
+        </div>
+        <div class="accordion" style="margin-top:20px">
+          <details>
+            <summary>Preguntas tipo test</summary>
+            <p>1) ¿Quién inicia el llamado de Abraham?<br>2) ¿Qué idea forma parte de Génesis 12:1–3?<br>3) ¿Qué muestra principalmente Génesis 12:4?<br>4) ¿Qué significa <em>berit</em>?<br>5) Según Génesis 15:6, ¿qué fue contado a Abram por justicia?</p>
+          </details>
+          <details>
+            <summary>Respuestas correctas</summary>
+            <p>1-b · 2-c · 3-a · 4-c · 5-d</p>
+          </details>
+          <details>
+            <summary>Áreas a reforzar</summary>
+            <ul>
+              <li>Diferencia entre promesa bíblica y deseo personal.</li>
+              <li>Diferencia entre fe y pensamiento positivo.</li>
+              <li>Sentido bíblico del pacto.</li>
+              <li>Relación entre gracia, fe y obediencia.</li>
+            </ul>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="tarea">
+      <div class="panel">
+        <div class="section-title">
+          <div>
+            <h2>Tarea semanal y cierre</h2>
+            <p>Una salida práctica para seguir meditando la clase durante la semana.</p>
+          </div>
+        </div>
+        <div class="two-col">
+          <article class="task-card">
+            <h3>Tarea</h3>
+            <ul>
+              <li>Leer otra vez Génesis 12:1–9 y Génesis 15:1–6.</li>
+              <li>Subrayar las acciones de Dios y rodear las acciones de Abram.</li>
+              <li>Completar la frase: <strong>“La fe bíblica no es..., sino...”</strong></li>
+              <li>Preparar una explicación oral de 2 minutos sobre la promesa hecha a Abraham.</li>
+              <li>Lectura opcional: Hebreos 11:8–16 y Gálatas 3:6–9.</li>
+            </ul>
+          </article>
+          <article class="note-card">
+            <h3>Cierre del profesor</h3>
+            <p class="big-quote">No necesitamos conocer todo el camino para obedecer el siguiente paso que Dios ha dejado claro en su Palabra.</p>
+            <p style="margin-top:16px;color:var(--muted)">Esta clase mantiene la estructura del curso: texto bíblico, explicación clara, raíz bíblica con prudencia, doctrina central, aplicación, diálogo y tarea final.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer reveal">
+      <strong>Fundamentos de la Palabra · Módulo 2 · Semana 5</strong>
+      <p>
+        Infografía en HTML basada en la clase <em>“Abraham y el Dios que llama”</em>, siguiendo la estructura fija del curso:
+        bienvenida, objetivo, lectura principal, explicación, palabra clave, doctrina central, aplicación, test, corrección y tarea final.
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    const buttons = document.querySelectorAll('.toggle-btn');
+    const panes = document.querySelectorAll('.toggle-pane');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const target = btn.dataset.target;
+        panes.forEach(p => p.hidden = p.dataset.pane !== target);
+      });
+    });
+
+    const navLinks = document.querySelectorAll('.topnav a');
+    const sections = [...document.querySelectorAll('section[id]')];
+    const revealEls = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('show');
+        }
+      });
+    }, {threshold: .14});
+
+    revealEls.forEach(el => observer.observe(el));
+
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, {rootMargin:'-40% 0px -50% 0px', threshold:0});
+
+    sections.forEach(sec => navObserver.observe(sec));
+  </script>
+</body>
+</html>

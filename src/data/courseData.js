@@ -237,13 +237,23 @@ export const courseData = [
     "weekLabel": "Semana 5",
     "title": "Abraham y el Dios que llama",
     "date": "2026-08-08",
-    "disponible": false,
+    "disponible": true,
     "verse": null,
     "verseRef": null,
-    "summary": `Estamos preparando esta lección con cuidado. Estará disponible próximamente.`,
-    "activity": `Estamos preparando esta lección con cuidado. Estará disponible próximamente.`,
-    "testMakeupUrl": "#",
-    "materialDriveUrl": "#"
+    "summary": `<p>Esta semana conocemos a Abraham y al Dios que llama: cómo Dios inicia una promesa de fe, pacto y obediencia que marcará el resto de la Escritura. Mira el vídeo antes de la clase del sábado.</p>
+<div style="position:relative;width:100%;max-width:720px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;margin-top:1rem">
+  <iframe src="https://www.youtube.com/embed/DQOqlUEJhLw" title="Abraham y el Dios que llama" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<p style="margin-top:1.5rem;font-weight:600">Mapa mental</p>
+<p>Explora el mapa mental interactivo para ver cómo encaja esta lección en el gran relato de la Escritura.</p>
+<a href="https://notebook.google.com/notebook/3918fef8-a275-4e04-8503-339c87a37dcd/artifact/094ef3e1-36d6-423f-b393-8f2e8aa1898d?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🧠 Abrir Mapa Mental</a>`,
+    "activity": `<p>Repasa los conceptos de esta semana con las tarjetas interactivas y la infografía.</p>
+<div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:0.75rem">
+  <a href="https://notebook.google.com/notebook/3918fef8-a275-4e04-8503-339c87a37dcd/artifact/ff9bd1c7-cab5-4a46-9b6e-1fa61f8183c7?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🃏 Tarjetas Bíblicas</a>
+  <a href="/infografia-semana5.html" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">📊 Infografía Interactiva</a>
+</div>`,
+    "testMakeupUrl": "https://notebook.google.com/notebook/3918fef8-a275-4e04-8503-339c87a37dcd/artifact/ee90c99f-46bf-45db-b7f2-f19a96cc41de?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_",
+    "materialDriveUrl": "https://docs.google.com/presentation/d/1v_28OwRaqwG9DUxGcekDu4qBHFc4n4MY/edit?usp=drive_web&ouid=113236244804924227906&rtpof=true"
   },
   {
     "id": 6,
