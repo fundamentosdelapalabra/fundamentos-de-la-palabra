@@ -262,7 +262,7 @@ export const courseData = [
     "weekLabel": "Semana 6",
     "title": "Moisés, liberación y formación del pueblo",
     "date": "2026-08-15",
-    "disponible": false,
+    "disponible": true,
     "verse": null,
     "verseRef": null,
     "summary": `<p>Esta semana conocemos a Moisés, la liberación del pueblo de Dios y su formación como nación. Mira el vídeo antes de la clase del sábado.</p>
