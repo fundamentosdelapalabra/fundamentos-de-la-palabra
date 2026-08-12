@@ -275,7 +275,7 @@ export const courseData = [
     "activity": `<p>Esta semana repasa los conceptos clave con las tarjetas interactivas. Es una forma rápida y efectiva de fijar lo aprendido antes de la próxima clase.</p>
 <a href="https://notebook.google.com/notebook/1347079b-f4ca-4ff4-a1c9-d07cd2cec881/artifact/0719e030-fff5-4f95-bbac-0e81ab1f09d4?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🃏 Abrir Tarjetas Bíblicas</a>`,
     "testMakeupUrl": "https://notebook.google.com/notebook/1347079b-f4ca-4ff4-a1c9-d07cd2cec881/artifact/0719e030-fff5-4f95-bbac-0e81ab1f09d4?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_",
-    "materialDriveUrl": "#"
+    "materialDriveUrl": "/material-semana6.pptx"
   },
   {
     "id": 7,
