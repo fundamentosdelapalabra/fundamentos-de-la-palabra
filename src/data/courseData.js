@@ -272,8 +272,11 @@ export const courseData = [
 <p style="margin-top:1.5rem;font-weight:600">Mapa mental</p>
 <p>Explora el mapa mental interactivo para ver cómo encaja esta lección en el gran relato de la Escritura.</p>
 <a href="https://notebook.google.com/notebook/1347079b-f4ca-4ff4-a1c9-d07cd2cec881/artifact/4bfad26f-9232-445d-b6ee-f54dce1a724a?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🧠 Abrir Mapa Mental</a>`,
-    "activity": `<p>Esta semana repasa los conceptos clave con las tarjetas interactivas. Es una forma rápida y efectiva de fijar lo aprendido antes de la próxima clase.</p>
-<a href="https://notebook.google.com/notebook/1347079b-f4ca-4ff4-a1c9-d07cd2cec881/artifact/0719e030-fff5-4f95-bbac-0e81ab1f09d4?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🃏 Abrir Tarjetas Bíblicas</a>`,
+    "activity": `<p>Repasa los conceptos de esta semana con las tarjetas interactivas y la infografía.</p>
+<div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:0.75rem">
+  <a href="https://notebook.google.com/notebook/1347079b-f4ca-4ff4-a1c9-d07cd2cec881/artifact/0719e030-fff5-4f95-bbac-0e81ab1f09d4?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🃏 Tarjetas Bíblicas</a>
+  <a href="/infografia-semana6.html" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">📊 Infografía Interactiva</a>
+</div>`,
     "testMakeupUrl": "https://notebook.google.com/notebook/1347079b-f4ca-4ff4-a1c9-d07cd2cec881/artifact/8c911a6a-f84f-40b3-a301-e8a46abc26e1?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_",
     "materialDriveUrl": "/material-semana6.pptx"
   },

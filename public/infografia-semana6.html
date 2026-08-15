@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Infografía | Noé, el diluvio, el pacto y Babel</title>
+  <style>
+    :root{
+      --bg:#f4f7f8;
+      --paper:#ffffff;
+      --ink:#1f2a30;
+      --muted:#5c6d75;
+      --blue:#2f6f91;
+      --blue-soft:#dcecf5;
+      --gold:#c9953a;
+      --gold-soft:#f6ead1;
+      --olive:#617b58;
+      --olive-soft:#e5eee0;
+      --rose:#9a5c57;
+      --rose-soft:#f4e2df;
+      --line:rgba(31,42,48,.1);
+      --shadow:0 18px 40px rgba(18,39,52,.08);
+      --radius:28px;
+      --radius-sm:18px;
+      --max:1200px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(47,111,145,.12), transparent 24%),
+        radial-gradient(circle at 100% 10%, rgba(201,149,58,.12), transparent 22%),
+        linear-gradient(180deg,#f9fbfc 0%, #eef4f6 50%, #f7fbfb 100%);
+      overflow-x:hidden;
+    }
+    body::before{
+      content:"";
+      position:fixed; inset:0; pointer-events:none; opacity:.04; z-index:1;
+      background-image:radial-gradient(#000 .45px, transparent .45px), radial-gradient(#000 .45px, transparent .45px);
+      background-position:0 0, 12px 12px; background-size:24px 24px;
+    }
+    .topbar{
+      position:sticky; top:0; z-index:40;
+      background:rgba(247,251,251,.86);
+      backdrop-filter: blur(16px);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{max-width:var(--max); margin:0 auto; padding:12px 20px; display:flex; gap:16px; justify-content:space-between; align-items:center; flex-wrap:wrap}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:800}
+    .brand-badge{width:42px; height:42px; border-radius:14px; display:grid; place-items:center; color:#fff; background:linear-gradient(135deg, var(--blue), #5e92ad); box-shadow:var(--shadow)}
+    .brand small{display:block; color:var(--muted); font-weight:700}
+    .topnav{display:flex; gap:10px; flex-wrap:wrap}
+    .topnav a{text-decoration:none; color:var(--muted); padding:10px 14px; border-radius:999px; font-weight:800; font-size:.94rem; transition:.25s ease}
+    .topnav a:hover,.topnav a.active{background:#fff; color:var(--ink); box-shadow:0 8px 20px rgba(18,39,52,.08)}
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 20px 80px; position:relative; z-index:2}
+
+    .hero{
+      background:linear-gradient(145deg, rgba(255,255,255,.92), rgba(245,250,252,.92));
+      border:1px solid var(--line);
+      border-radius:36px;
+      box-shadow:var(--shadow);
+      padding:34px;
+      display:grid; grid-template-columns:1.2fr .8fr; gap:24px; position:relative; overflow:hidden;
+    }
+    .hero::before{content:""; position:absolute; right:-80px; top:-80px; width:320px; height:320px; border-radius:50%; background:radial-gradient(circle, rgba(47,111,145,.18), transparent 70%); animation:float 8s ease-in-out infinite}
+    .hero::after{content:""; position:absolute; left:-80px; bottom:-80px; width:280px; height:280px; border-radius:50%; background:radial-gradient(circle, rgba(201,149,58,.16), transparent 70%); animation:float 10s ease-in-out infinite reverse}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(12px)}}
+    @keyframes rise{from{opacity:0; transform:translateY(26px)} to{opacity:1; transform:translateY(0)}}
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
+
+    .eyebrow{display:inline-flex; align-items:center; gap:10px; padding:10px 14px; background:#fff; border:1px solid var(--line); border-radius:999px; color:var(--blue); font-weight:900; box-shadow:0 10px 20px rgba(18,39,52,.06); margin-bottom:16px}
+    .hero h1{margin:0; font-size:clamp(2rem,4vw,3.8rem); line-height:.96; letter-spacing:-.03em}
+    .subtitle{margin:14px 0 20px; color:var(--muted); font-size:1.06rem; line-height:1.72; max-width:62ch}
+    .pill-row{display:flex; gap:10px; flex-wrap:wrap}
+    .pill{padding:10px 14px; background:#fff; border:1px solid var(--line); border-radius:999px; font-weight:800; color:var(--muted)}
+    .hero-quote{margin-top:22px; background:rgba(255,255,255,.78); border:1px solid var(--line); border-radius:22px; padding:18px 20px}
+    .hero-quote strong{display:block; margin-bottom:8px; color:var(--rose)}
+    .hero-right{display:grid; gap:16px; align-content:start}
+    .summary-card{background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(248,252,253,.95)); border:1px solid var(--line); border-radius:24px; padding:20px; box-shadow:0 10px 26px rgba(18,39,52,.06); animation:pulse 6s ease-in-out infinite}
+    .summary-card h3{margin:0 0 10px}
+    .summary-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    .summary-item{background:#fff; border:1px solid var(--line); border-radius:18px; padding:14px}
+    .summary-item span{display:block; color:var(--muted); font-size:.78rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase}
+    .summary-item strong{display:block; margin-top:8px; line-height:1.4}
+    .big-quote{font-size:clamp(1.05rem,2vw,1.6rem); font-weight:900; line-height:1.45; letter-spacing:-.02em}
+
+    .section{margin-top:28px; animation:rise .7s ease both}
+    .panel{background:rgba(255,255,255,.88); border:1px solid var(--line); border-radius:32px; box-shadow:var(--shadow); padding:28px; position:relative; overflow:hidden}
+    .section-title{display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap; margin-bottom:18px}
+    .section-title h2{margin:0; font-size:clamp(1.4rem,2vw,2.1rem)}
+    .section-title p{margin:0; color:var(--muted); max-width:60ch; line-height:1.68}
+
+    .timeline{display:grid; grid-template-columns:repeat(6,1fr); gap:14px; position:relative; margin-top:10px}
+    .timeline::before{content:""; position:absolute; left:6%; right:6%; top:35px; height:3px; border-radius:999px; background:linear-gradient(90deg, var(--rose), var(--blue), var(--gold)); opacity:.35}
+    .node{background:#fff; border:1px solid var(--line); border-radius:22px; padding:18px 14px; text-align:center; box-shadow:0 8px 20px rgba(18,39,52,.05); position:relative}
+    .node .dot{width:18px; height:18px; border-radius:50%; background:var(--blue); margin:0 auto 16px; box-shadow:0 0 0 8px rgba(47,111,145,.14); position:relative; z-index:1}
+    .node h4{margin:0 0 8px; font-size:1rem}
+    .node p{margin:0; color:var(--muted); font-size:.93rem; line-height:1.56}
+
+    .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+    .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.98), rgba(246,251,252,.96)); border:1px solid var(--line); border-radius:24px; padding:20px; height:100%}
+    .card h3{margin:0 0 10px}
+    .card p{margin:0; color:var(--muted); line-height:1.68}
+    .badge{display:inline-block; padding:8px 12px; border-radius:999px; background:var(--blue-soft); color:var(--blue); font-weight:900; margin-bottom:12px}
+
+    .toggle-tabs{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:12px}
+    .toggle-btn{border:none; cursor:pointer; padding:12px 16px; border-radius:999px; background:#fff; color:var(--muted); font-weight:900; border:1px solid var(--line); transition:.25s ease}
+    .toggle-btn.active{background:linear-gradient(135deg, var(--blue), #5f93af); color:#fff; box-shadow:0 10px 20px rgba(47,111,145,.18)}
+    .toggle-card{background:linear-gradient(180deg, rgba(255,255,255,.98), rgba(247,252,252,.96)); border:1px solid var(--line); border-radius:24px; padding:22px; min-height:300px}
+    .toggle-card ul{padding-left:18px; margin:0}
+    .toggle-card li{margin:10px 0; color:var(--muted); line-height:1.68}
+
+    .scripture-list{display:grid; gap:14px; margin-top:18px}
+    .scripture-box{background:#fff; border:1px solid var(--line); border-radius:22px; padding:0 18px; box-shadow:0 8px 18px rgba(18,39,52,.05)}
+    .scripture-box summary{cursor:pointer; list-style:none; padding:18px 4px; font-weight:900}
+    .scripture-box summary::-webkit-details-marker{display:none}
+    .scripture-ref{display:inline-block; margin-left:10px; color:var(--blue); font-size:.92rem}
+    .verse-block{padding:0 4px 18px; display:grid; gap:10px}
+    .verse{line-height:1.72; color:var(--muted); background:linear-gradient(180deg, rgba(250,252,253,.98), rgba(255,255,255,.98)); border:1px solid rgba(31,42,48,.06); padding:12px 14px; border-radius:16px}
+    .verse-num{display:inline-flex; align-items:center; justify-content:center; min-width:28px; height:28px; border-radius:999px; background:var(--gold-soft); color:var(--ink); font-weight:900; margin-right:10px}
+
+    .statement{padding:18px; border-left:6px solid var(--gold); border-radius:18px; background:var(--gold-soft); line-height:1.7; margin-top:14px}
+    .mini-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:12px}
+    .mini{background:#fff; border:1px solid var(--line); padding:16px; border-radius:18px; text-align:center; font-weight:800; color:var(--muted)}
+
+    .exercise{margin-top:16px; padding:20px; border-radius:22px; background:linear-gradient(135deg, rgba(97,123,88,.1), rgba(47,111,145,.08)); border:1px dashed rgba(31,42,48,.15)}
+    .exercise ol{margin:10px 0 0; padding-left:20px}
+    .exercise li{margin:8px 0; line-height:1.62}
+
+    details.accord{background:#fff; border:1px solid var(--line); border-radius:18px; padding:0 18px; overflow:hidden}
+    details.accord summary{cursor:pointer; list-style:none; padding:16px 4px; font-weight:900}
+    details.accord summary::-webkit-details-marker{display:none}
+    details.accord p, details.accord ul{margin:0 0 16px; color:var(--muted); line-height:1.66}
+    details.accord ul{padding-left:18px}
+
+    .footer{margin-top:26px; padding:26px; border-radius:28px; background:linear-gradient(135deg, rgba(31,42,48,.96), rgba(47,111,145,.95)); color:#eff8fb; box-shadow:var(--shadow)}
+    .footer p{color:rgba(239,248,251,.88); line-height:1.7}
+
+    .reveal{opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease}
+    .reveal.show{opacity:1; transform:translateY(0)}
+
+    @media (max-width:1100px){
+      .hero,.grid-2{grid-template-columns:1fr}
+      .timeline{grid-template-columns:repeat(2,1fr)}
+      .timeline::before{display:none}
+      .grid-3{grid-template-columns:1fr}
+      .mini-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:720px){
+      .hero{padding:24px}
+      .panel{padding:22px}
+      .summary-grid,.timeline,.mini-grid{grid-template-columns:1fr}
+      .topbar-inner{align-items:flex-start}
+      .hero h1{font-size:2.2rem}
+      .topnav{justify-content:flex-start}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-badge">✦</div>
+        <div>
+          Fundamentos de la Palabra
+          <small>Módulo 2 · Clase puente · Infografía interactiva</small>
+        </div>
+      </div>
+      <nav class="topnav">
+        <a href="#inicio">Inicio</a>
+        <a href="#mapa">Mapa</a>
+        <a href="#lecturas">Lecturas</a>
+        <a href="#texto">Texto</a>
+        <a href="#pacto">Pacto</a>
+        <a href="#aplicacion">Aplicación</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero reveal" id="inicio">
+      <div>
+        <div class="eyebrow">⛵ Clase puente del segundo bloque</div>
+        <h1>Noé, el diluvio,<br> el pacto y Babel</h1>
+        <p class="subtitle">
+          Una clase para <strong>completar el mapa bíblico</strong> entre la caída y Abraham. Aquí vemos cómo el pecado se extiende,
+          cómo Dios juzga y preserva, cómo establece un pacto con Noé y cómo Babel prepara el contraste con el llamado de Abram.
+        </p>
+        <div class="pill-row">
+          <div class="pill">Lecturas principales: Gn 6:5–22 · 8:20–22 · 9:1–17 · 11:1–9</div>
+          <div class="pill">Conexión final: Génesis 12:1–3</div>
+        </div>
+        <div class="hero-quote">
+          <strong>Idea central</strong>
+          El pecado se extiende y Dios juzga, pero su gracia preserva la vida y mantiene abierta la historia de la promesa; después de Babel, el llamado de Abraham aparece como un nuevo paso del plan de Dios hacia las naciones.
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="summary-card">
+          <h3>Ficha rápida</h3>
+          <div class="summary-grid">
+            <div class="summary-item"><span>Ubicación</span><strong>Clase puente del Módulo 2</strong></div>
+            <div class="summary-item"><span>Tema</span><strong>Juicio, gracia, pacto y dispersión</strong></div>
+            <div class="summary-item"><span>Conexión</span><strong>Entre la caída y Abraham</strong></div>
+            <div class="summary-item"><span>Enfoque</span><strong>Noé, pacto, Babel y naciones</strong></div>
+          </div>
+        </div>
+        <div class="summary-card">
+          <h3>Versículo eje</h3>
+          <p class="big-quote">“Pero Noé halló gracia ante los ojos de Jehová.”</p>
+          <p style="margin:10px 0 0;color:var(--muted);font-weight:700">Génesis 6:8</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="mapa">
+      <div class="panel">
+        <div class="section-title">
+          <div>
+            <h2>Mapa bíblico de la clase</h2>
+            <p>Esta sesión corrige el salto entre la caída y Abraham. El hilo bíblico queda así:</p>
+          </div>
+        </div>
+        <div class="timeline">
+          <div class="node"><div class="dot"></div><h4>1. Caída</h4><p>El pecado entra en la historia y rompe la relación.</p></div>
+          <div class="node"><div class="dot"></div><h4>2. Corrupción</h4><p>La maldad se extiende y afecta a la humanidad entera.</p></div>
+          <div class="node"><div class="dot"></div><h4>3. Diluvio</h4><p>Dios juzga el pecado, pero preserva la vida.</p></div>
+          <div class="node"><div class="dot"></div><h4>4. Pacto con Noé</h4><p>Dios mantiene abierto el escenario de la historia.</p></div>
+          <div class="node"><div class="dot"></div><h4>5. Babel</h4><p>La humanidad busca hacerse un nombre y termina dispersa.</p></div>
+          <div class="node"><div class="dot"></div><h4>6. Abraham</h4><p>Dios llama a Abram para bendecir a las naciones.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="lecturas">
+      <div class="panel">
+        <div class="section-title">
+          <div>
+            <h2>Lecturas bíblicas completas</h2>
+            <p>Los pasajes se despliegan aquí para que los alumnos no tengan que buscarlos fuera de la infografía.</p>
+          </div>
+        </div>
+        <div class="scripture-list">
+          <details class="scripture-box" open>
+            <summary>Corrupción humana y gracia para Noé <span class="scripture-ref">Génesis 6:5–8</span></summary>
+            <div class="verse-block">
+              <div class="verse"><span class="verse-num">5</span>Y vio Jehová que la maldad de los hombres era mucha en la tierra, y que todo designio de los pensamientos del corazón de ellos era de continuo solamente el mal.</div>
+              <div class="verse"><span class="verse-num">6</span>Y se arrepintió Jehová de haber hecho hombre en la tierra, y le dolió en su corazón.</div>
+              <div class="verse"><span class="verse-num">7</span>Y dijo Jehová: Raeré de sobre la faz de la tierra a los hombres que he creado, desde el hombre hasta la bestia, y hasta el reptil y las aves del cielo; pues me arrepiento de haberlos hecho.</div>
+              <div class="verse"><span class="verse-num">8</span>Pero Noé halló gracia ante los ojos de Jehová.</div>
+            </div>
+          </details>
+
+          <details class="scripture-box">
+            <summary>Noé y el arca <span class="scripture-ref">Génesis 6:9–22</span></summary>
+            <div class="verse-block">
+              <div class="verse"><span class="verse-num">9</span>Estas son las generaciones de Noé: Noé, varón justo, era perfecto en sus generaciones; con Dios caminó Noé.</div>
+              <div class="verse"><span class="verse-num">10</span>Y engendró Noé tres hijos: a Sem, a Cam y a Jafet.</div>
+              <div class="verse"><span class="verse-num">11</span>Y se corrompió la tierra delante de Dios, y estaba la tierra llena de violencia.</div>
+              <div class="verse"><span class="verse-num">12</span>Y miró Dios la tierra, y he aquí que estaba corrompida; porque toda carne había corrompido su camino sobre la tierra.</div>
+              <div class="verse"><span class="verse-num">13</span>Dijo, pues, Dios a Noé: He decidido el fin de todo ser, porque la tierra está llena de violencia a causa de ellos; y he aquí que yo los destruiré con la tierra.</div>
+              <div class="verse"><span class="verse-num">14</span>Hazte un arca de madera de gofer; harás aposentos en el arca, y la calafatearás con brea por dentro y por fuera.</div>
+              <div class="verse"><span class="verse-num">15</span>Y de esta manera la harás: de trescientos codos la longitud del arca, de cincuenta codos su anchura, y de treinta codos su altura.</div>
+              <div class="verse"><span class="verse-num">16</span>Una ventana harás al arca, y la acabarás a un codo de elevación por la parte de arriba; y pondrás la puerta del arca a su lado; y le harás piso bajo, segundo y tercero.</div>
+              <div class="verse"><span class="verse-num">17</span>Y he aquí que yo traigo un diluvio de aguas sobre la tierra, para destruir toda carne en que haya espíritu de vida debajo del cielo; todo lo que hay en la tierra morirá.</div>
+              <div class="verse"><span class="verse-num">18</span>Mas estableceré mi pacto contigo, y entrarás en el arca tú, tus hijos, tu mujer, y las mujeres de tus hijos contigo.</div>
+              <div class="verse"><span class="verse-num">19</span>Y de todo lo que vive, de toda carne, dos de cada especie meterás en el arca, para que tengan vida contigo; macho y hembra serán.</div>
+              <div class="verse"><span class="verse-num">20</span>De las aves según su especie, y de las bestias según su especie, de todo reptil de la tierra según su especie, dos de cada especie entrarán contigo, para que tengan vida.</div>
+              <div class="verse"><span class="verse-num">21</span>Y toma contigo de todo alimento que se come, y almacénalo, y servirá de sustento para ti y para ellos.</div>
+              <div class="verse"><span class="verse-num">22</span>Y lo hizo así Noé; hizo conforme a todo lo que Dios le mandó.</div>
+            </div>
+          </details>
+
+          <details class="scripture-box">
+            <summary>Altar y preservación <span class="scripture-ref">Génesis 8:20–22</span></summary>
+            <div class="verse-block">
+              <div class="verse"><span class="verse-num">20</span>Y edificó Noé un altar a Jehová, y tomó de todo animal limpio y de toda ave limpia, y ofreció holocausto en el altar.</div>
+              <div class="verse"><span class="verse-num">21</span>Y percibió Jehová olor grato; y dijo Jehová en su corazón: No volveré más a maldecir la tierra por causa del hombre; porque el intento del corazón del hombre es malo desde su juventud; ni volveré más a destruir todo ser viviente, como he hecho.</div>
+              <div class="verse"><span class="verse-num">22</span>Mientras la tierra permanezca, no cesarán la sementera y la siega, el frío y el calor, el verano y el invierno, y el día y la noche.</div>
+            </div>
+          </details>
+
+          <details class="scripture-box">
+            <summary>Pacto con Noé y señal del arco <span class="scripture-ref">Génesis 9:1–17</span></summary>
+            <div class="verse-block">
+              <div class="verse"><span class="verse-num">1</span>Bendijo Dios a Noé y a sus hijos, y les dijo: Fructificad y multiplicaos, y llenad la tierra.</div>
+              <div class="verse"><span class="verse-num">2</span>El temor y el miedo de vosotros estarán sobre todo animal de la tierra, y sobre toda ave de los cielos, en todo lo que se mueva sobre la tierra, y en todos los peces del mar; en vuestra mano son entregados.</div>
+              <div class="verse"><span class="verse-num">3</span>Todo lo que se mueve y vive, os será para mantenimiento: así como las legumbres y plantas verdes, os lo he dado todo.</div>
+              <div class="verse"><span class="verse-num">4</span>Pero carne con su vida, que es su sangre, no comeréis.</div>
+              <div class="verse"><span class="verse-num">5</span>Porque ciertamente demandaré la sangre de vuestras vidas; de mano de todo animal la demandaré, y de mano del hombre; de mano del varón su hermano demandaré la vida del hombre.</div>
+              <div class="verse"><span class="verse-num">6</span>El que derramare sangre de hombre, por el hombre su sangre será derramada; porque a imagen de Dios es hecho el hombre.</div>
+              <div class="verse"><span class="verse-num">7</span>Mas vosotros fructificad y multiplicaos; procread abundantemente en la tierra, y multiplicaos en ella.</div>
+              <div class="verse"><span class="verse-num">8</span>Y habló Dios a Noé y a sus hijos con él, diciendo:</div>
+              <div class="verse"><span class="verse-num">9</span>He aquí que yo establezco mi pacto con vosotros, y con vuestros descendientes después de vosotros;</div>
+              <div class="verse"><span class="verse-num">10</span>y con todo ser viviente que está con vosotros; aves, animales y toda bestia de la tierra que está con vosotros, desde todos los que salieron del arca hasta todo animal de la tierra.</div>
+              <div class="verse"><span class="verse-num">11</span>Estableceré mi pacto con vosotros, y no exterminaré ya más toda carne con aguas de diluvio, ni habrá más diluvio para destruir la tierra.</div>
+              <div class="verse"><span class="verse-num">12</span>Y dijo Dios: Esta es la señal del pacto que yo establezco entre mí y vosotros y todo ser viviente que está con vosotros, por siglos perpetuos:</div>
+              <div class="verse"><span class="verse-num">13</span>Mi arco he puesto en las nubes, el cual será por señal del pacto entre mí y la tierra.</div>
+              <div class="verse"><span class="verse-num">14</span>Y sucederá que cuando haga venir nubes sobre la tierra, se dejará ver entonces mi arco en las nubes.</div>
+              <div class="verse"><span class="verse-num">15</span>Y me acordaré del pacto mío, que hay entre mí y vosotros y todo ser viviente de toda carne; y no habrá más diluvio de aguas para destruir toda carne.</div>
+              <div class="verse"><span class="verse-num">16</span>Estará el arco en las nubes, y lo veré, y me acordaré del pacto perpetuo entre Dios y todo ser viviente, con toda carne que hay sobre la tierra.</div>
+              <div class="verse"><span class="verse-num">17</span>Dijo, pues, Dios a Noé: Esta es la señal del pacto que he establecido entre mí y toda carne que está sobre la tierra.</div>
+            </div>
+          </details>
+
+          <details class="scripture-box">
+            <summary>Babel <span class="scripture-ref">Génesis 11:1–9</span></summary>
+            <div class="verse-block">
+              <div class="verse"><span class="verse-num">1</span>Tenía entonces toda la tierra una sola lengua y unas mismas palabras.</div>
+              <div class="verse"><span class="verse-num">2</span>Y aconteció que cuando salieron de oriente, hallaron una llanura en la tierra de Sinar, y se establecieron allí.</div>
+              <div class="verse"><span class="verse-num">3</span>Y se dijeron unos a otros: Vamos, hagamos ladrillo y cozámoslo con fuego. Y les sirvió el ladrillo en lugar de piedra, y el asfalto en lugar de mezcla.</div>
+              <div class="verse"><span class="verse-num">4</span>Y dijeron: Vamos, edifiquémonos una ciudad y una torre, cuya cúspide llegue al cielo; y hagámonos un nombre, por si fuéremos esparcidos sobre la faz de toda la tierra.</div>
+              <div class="verse"><span class="verse-num">5</span>Y descendió Jehová para ver la ciudad y la torre que edificaban los hijos de los hombres.</div>
+              <div class="verse"><span class="verse-num">6</span>Y dijo Jehová: He aquí el pueblo es uno, y todos éstos tienen un solo lenguaje; y han comenzado la obra, y nada les hará desistir ahora de lo que han pensado hacer.</div>
+              <div class="verse"><span class="verse-num">7</span>Ahora, pues, descendamos, y confundamos allí su lengua, para que ninguno entienda el habla de su compañero.</div>
+              <div class="verse"><span class="verse-num">8</span>Así los esparció Jehová desde allí sobre la faz de toda la tierra, y dejaron de edificar la ciudad.</div>
+              <div class="verse"><span class="verse-num">9</span>Por esto fue llamado el nombre de ella Babel, porque allí confundió Jehová el lenguaje de toda la tierra, y desde allí los esparció sobre la faz de toda la tierra.</div>
+            </div>
+          </details>
+
+          <details class="scripture-box">
+            <summary>Conexión final con Abraham <span class="scripture-ref">Génesis 12:1–3</span></summary>
+            <div class="verse-block">
+              <div class="verse"><span class="verse-num">1</span>Pero Jehová había dicho a Abram: Vete de tu tierra y de tu parentela, y de la casa de tu padre, a la tierra que te mostraré.</div>
+              <div class="verse"><span class="verse-num">2</span>Y haré de ti una nación grande, y te bendeciré, y engrandeceré tu nombre, y serás bendición.</div>
+              <div class="verse"><span class="verse-num">3</span>Bendeciré a los que te bendijeren, y a los que te maldijeren maldeciré; y serán benditas en ti todas las familias de la tierra.</div>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="texto">
+      <div class="panel">
+        <div class="section-title">
+          <div>
+            <h2>Qué dice · qué no dice · qué enseña</h2>
+            <p>Pulsa cada botón para recorrer la explicación principal de la clase puente.</p>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div>
+            <div class="toggle-tabs">
+              <button class="toggle-btn active" data-target="dice">Qué dice</button>
+              <button class="toggle-btn" data-target="no-dice">Qué no dice</button>
+              <button class="toggle-btn" data-target="ensena">Qué enseña</button>
+            </div>
+            <div class="toggle-card">
+              <div class="toggle-pane" data-pane="dice">
+                <h3>Qué dice el texto</h3>
+                <ul>
+                  <li>El pecado no se detuvo en Edén: se extendió a la historia y a la sociedad.</li>
+                  <li>El diluvio muestra un juicio real de Dios ante la corrupción humana.</li>
+                  <li>Noé halla gracia y responde con obediencia a la palabra recibida.</li>
+                  <li>Después del diluvio, Dios bendice, protege la vida humana y establece un pacto.</li>
+                  <li>Babel muestra una humanidad unida, pero orientada al orgullo y a la autosuficiencia.</li>
+                  <li>Después de Babel, Génesis 12 presenta a Abraham como inicio de un nuevo paso hacia las naciones.</li>
+                </ul>
+              </div>
+              <div class="toggle-pane" data-pane="no-dice" hidden>
+                <h3>Qué no permite afirmar sin más</h3>
+                <ul>
+                  <li>Que el objetivo principal del relato sea resolver cada detalle científico o geológico del diluvio.</li>
+                  <li>Que el arco iris sea un objeto mágico; el texto lo presenta como señal del pacto.</li>
+                  <li>Que toda construcción humana sea automáticamente una “Babel”.</li>
+                  <li>Que Noé fuese perfecto en sentido absoluto; Génesis también muestra su fragilidad.</li>
+                  <li>Que la historia termine en Noé; el texto empuja hacia Babel y luego hacia Abraham.</li>
+                </ul>
+              </div>
+              <div class="toggle-pane" data-pane="ensena" hidden>
+                <h3>Qué enseña claramente</h3>
+                <ul>
+                  <li>Dios toma en serio el pecado y no es indiferente al mal.</li>
+                  <li>La gracia de Dios preserva la vida y sostiene su propósito.</li>
+                  <li>La vida humana tiene dignidad por estar vinculada a la imagen de Dios.</li>
+                  <li>El orgullo humano no puede producir por sí mismo la bendición universal.</li>
+                  <li>Dios conduce la historia hacia su promesa de bendición para las naciones.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <span class="badge">Contraste clave</span>
+            <h3>De Babel a Abraham</h3>
+            <p>La secuencia narrativa es esencial:</p>
+            <div class="statement">
+              <strong>Babel:</strong> “Hagámonos un nombre.”<br>
+              <strong>Abraham:</strong> “Haré de ti una nación grande… y engrandeceré tu nombre… y serán benditas en ti todas las familias de la tierra.”
+            </div>
+            <p style="margin-top:14px">La Biblia pasa del intento humano de asegurarse grandeza bajo su propio nombre a la promesa divina de una bendición que alcanzará a las naciones.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="pacto">
+      <div class="panel">
+        <div class="section-title">
+          <div>
+            <h2>Palabras clave y doctrina central</h2>
+            <p>Las raíces bíblicas se usan con prudencia para iluminar el texto, no para complicarlo.</p>
+          </div>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <span class="badge">Hebreo</span>
+            <h3>Berit · בְּרִית</h3>
+            <p><strong>Pacto.</strong> Un compromiso establecido por Dios mediante una palabra vinculante y una señal. En Génesis 9 alcanza a Noé, a su descendencia y a los seres vivientes.</p>
+          </article>
+          <article class="card">
+            <span class="badge" style="background:var(--olive-soft);color:var(--olive)">Hebreo</span>
+            <h3>Chen · חֵן</h3>
+            <p><strong>Gracia / favor.</strong> Génesis 6:8 enseña que Noé halló gracia ante los ojos de Jehová. Esto evita leer la historia como si Noé se salvara solo por mérito propio.</p>
+          </article>
+          <article class="card">
+            <span class="badge" style="background:var(--gold-soft);color:#8d650f">Doctrina central</span>
+            <h3>Dios juzga y preserva</h3>
+            <p>Dios es santo y justo frente al pecado, pero también fiel y misericordioso en la preservación de su propósito. Juzga el mal sin abandonar la historia de la gracia.</p>
+          </article>
+        </div>
+        <div class="statement">
+          <strong>Verdad que debe quedar clara:</strong><br>
+          Dios juzga el pecado sin abandonar su propósito de gracia; preserva la vida, establece su pacto y conduce la historia hacia la bendición prometida a las naciones.
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="aplicacion">
+      <div class="panel">
+        <div class="section-title">
+          <div>
+            <h2>Aplicación personal y comunitaria</h2>
+            <p>La clase no solo aclara el mapa bíblico; también confronta el corazón humano y orienta a la comunidad.</p>
+          </div>
+        </div>
+        <div class="grid-2">
+          <article class="card">
+            <h3>Aplicación personal</h3>
+            <ul style="padding-left:18px; margin:0">
+              <li style="margin:10px 0; color:var(--muted); line-height:1.68">Tomar en serio el pecado sin caer en desesperación.</li>
+              <li style="margin:10px 0; color:var(--muted); line-height:1.68">Obedecer lo que Dios ha dejado claro en su Palabra.</li>
+              <li style="margin:10px 0; color:var(--muted); line-height:1.68">Reconocer el valor de toda vida humana por la imagen de Dios.</li>
+              <li style="margin:10px 0; color:var(--muted); line-height:1.68">Preguntarnos si queremos “hacernos un nombre” o vivir para el nombre de Dios.</li>
+              <li style="margin:10px 0; color:var(--muted); line-height:1.68">Confiar en que Dios puede preservar su propósito en medio del desorden.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Aplicación comunitaria</h3>
+            <ul style="padding-left:18px; margin:0">
+              <li style="margin:10px 0; color:var(--muted); line-height:1.68">Hablar del pecado con verdad y de la gracia con esperanza.</li>
+              <li style="margin:10px 0; color:var(--muted); line-height:1.68">Defender la dignidad humana con coherencia.</li>
+              <li style="margin:10px 0; color:var(--muted); line-height:1.68">Buscar unidad, pero orientada a la verdad, la humildad y el servicio.</li>
+              <li style="margin:10px 0; color:var(--muted); line-height:1.68">Recordar que el propósito de Dios avanza de generación en generación.</li>
+            </ul>
+          </article>
+        </div>
+        <div class="exercise">
+          <strong>Ejercicio práctico</strong>
+          <ol>
+            <li>Haz dos columnas: “acciones humanas” y “acciones de Dios”.</li>
+            <li>Escribe en una frase qué significa para ti que Noé “halló gracia”.</li>
+            <li>Prepara una explicación de dos minutos del contraste Babel → Abraham.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="panel">
+        <div class="section-title">
+          <div>
+            <h2>Resumen y test rápido</h2>
+            <p>Una síntesis visual para fijar la enseñanza principal de la clase.</p>
+          </div>
+        </div>
+        <div class="mini-grid">
+          <div class="mini">El pecado se extiende después de la caída</div>
+          <div class="mini">Dios juzga, pero Noé halla gracia</div>
+          <div class="mini">El pacto preserva la continuidad de la historia</div>
+          <div class="mini">Babel revela orgullo humano y termina en dispersión</div>
+          <div class="mini">Después de Babel, Dios llama a Abraham</div>
+        </div>
+        <div style="display:grid; gap:12px; margin-top:18px">
+          <details class="accord">
+            <summary>Preguntas tipo test</summary>
+            <p>1) ¿Qué afirma Génesis 6:8 sobre Noé?<br>2) ¿Cuál es una idea central del pacto de Génesis 9?<br>3) ¿Qué señal aparece asociada al pacto con Noé?<br>4) ¿Qué expresa el proyecto de Babel?<br>5) ¿Qué ocurre narrativamente después de Babel?</p>
+          </details>
+          <details class="accord">
+            <summary>Respuestas correctas</summary>
+            <p>1-b · 2-a · 3-c · 4-b · 5-a</p>
+          </details>
+          <details class="accord">
+            <summary>Áreas a reforzar</summary>
+            <ul>
+              <li>Diferencia entre gracia y mérito.</li>
+              <li>Sentido del pacto.</li>
+              <li>Dignidad humana e imagen de Dios.</li>
+              <li>Propósito de Babel.</li>
+              <li>Continuidad entre Génesis 11 y 12.</li>
+            </ul>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="panel">
+        <div class="section-title">
+          <div>
+            <h2>Tarea semanal y cierre</h2>
+            <p>La clase termina llevando al alumno a leer, observar y explicar el hilo bíblico con claridad.</p>
+          </div>
+        </div>
+        <div class="grid-2">
+          <article class="card">
+            <h3>Tarea</h3>
+            <ul style="padding-left:18px; margin:0">
+              <li style="margin:10px 0; color:var(--muted); line-height:1.68">Leer Génesis 6:5–22, Génesis 9:1–17 y Génesis 11:1–9.</li>
+              <li style="margin:10px 0; color:var(--muted); line-height:1.68">Hacer dos columnas: “acciones humanas” y “acciones de Dios”.</li>
+              <li style="margin:10px 0; color:var(--muted); line-height:1.68">Escribir en una frase qué significa para ti que Noé “halló gracia”.</li>
+              <li style="margin:10px 0; color:var(--muted); line-height:1.68">Preparar una explicación de dos minutos del contraste Babel → Abraham.</li>
+              <li style="margin:10px 0; color:var(--muted); line-height:1.68">Lectura opcional: Génesis 10 y Génesis 11:10–32.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Cierre del profesor</h3>
+            <p class="big-quote">Entre la caída y Abraham, Dios no abandonó la historia: juzgó el mal, preservó la vida, estableció su pacto y preparó el escenario para una promesa que alcanzaría a las naciones.</p>
+            <p style="margin-top:14px; color:var(--muted)">Esta clase mantiene la estructura fija del curso: texto bíblico, explicación, doctrina, aplicación, diálogo, test y tarea semanal.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer reveal">
+      <strong>Fundamentos de la Palabra · Módulo 2 · Clase puente</strong>
+      <p>
+        Infografía HTML basada en la clase <em>“Noé, el diluvio, el pacto y Babel”</em>. Diseñada para apoyar la enseñanza oral, completar el mapa del curso y permitir que los alumnos lean los pasajes bíblicos completos sin salir del material.
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    const buttons = document.querySelectorAll('.toggle-btn');
+    const panes = document.querySelectorAll('.toggle-pane');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const target = btn.dataset.target;
+        panes.forEach(p => p.hidden = p.dataset.pane !== target);
+      });
+    });
+
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) entry.target.classList.add('show');
+      });
+    }, {threshold:.14});
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    const navLinks = document.querySelectorAll('.topnav a');
+    const sections = [...document.querySelectorAll('section[id]')];
+    const navObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, {rootMargin:'-40% 0px -50% 0px', threshold:0});
+    sections.forEach(sec => navObserver.observe(sec));
+  </script>
+</body>
+</html>
