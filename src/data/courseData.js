@@ -87,27 +87,27 @@ export const modules = [
   {
     "id": 2,
     "title": "Pacto, pueblo de Dios y obediencia",
-    "subtitle": "Semanas 5-8"
+    "subtitle": "Semanas 5-9"
   },
   {
     "id": 3,
     "title": "Reino, sabiduría, profetas y esperanza",
-    "subtitle": "Semanas 9-12"
+    "subtitle": "Semanas 10-13"
   },
   {
     "id": 4,
     "title": "Jesucristo y el evangelio",
-    "subtitle": "Semanas 13-16"
+    "subtitle": "Semanas 14-17"
   },
   {
     "id": 5,
     "title": "Vida del discípulo y la iglesia",
-    "subtitle": "Semanas 17-20"
+    "subtitle": "Semanas 18-21"
   },
   {
     "id": 6,
     "title": "Madurez, perseverancia y discipulado a otros",
-    "subtitle": "Semanas 21-24"
+    "subtitle": "Semanas 22-25"
   }
 ];
 
@@ -236,7 +236,7 @@ export const courseData = [
     "moduleTitle": "Pacto, pueblo de Dios y obediencia",
     "weekLabel": "Semana 5",
     "title": "Abraham y el Dios que llama",
-    "date": "2026-08-08",
+    "date": "2026-08-01",
     "disponible": true,
     "verse": null,
     "verseRef": null,
@@ -260,14 +260,14 @@ export const courseData = [
     "moduleId": 2,
     "moduleTitle": "Pacto, pueblo de Dios y obediencia",
     "weekLabel": "Semana 6",
-    "title": "Moisés, liberación y formación del pueblo",
-    "date": "2026-08-15",
+    "title": "Noé, el diluvio, el pacto y Babel",
+    "date": "2026-08-08",
     "disponible": true,
     "verse": null,
     "verseRef": null,
-    "summary": `<p>Esta semana conocemos a Moisés, la liberación del pueblo de Dios y su formación como nación. Mira el vídeo antes de la clase del sábado.</p>
+    "summary": `<p>Esta semana conocemos a Noé, el diluvio, el pacto del arcoíris y la dispersión de las naciones en Babel. Mira el vídeo antes de la clase del sábado.</p>
 <div style="position:relative;width:100%;max-width:720px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;margin-top:1rem">
-  <iframe src="https://www.youtube.com/embed/t04iGz8txWw" title="Moisés, liberación y formación del pueblo" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe src="https://www.youtube.com/embed/t04iGz8txWw" title="Noé, el diluvio, el pacto y Babel" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 <p style="margin-top:1.5rem;font-weight:600">Mapa mental</p>
 <p>Explora el mapa mental interactivo para ver cómo encaja esta lección en el gran relato de la Escritura.</p>
@@ -285,7 +285,7 @@ export const courseData = [
     "moduleId": 2,
     "moduleTitle": "Pacto, pueblo de Dios y obediencia",
     "weekLabel": "Semana 7",
-    "title": "La ley, el pacto y la santidad de Dios",
+    "title": "Moisés, liberación y formación del pueblo",
     "date": "2026-08-22",
     "disponible": false,
     "verse": null,
@@ -300,7 +300,7 @@ export const courseData = [
     "moduleId": 2,
     "moduleTitle": "Pacto, pueblo de Dios y obediencia",
     "weekLabel": "Semana 8",
-    "title": "Idolatría, desierto y fidelidad de Dios",
+    "title": "Ley, pacto y santidad",
     "date": "2026-08-29",
     "disponible": false,
     "verse": null,
@@ -312,10 +312,10 @@ export const courseData = [
   },
   {
     "id": 9,
-    "moduleId": 3,
-    "moduleTitle": "Reino, sabiduría, profetas y esperanza",
+    "moduleId": 2,
+    "moduleTitle": "Pacto, pueblo de Dios y obediencia",
     "weekLabel": "Semana 9",
-    "title": "David y el reino: liderazgo bajo Dios",
+    "title": "Idolatría, desierto y fidelidad de Dios",
     "date": "2026-09-05",
     "disponible": false,
     "verse": null,
@@ -330,7 +330,7 @@ export const courseData = [
     "moduleId": 3,
     "moduleTitle": "Reino, sabiduría, profetas y esperanza",
     "weekLabel": "Semana 10",
-    "title": "Salmos y Proverbios: oración y sabiduría para vivir",
+    "title": "David y el reino: liderazgo bajo Dios",
     "date": "2026-09-12",
     "disponible": false,
     "verse": null,
@@ -345,7 +345,7 @@ export const courseData = [
     "moduleId": 3,
     "moduleTitle": "Reino, sabiduría, profetas y esperanza",
     "weekLabel": "Semana 11",
-    "title": "Los profetas: volver a Dios con justicia y verdad",
+    "title": "Salmos y Proverbios: oración y sabiduría para vivir",
     "date": "2026-09-19",
     "disponible": false,
     "verse": null,
@@ -360,7 +360,7 @@ export const courseData = [
     "moduleId": 3,
     "moduleTitle": "Reino, sabiduría, profetas y esperanza",
     "weekLabel": "Semana 12",
-    "title": "Esperanza mesiánica: la promesa que apunta hacia Cristo",
+    "title": "Los profetas: volver a Dios con justicia y verdad",
     "date": "2026-09-26",
     "disponible": false,
     "verse": null,
@@ -372,10 +372,10 @@ export const courseData = [
   },
   {
     "id": 13,
-    "moduleId": 4,
-    "moduleTitle": "Jesucristo y el evangelio",
+    "moduleId": 3,
+    "moduleTitle": "Reino, sabiduría, profetas y esperanza",
     "weekLabel": "Semana 13",
-    "title": "Jesús: nacimiento, identidad y misión",
+    "title": "Esperanza mesiánica: la promesa que apunta hacia Cristo",
     "date": "2026-10-03",
     "disponible": false,
     "verse": null,
@@ -390,7 +390,7 @@ export const courseData = [
     "moduleId": 4,
     "moduleTitle": "Jesucristo y el evangelio",
     "weekLabel": "Semana 14",
-    "title": "El Reino de Dios y las enseñanzas de Jesús",
+    "title": "Jesús: nacimiento, identidad y misión",
     "date": "2026-10-10",
     "disponible": false,
     "verse": null,
@@ -405,7 +405,7 @@ export const courseData = [
     "moduleId": 4,
     "moduleTitle": "Jesucristo y el evangelio",
     "weekLabel": "Semana 15",
-    "title": "La cruz: pecado, perdón y gracia",
+    "title": "El Reino de Dios y las enseñanzas de Jesús",
     "date": "2026-10-17",
     "disponible": false,
     "verse": null,
@@ -420,7 +420,7 @@ export const courseData = [
     "moduleId": 4,
     "moduleTitle": "Jesucristo y el evangelio",
     "weekLabel": "Semana 16",
-    "title": "La resurrección y la buena noticia del evangelio",
+    "title": "La cruz: pecado, perdón y gracia",
     "date": "2026-10-24",
     "disponible": false,
     "verse": null,
@@ -432,10 +432,10 @@ export const courseData = [
   },
   {
     "id": 17,
-    "moduleId": 5,
-    "moduleTitle": "Vida del discípulo y la iglesia",
+    "moduleId": 4,
+    "moduleTitle": "Jesucristo y el evangelio",
     "weekLabel": "Semana 17",
-    "title": "El Espíritu Santo y la vida nueva",
+    "title": "La resurrección y la buena noticia del evangelio",
     "date": "2026-10-31",
     "disponible": false,
     "verse": null,
@@ -450,7 +450,7 @@ export const courseData = [
     "moduleId": 5,
     "moduleTitle": "Vida del discípulo y la iglesia",
     "weekLabel": "Semana 18",
-    "title": "Oración, comunión y vida diaria con Dios",
+    "title": "El Espíritu Santo y la vida nueva",
     "date": "2026-11-07",
     "disponible": false,
     "verse": null,
@@ -465,7 +465,7 @@ export const courseData = [
     "moduleId": 5,
     "moduleTitle": "Vida del discípulo y la iglesia",
     "weekLabel": "Semana 19",
-    "title": "La iglesia: familia, cuerpo y servicio",
+    "title": "Oración, comunión y vida diaria con Dios",
     "date": "2026-11-14",
     "disponible": false,
     "verse": null,
@@ -480,7 +480,7 @@ export const courseData = [
     "moduleId": 5,
     "moduleTitle": "Vida del discípulo y la iglesia",
     "weekLabel": "Semana 20",
-    "title": "Misión: compartir la Palabra con humildad",
+    "title": "La iglesia: familia, cuerpo y servicio",
     "date": "2026-11-21",
     "disponible": false,
     "verse": null,
@@ -492,10 +492,10 @@ export const courseData = [
   },
   {
     "id": 21,
-    "moduleId": 6,
-    "moduleTitle": "Madurez, perseverancia y discipulado a otros",
+    "moduleId": 5,
+    "moduleTitle": "Vida del discípulo y la iglesia",
     "weekLabel": "Semana 21",
-    "title": "Cómo leer un pasaje bíblico sin perderse",
+    "title": "Misión: compartir la Palabra con humildad",
     "date": "2026-11-28",
     "disponible": false,
     "verse": null,
@@ -510,7 +510,7 @@ export const courseData = [
     "moduleId": 6,
     "moduleTitle": "Madurez, perseverancia y discipulado a otros",
     "weekLabel": "Semana 22",
-    "title": "Cómo preparar una pequeña enseñanza bíblica",
+    "title": "Cómo leer un pasaje bíblico sin perderse",
     "date": "2026-12-05",
     "disponible": false,
     "verse": null,
@@ -525,7 +525,7 @@ export const courseData = [
     "moduleId": 6,
     "moduleTitle": "Madurez, perseverancia y discipulado a otros",
     "weekLabel": "Semana 23",
-    "title": "Perseverancia, pruebas y esperanza final",
+    "title": "Cómo preparar una pequeña enseñanza bíblica",
     "date": "2026-12-12",
     "disponible": false,
     "verse": null,
@@ -540,7 +540,7 @@ export const courseData = [
     "moduleId": 6,
     "moduleTitle": "Madurez, perseverancia y discipulado a otros",
     "weekLabel": "Semana 24",
-    "title": "Cierre del curso: repaso final y envío a discipular",
+    "title": "Perseverancia, pruebas y esperanza final",
     "date": "2026-12-19",
     "disponible": false,
     "verse": null,
@@ -549,10 +549,26 @@ export const courseData = [
     "activity": `Estamos preparando esta lección con cuidado. Estará disponible próximamente.`,
     "testMakeupUrl": "#",
     "materialDriveUrl": "#"
+  },
+  {
+    "id": 25,
+    "moduleId": 6,
+    "moduleTitle": "Madurez, perseverancia y discipulado a otros",
+    "weekLabel": "Semana 25",
+    "title": "Cierre del curso: repaso final y envío a discipular",
+    "date": "2026-12-26",
+    "disponible": false,
+    "verse": null,
+    "verseRef": null,
+    "summary": `Estamos preparando esta lección con cuidado. Estará disponible próximamente.`,
+    "activity": `Estamos preparando esta lección con cuidado. Estará disponible próximamente.`,
+    "testMakeupUrl": "#",
+    "materialDriveUrl": "#"
   }
+
 ];
 
-export const totalWeeks = 24;
+export const totalWeeks = 25;
 
 export function getLessonById(id) {
   return courseData.find((lesson) => lesson.id === id);
