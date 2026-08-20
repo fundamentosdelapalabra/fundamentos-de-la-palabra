@@ -15,6 +15,7 @@ import Sidebar from './components/Sidebar.jsx'
 import LessonView from './components/LessonView.jsx'
 import Asistencia from './pages/Asistencia.jsx'
 import Certificado from './pages/Certificado.jsx'
+import AdminContenido from './pages/AdminContenido.jsx'
 
 function LoadingScreen() {
   return (
@@ -158,6 +159,14 @@ function AppRoutes() {
         element={
           <RequireConsentedUser>
             <AulaLayout>{(onOpenMenu) => <Certificado onOpenMenu={onOpenMenu} />}</AulaLayout>
+          </RequireConsentedUser>
+        }
+      />
+      <Route
+        path="/aula/admin"
+        element={
+          <RequireConsentedUser>
+            <AulaLayout>{(onOpenMenu) => <AdminContenido onOpenMenu={onOpenMenu} />}</AulaLayout>
           </RequireConsentedUser>
         }
       />

@@ -5,6 +5,7 @@ import App from './App.jsx'
 import { AuthProvider } from './context/AuthContext.jsx'
 import { ProgressProvider } from './context/ProgressContext.jsx'
 import { ThemeProvider } from './context/ThemeContext.jsx'
+import { ContentProvider } from './context/ContentContext.jsx'
 import './index.css'
 
 createRoot(document.getElementById('root')).render(
@@ -13,7 +14,9 @@ createRoot(document.getElementById('root')).render(
       <BrowserRouter>
         <AuthProvider>
           <ProgressProvider>
-            <App />
+            <ContentProvider>
+              <App />
+            </ContentProvider>
           </ProgressProvider>
         </AuthProvider>
       </BrowserRouter>
