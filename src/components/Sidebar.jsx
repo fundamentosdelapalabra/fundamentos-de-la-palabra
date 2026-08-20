@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { NavLink, useNavigate, useParams } from 'react-router-dom'
-import { modules, getModuleLessons } from '../data/courseData.js'
+import { useContent } from '../context/ContentContext.jsx'
 import { useProgress } from '../context/ProgressContext.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
 import { useTheme } from '../context/ThemeContext.jsx'
@@ -19,6 +19,7 @@ const THEME_OPTIONS = [
 
 function ModuleSection({ mod, currentId, isOpenByDefault }) {
   const [open, setOpen] = useState(isOpenByDefault)
+  const { getModuleLessons } = useContent()
   const lessons = getModuleLessons(mod.id)
   const { isCompleted } = useProgress()
 
@@ -121,6 +122,7 @@ export default function Sidebar({ onNavigate }) {
   const { id } = useParams()
   const { user, signOut } = useAuth()
   const { theme, setTheme } = useTheme()
+  const { modules } = useContent()
   const navigate = useNavigate()
   const [menuOpen, setMenuOpen] = useState(false)
   const menuRef = useRef(null)
@@ -277,6 +279,21 @@ export default function Sidebar({ onNavigate }) {
             }
           >
             📊 Seguimiento
+          </NavLink>
+        )}
+
+        {isAdmin(user?.email) && (
+          <NavLink
+            to="/aula/admin"
+            className={({ isActive }) =>
+              `mt-3 flex w-full items-center justify-center gap-2 rounded-lg border-2 px-4 py-2.5 text-sm font-semibold transition-colors ${
+                isActive
+                  ? 'border-navy bg-navy text-white'
+                  : 'border-navy text-navy hover:bg-navy/5 dark:border-navy-light dark:text-navy-light dark:hover:bg-gray-800'
+              }`
+            }
+          >
+            🛠️ Panel de contenido
           </NavLink>
         )}
       </div>

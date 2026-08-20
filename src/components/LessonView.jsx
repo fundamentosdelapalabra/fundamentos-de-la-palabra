@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom'
-import { getLessonById, getNextLessonId } from '../data/courseData.js'
+import { useContent } from '../context/ContentContext.jsx'
 import { useProgress } from '../context/ProgressContext.jsx'
 import ProgressBar from './ProgressBar.jsx'
 import LessonTabs from './LessonTabs.jsx'
@@ -19,6 +19,7 @@ function formatDate(isoDate) {
 export default function LessonView({ onOpenMenu }) {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { getLessonById, getNextLessonId } = useContent()
   const lesson = getLessonById(Number(id))
   const { isCompleted, markAsCompleted } = useProgress()
 
@@ -111,6 +112,18 @@ export default function LessonView({ onOpenMenu }) {
               </footer>
             )}
           </blockquote>
+        )}
+
+        {lesson.videoUrl && (
+          <div className="mt-6 w-full overflow-hidden rounded-xl shadow-soft" style={{ position: 'relative', aspectRatio: '16/9' }}>
+            <iframe
+              src={lesson.videoUrl}
+              title={`Vídeo — ${lesson.title}`}
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0 }}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
         )}
 
         <div className="mt-8">
