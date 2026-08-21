@@ -51,6 +51,279 @@ function CampoArea({ label, ayuda, value, onChange }) {
   )
 }
 
+// -----------------------------------------------------------------------------
+// Cuestionario autocalificado: el profesor crea aquí las preguntas (tipo
+// test, una respuesta correcta) de la lección. Al guardar, se sustituyen
+// todas las preguntas anteriores de esa lección por las que hay en pantalla
+// (es más simple y fiable que ir sincronizando fila a fila). Los intentos que
+// ya hayan hecho los alumnos no se ven afectados: se guardan aparte.
+// -----------------------------------------------------------------------------
+
+let contadorLocal = 0
+function idLocal() {
+  contadorLocal += 1
+  return `local-${contadorLocal}`
+}
+
+function preguntaVacia() {
+  return {
+    localId: idLocal(),
+    enunciado: '',
+    opciones: [
+      { localId: idLocal(), texto: '', correcta: true },
+      { localId: idLocal(), texto: '', correcta: false },
+    ],
+  }
+}
+
+function GestorPreguntas({ leccionId }) {
+  const [preguntas, setPreguntas] = useState(null)
+  const [cargando, setCargando] = useState(true)
+  const [guardando, setGuardando] = useState(false)
+  const [ok, setOk] = useState(false)
+
+  useEffect(() => {
+    let cancelado = false
+    async function cargar() {
+      setCargando(true)
+      const { data } = await supabase
+        .from('preguntas_test')
+        .select('id, enunciado, orden, opciones_test(id, texto, correcta, orden)')
+        .eq('leccion_id', leccionId)
+        .order('orden')
+      if (!cancelado) {
+        const lista = (data || []).map((p) => ({
+          localId: p.id,
+          enunciado: p.enunciado,
+          opciones: [...(p.opciones_test || [])]
+            .sort((a, b) => a.orden - b.orden)
+            .map((o) => ({ localId: o.id, texto: o.texto, correcta: o.correcta })),
+        }))
+        setPreguntas(lista)
+        setCargando(false)
+      }
+    }
+    cargar()
+    return () => {
+      cancelado = true
+    }
+  }, [leccionId])
+
+  function actualizarPregunta(localId, cambios) {
+    setPreguntas((prev) => prev.map((p) => (p.localId === localId ? { ...p, ...cambios } : p)))
+    setOk(false)
+  }
+
+  function actualizarOpcion(preguntaId, opcionId, cambios) {
+    setPreguntas((prev) =>
+      prev.map((p) =>
+        p.localId !== preguntaId
+          ? p
+          : { ...p, opciones: p.opciones.map((o) => (o.localId === opcionId ? { ...o, ...cambios } : o)) }
+      )
+    )
+    setOk(false)
+  }
+
+  function marcarCorrecta(preguntaId, opcionId) {
+    setPreguntas((prev) =>
+      prev.map((p) =>
+        p.localId !== preguntaId
+          ? p
+          : { ...p, opciones: p.opciones.map((o) => ({ ...o, correcta: o.localId === opcionId })) }
+      )
+    )
+    setOk(false)
+  }
+
+  function añadirOpcion(preguntaId) {
+    setPreguntas((prev) =>
+      prev.map((p) =>
+        p.localId !== preguntaId ? p : { ...p, opciones: [...p.opciones, { localId: idLocal(), texto: '', correcta: false }] }
+      )
+    )
+  }
+
+  function quitarOpcion(preguntaId, opcionId) {
+    setPreguntas((prev) =>
+      prev.map((p) => {
+        if (p.localId !== preguntaId || p.opciones.length <= 2) return p
+        const opciones = p.opciones.filter((o) => o.localId !== opcionId)
+        if (!opciones.some((o) => o.correcta)) opciones[0].correcta = true
+        return { ...p, opciones }
+      })
+    )
+    setOk(false)
+  }
+
+  function añadirPregunta() {
+    setPreguntas((prev) => [...(prev || []), preguntaVacia()])
+  }
+
+  function quitarPregunta(localId) {
+    setPreguntas((prev) => prev.filter((p) => p.localId !== localId))
+    setOk(false)
+  }
+
+  async function guardar() {
+    for (const p of preguntas) {
+      if (!p.enunciado.trim()) {
+        alert('Cada pregunta necesita un enunciado.')
+        return
+      }
+      if (p.opciones.some((o) => !o.texto.trim())) {
+        alert('Rellena el texto de todas las opciones (o quita las que sobren).')
+        return
+      }
+      if (!p.opciones.some((o) => o.correcta)) {
+        alert('Marca cuál es la respuesta correcta en cada pregunta.')
+        return
+      }
+    }
+
+    setGuardando(true)
+    const { error: errorBorrar } = await supabase.from('preguntas_test').delete().eq('leccion_id', leccionId)
+    if (errorBorrar) {
+      setGuardando(false)
+      alert('No se pudo guardar: ' + errorBorrar.message)
+      return
+    }
+
+    for (let i = 0; i < preguntas.length; i++) {
+      const p = preguntas[i]
+      const { data: nueva, error } = await supabase
+        .from('preguntas_test')
+        .insert({ leccion_id: leccionId, enunciado: p.enunciado, orden: i })
+        .select('id')
+        .single()
+      if (error || !nueva) {
+        setGuardando(false)
+        alert('No se pudo guardar: ' + (error?.message || 'error desconocido'))
+        return
+      }
+      const filasOpciones = p.opciones.map((o, j) => ({
+        pregunta_id: nueva.id,
+        texto: o.texto,
+        correcta: !!o.correcta,
+        orden: j,
+      }))
+      const { error: errorOp } = await supabase.from('opciones_test').insert(filasOpciones)
+      if (errorOp) {
+        setGuardando(false)
+        alert('No se pudo guardar: ' + errorOp.message)
+        return
+      }
+    }
+
+    setGuardando(false)
+    setOk(true)
+  }
+
+  if (cargando || !preguntas) {
+    return <p className="text-sm text-gray-400 dark:text-gray-500">Cargando preguntas…</p>
+  }
+
+  return (
+    <div className="flex flex-col gap-4 border-t border-gray-100 pt-4 dark:border-gray-800">
+      <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 dark:text-gray-500">
+        Cuestionario (test autocalificado)
+      </p>
+
+      {preguntas.length === 0 && (
+        <p className="text-xs text-gray-400 dark:text-gray-500">
+          Todavía no hay preguntas. Los alumnos verán el enlace de recuperación (si lo has puesto arriba) hasta que
+          añadas al menos una.
+        </p>
+      )}
+
+      {preguntas.map((p, i) => (
+        <div key={p.localId} className="rounded-lg border border-gray-200 p-3 dark:border-gray-700">
+          <div className="flex items-start justify-between gap-2">
+            <span className="mt-2 flex-shrink-0 text-xs font-semibold text-gray-400 dark:text-gray-500">
+              {i + 1}.
+            </span>
+            <textarea
+              value={p.enunciado}
+              onChange={(e) => actualizarPregunta(p.localId, { enunciado: e.target.value })}
+              placeholder="Escribe la pregunta"
+              rows={2}
+              className="flex-1 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-ink dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
+            />
+            <button
+              type="button"
+              onClick={() => quitarPregunta(p.localId)}
+              className="flex-shrink-0 rounded-md p-1.5 text-xs text-gray-400 hover:bg-gray-100 hover:text-red-600 dark:hover:bg-gray-800"
+              title="Eliminar pregunta"
+            >
+              ✕
+            </button>
+          </div>
+
+          <div className="mt-2.5 ml-6 flex flex-col gap-1.5">
+            {p.opciones.map((o) => (
+              <div key={o.localId} className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  name={`correcta-${p.localId}`}
+                  checked={o.correcta}
+                  onChange={() => marcarCorrecta(p.localId, o.localId)}
+                  title="Marcar como respuesta correcta"
+                  className="h-4 w-4 flex-shrink-0"
+                />
+                <input
+                  type="text"
+                  value={o.texto}
+                  onChange={(e) => actualizarOpcion(p.localId, o.localId, { texto: e.target.value })}
+                  placeholder="Texto de la opción"
+                  className="flex-1 rounded-lg border border-gray-200 bg-white px-2.5 py-1.5 text-sm text-ink dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
+                />
+                {p.opciones.length > 2 && (
+                  <button
+                    type="button"
+                    onClick={() => quitarOpcion(p.localId, o.localId)}
+                    className="flex-shrink-0 rounded-md p-1 text-xs text-gray-400 hover:bg-gray-100 hover:text-red-600 dark:hover:bg-gray-800"
+                    title="Quitar opción"
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={() => añadirOpcion(p.localId)}
+              className="mt-0.5 w-fit text-xs font-medium text-navy hover:underline dark:text-navy-light"
+            >
+              + Añadir opción
+            </button>
+          </div>
+        </div>
+      ))}
+
+      <div className="flex items-center gap-3">
+        <button
+          type="button"
+          onClick={añadirPregunta}
+          className="inline-flex items-center gap-2 rounded-lg border border-navy px-4 py-2 text-xs font-semibold text-navy transition-colors hover:bg-navy/5 dark:border-navy-light dark:text-navy-light dark:hover:bg-navy-light/10"
+        >
+          + Añadir pregunta
+        </button>
+        <button
+          type="button"
+          onClick={guardar}
+          disabled={guardando}
+          className="inline-flex items-center gap-2 rounded-lg bg-navy px-4 py-2 text-xs font-semibold text-white shadow-soft transition-colors hover:bg-navy-dark disabled:opacity-50"
+        >
+          {guardando ? 'Guardando…' : 'Guardar preguntas'}
+        </button>
+        {ok && (
+          <span className="text-xs font-medium text-green-600 dark:text-green-400">✓ Guardado</span>
+        )}
+      </div>
+    </div>
+  )
+}
+
 function FilaLeccion({ lesson, cursoId, onGuardado }) {
   const [abierto, setAbierto] = useState(false)
   const [cargando, setCargando] = useState(false)
@@ -208,6 +481,8 @@ function FilaLeccion({ lesson, cursoId, onGuardado }) {
                   </span>
                 )}
               </div>
+
+              {lesson.dbId && <GestorPreguntas leccionId={lesson.dbId} />}
             </div>
           )}
         </div>
