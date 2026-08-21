@@ -21,6 +21,7 @@ function mergeLesson(base, fila) {
   if (!fila) return base
   return {
     ...base,
+    dbId: fila.id,
     videoUrl: toYoutubeEmbed(fila.video_url),
     summary: fila.resumen || base.summary,
     activity: fila.actividad_descripcion || base.activity,
@@ -42,7 +43,7 @@ export function ContentProvider({ children }) {
     setCursoId(curso.id)
     const { data, error } = await supabase
       .from('lecciones')
-      .select('orden, video_url, resumen, actividad_descripcion, material_url, test_url, publicado')
+      .select('id, orden, video_url, resumen, actividad_descripcion, material_url, test_url, publicado')
       .eq('curso_id', curso.id)
     if (!error && data) {
       const map = {}
