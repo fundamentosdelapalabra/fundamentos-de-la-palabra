@@ -309,13 +309,23 @@ export const courseData = [
     "weekLabel": "Semana 8",
     "title": "Ley, pacto y santidad",
     "date": "2026-08-29",
-    "disponible": false,
+    "disponible": true,
     "verse": null,
     "verseRef": null,
-    "summary": `Estamos preparando esta lección con cuidado. Estará disponible próximamente.`,
-    "activity": `Estamos preparando esta lección con cuidado. Estará disponible próximamente.`,
-    "testMakeupUrl": "#",
-    "materialDriveUrl": "#"
+    "summary": `<p>Esta semana descubrimos cómo la ley llega después de la liberación: el pacto del Sinaí, los Diez Mandamientos y el llamado a la santidad como respuesta a la gracia ya recibida, no como condición para ella. Mira el vídeo antes de la clase del viernes.</p>
+<div style="position:relative;width:100%;max-width:720px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;margin-top:1rem">
+  <iframe src="https://www.youtube.com/embed/nfW-SBfUrbQ" title="Ley, pacto y santidad" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<p style="margin-top:1.5rem;font-weight:600">Mapa mental</p>
+<p>Explora el mapa mental interactivo para ver cómo encaja esta lección en el gran relato de la Escritura.</p>
+<a href="https://notebook.google.com/notebook/337ecce5-04e1-4ae7-a3aa-5f12de7bbaaa/artifact/773771c3-f621-4766-a6fd-dddc7e2974d9" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🧠 Abrir Mapa Mental</a>`,
+    "activity": `<p>Repasa los conceptos de esta semana con las tarjetas interactivas y la infografía.</p>
+<div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:0.75rem">
+  <a href="https://notebook.google.com/notebook/337ecce5-04e1-4ae7-a3aa-5f12de7bbaaa/artifact/46a4e3c8-c737-4611-940f-b704756d9ea6" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🃏 Tarjetas Bíblicas</a>
+  <a href="https://claude.ai/code/artifact/880729f4-37a8-4dda-8eab-755b4b1afc95" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">📊 Infografía Interactiva</a>
+</div>`,
+    "testMakeupUrl": "https://notebook.google.com/notebook/337ecce5-04e1-4ae7-a3aa-5f12de7bbaaa/artifact/eae88e82-e649-4bab-bf89-f34f2ae2f734",
+    "materialDriveUrl": "https://drive.google.com/file/d/1G-0ShxvAPCuNwfSBRGH2Ln4gF-R_Xp5j/view?usp=drivesdk"
   },
   {
     "id": 9,
