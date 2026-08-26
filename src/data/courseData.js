@@ -128,7 +128,7 @@ export const courseData = [
 </div>
 <p style="margin-top:1.5rem;font-weight:600">🎙️ Locución — escucha la presentación</p>
 <p>Si prefieres escuchar, aquí tienes una locución en formato pódcast de esta presentación.</p>
-<a href="https://go.ivoox.com/rf/179550242" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🎙️ Escuchar locución</a>`,
+<a href="https://go.ivoox.com/rf/179550242" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🎙️ Escuchar podcast</a>`,
     "activity": `Esta semana no hay actividad: solo te pedimos ver el vídeo de presentación y unirte a la primera clase en vivo el sábado.`,
     "testMakeupUrl": "#",
     "materialDriveUrl": "#"
