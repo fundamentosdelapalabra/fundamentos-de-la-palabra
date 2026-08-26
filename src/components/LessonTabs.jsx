@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useAuth } from '../context/AuthContext.jsx'
 import { useProgress } from '../context/ProgressContext.jsx'
 import { supabase } from '../lib/supabaseClient.js'
+import TestLeccion from './TestLeccion.jsx'
 
 const TABS = [
   { key: 'resumen', label: 'Resumen' },
@@ -83,25 +84,7 @@ export default function LessonTabs({ lesson }) {
           </div>
         )}
 
-        {active === 'test' && (
-          <div className="flex flex-col items-start gap-4">
-            <p className="text-[15px] leading-relaxed text-gray-700 dark:text-gray-300">
-              El cuestionario de esta semana está en NotebookLM. Puedes hacerlo
-              a tu propio ritmo cuando quieras.
-            </p>
-
-            {lesson.testMakeupUrl && lesson.testMakeupUrl !== '#' && (
-              <a
-                href={lesson.testMakeupUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg bg-navy px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-navy-dark"
-              >
-                Hacer el Test
-              </a>
-            )}
-          </div>
-        )}
+        {active === 'test' && <TestLeccion lesson={lesson} />}
 
         {active === 'material' && (
           <div className="flex flex-col items-start gap-4">

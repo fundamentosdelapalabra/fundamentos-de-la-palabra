@@ -8,13 +8,13 @@
 
 import { useAuth } from '../context/AuthContext.jsx'
 import { useProgress } from '../context/ProgressContext.jsx'
-import { courseData } from '../data/courseData.js'
-
-const SEMANAS = courseData.filter((l) => l.moduleId !== 0)
+import { useContent } from '../context/ContentContext.jsx'
 
 export default function Certificado({ onOpenMenu }) {
   const { user } = useAuth()
   const { completedIds } = useProgress()
+  const { courseData } = useContent()
+  const SEMANAS = courseData.filter((l) => l.moduleId !== 0)
 
   const nombre = user?.user_metadata?.nombre
   const apellido = user?.user_metadata?.apellido

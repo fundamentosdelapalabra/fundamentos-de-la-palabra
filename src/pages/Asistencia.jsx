@@ -9,12 +9,10 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext.jsx'
+import { useContent } from '../context/ContentContext.jsx'
 import { supabase } from '../lib/supabaseClient.js'
-import { courseData } from '../data/courseData.js'
 import { isAdmin } from '../lib/admins.js'
 
-const SEMANAS = courseData.filter((l) => l.moduleId !== 0)
-const SEMANAS_DISPONIBLES = SEMANAS.filter((l) => l.disponible).length
 const DIAS_PARA_INACTIVO = 14
 
 function escaparCSV(valor) {
@@ -29,6 +27,9 @@ export default function Asistencia({ onOpenMenu }) {
   const { user, loading: authLoading } = useAuth()
   const navigate = useNavigate()
   const autorizado = isAdmin(user?.email)
+  const { courseData } = useContent()
+  const SEMANAS = courseData.filter((l) => l.moduleId !== 0)
+  const SEMANAS_DISPONIBLES = SEMANAS.filter((l) => l.disponible).length
 
   const [vista, setVista] = useState('semana') // 'semana' | 'resumen'
   const [leccionId, setLeccionId] = useState(courseData[0].id)
@@ -180,7 +181,7 @@ export default function Asistencia({ onOpenMenu }) {
     }
 
     const csv = filas.map((fila) => fila.map(escaparCSV).join(';')).join('\n')
-    const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' })
+    const blob = new Blob([' ' + csv], { type: 'text/csv;charset=utf-8;' })
     const url = URL.createObjectURL(blob)
     const enlace = document.createElement('a')
     enlace.href = url
@@ -378,6 +379,7 @@ export default function Asistencia({ onOpenMenu }) {
             alumnos={alumnos}
             todo={todo}
             cargando={cargandoAlumnos || cargandoResumen}
+            semanasDisponibles={SEMANAS_DISPONIBLES}
           />
         )}
       </div>
@@ -385,7 +387,7 @@ export default function Asistencia({ onOpenMenu }) {
   )
 }
 
-function ResumenGeneral({ alumnos, todo, cargando }) {
+function ResumenGeneral({ alumnos, todo, cargando, semanasDisponibles }) {
   if (cargando || !todo) {
     return <p className="mt-6 text-sm text-gray-400 dark:text-gray-500">Cargando…</p>
   }
@@ -408,15 +410,15 @@ function ResumenGeneral({ alumnos, todo, cargando }) {
     ).length
 
     const asistenciaPct =
-      SEMANAS_DISPONIBLES > 0 ? Math.round((asistenciaCount / SEMANAS_DISPONIBLES) * 100) : null
+      semanasDisponibles > 0 ? Math.round((asistenciaCount / semanasDisponibles) * 100) : null
     const progresoPct =
-      SEMANAS_DISPONIBLES > 0 ? Math.round((leccionCount / SEMANAS_DISPONIBLES) * 100) : null
+      semanasDisponibles > 0 ? Math.round((leccionCount / semanasDisponibles) * 100) : null
 
     const diasInactivo = alumno.ultima_visita
       ? Math.floor((Date.now() - new Date(alumno.ultima_visita).getTime()) / 86400000)
       : null
     const inactivo = diasInactivo === null || diasInactivo >= DIAS_PARA_INACTIVO
-    const atrasado = SEMANAS_DISPONIBLES > 0 && (asistenciaPct < 50 || progresoPct < 50)
+    const atrasado = semanasDisponibles > 0 && (asistenciaPct < 50 || progresoPct < 50)
 
     return {
       alumno,
@@ -466,7 +468,7 @@ function ResumenGeneral({ alumnos, todo, cargando }) {
         </div>
       </div>
 
-      {SEMANAS_DISPONIBLES === 0 && (
+      {semanasDisponibles === 0 && (
         <p className="mt-4 text-sm text-gray-400 dark:text-gray-500">
           Todavía no hay ninguna semana publicada, así que aún no hay porcentajes que mostrar.
         </p>
