@@ -125,7 +125,10 @@ export const courseData = [
     "summary": `<p>Bienvenido a «Fundamentos de la Palabra». Antes de la primera clase en vivo, mira este vídeo de presentación para conocer cómo vamos a estudiar la Biblia juntos durante los próximos 6 meses.</p>
 <div style="position:relative;width:100%;max-width:720px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;margin-top:1rem">
   <iframe src="https://www.youtube.com/embed/WMNd5-si9FM" title="Fundamentos de la Palabra - Vídeo de bienvenida" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>`,
+</div>
+<p style="margin-top:1.5rem;font-weight:600">🎙️ Locución — escucha la presentación</p>
+<p>Si prefieres escuchar, aquí tienes una locución en formato pódcast de esta presentación.</p>
+<a href="https://go.ivoox.com/rf/179550242" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🎙️ Escuchar locución</a>`,
     "activity": `Esta semana no hay actividad: solo te pedimos ver el vídeo de presentación y unirte a la primera clase en vivo el sábado.`,
     "testMakeupUrl": "#",
     "materialDriveUrl": "#"
