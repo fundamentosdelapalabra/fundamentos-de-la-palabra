@@ -337,13 +337,29 @@ export const courseData = [
     "weekLabel": "Semana 9",
     "title": "Idolatría, desierto y fidelidad de Dios",
     "date": "2026-09-05",
-    "disponible": false,
-    "verse": null,
-    "verseRef": null,
-    "summary": `Estamos preparando esta lección con cuidado. Estará disponible próximamente.`,
-    "activity": `Estamos preparando esta lección con cuidado. Estará disponible próximamente.`,
-    "testMakeupUrl": "#",
-    "materialDriveUrl": "#"
+    "disponible": true,
+    "verse": "Jehová, tardo para la ira y grande en misericordia, que perdona la iniquidad y la rebelión, aunque de ningún modo tendrá por inocente al culpable.",
+    "verseRef": "Números 14:18",
+    "summary": `<p>Israel ha sido liberado, ha recibido el pacto y ha conocido la voluntad de Dios; sin embargo, el corazón humano sigue inclinándose a la idolatría, a la queja y a la incredulidad. Esta semana recorremos el becerro de oro (Éxodo 32), la queja en el desierto (Números 11), el informe de los espías (Números 13-14) y Meriba (Números 20): el desierto revela el corazón humano, pero también revela la fidelidad de Dios. Mira el vídeo antes de la clase del sábado.</p>
+<div style="position:relative;width:100%;max-width:720px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;margin-top:1rem">
+  <iframe src="https://www.youtube.com/embed/c4ixlGSGWKc" title="Idolatría, desierto y fidelidad de Dios" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<p style="margin-top:1.5rem;font-weight:600">Mapa mental</p>
+<p>Explora el mapa mental interactivo para ver cómo encaja esta lección en el gran relato de la Escritura.</p>
+<a href="https://notebook.google.com/notebook/d3879ec7-a354-469a-809e-d9bdeb1ac695/artifact/6b771baf-0a68-4389-b67a-55f80d2ced54" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🧠 Abrir Mapa Mental</a>
+<p style="margin-top:1.5rem;font-weight:600">Podcast</p>
+<p>Escucha este podcast antes de la clase: una reflexión sobre por qué, como Israel en el desierto, a veces saboteamos nuestra propia libertad.</p>
+<audio controls style="width:100%;max-width:480px;margin-top:0.5rem">
+  <source src="/podcast-semana9.mp3" type="audio/mpeg" />
+  Tu navegador no soporta el elemento de audio. <a href="/podcast-semana9.mp3">Descarga el podcast aquí</a>.
+</audio>`,
+    "activity": `<p>Repasa los conceptos de esta semana con las tarjetas interactivas y la infografía.</p>
+<div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:0.75rem">
+  <a href="https://notebook.google.com/notebook/d3879ec7-a354-469a-809e-d9bdeb1ac695/artifact/428e9de4-9349-4d08-b327-ee62dcbb8250" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🃏 Tarjetas Bíblicas</a>
+  <a href="https://claude.ai/code/artifact/a94bf568-324e-4f2d-bb50-e8a9975cd065" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">📊 Infografía Interactiva</a>
+</div>`,
+    "testMakeupUrl": "https://notebook.google.com/notebook/d3879ec7-a354-469a-809e-d9bdeb1ac695/artifact/9925e641-8ca3-448b-8718-396b044a4ef6",
+    "materialDriveUrl": "/material-semana9.pptx"
   },
   {
     "id": 10,
