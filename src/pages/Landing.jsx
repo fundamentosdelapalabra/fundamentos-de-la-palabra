@@ -73,7 +73,7 @@ const MOSTRAR_MAPA_INTERACTIVO = true
 
 const DETAILS = [
   { label: 'Grupo pequeño por Meet' },
-  { label: 'Sábados a las 10:00 PM (hora española)' },
+  { label: 'Viernes a las 10:00 PM (hora española)' },
   { label: '6 meses de formación' },
 ]
 
