@@ -390,7 +390,7 @@ export const courseData = [
             <a href="https://claude.ai/artifact/3oakGHqDEL5k1yPSAq7fUV" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">📊 Infografía Interactiva</a>
             </div>`,
         "testMakeupUrl": "https://notebook.google.com/notebook/74a15314-961b-4b6f-aceb-aec30025ea1d/artifact/edcbb65b-6e8e-4bd9-bedf-f75e0ce087e3",
-        "materialDriveUrl": "/material-semana10.pptx"
+        "materialDriveUrl": "https://docs.google.com/presentation/d/1NOjDj3hGFqa0hHljHzVreMpkTUAcryeT/edit?usp=sharing&ouid=113236244804924227906&rtpof=true&sd=true"
   },
   {
         "id": 11,
