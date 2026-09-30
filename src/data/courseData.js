@@ -398,14 +398,24 @@ export const courseData = [
         "moduleTitle": "Reino, sabiduría, profetas y esperanza",
         "weekLabel": "Semana 11",
         "title": "Salmos y Proverbios: oración y sabiduría para vivir",
-        "date": "2026-09-19",
-        "disponible": false,
+        "date": "2026-10-02",
+        "disponible": true,
         "verse": null,
         "verseRef": null,
-        "summary": `Estamos preparando esta lección con cuidado. Estará disponible próximamente.`,
-        "activity": `Estamos preparando esta lección con cuidado. Estará disponible próximamente.`,
-        "testMakeupUrl": "#",
-        "materialDriveUrl": "#"
+        "summary": `<p>Esta semana entramos en los libros de Salmos y Proverbios: cómo orar con sinceridad delante de Dios en toda circunstancia -alabanza, lamento, gratitud, duda- y cómo la sabiduría práctica de Proverbios nos enseña a vivir con temor de Dios en lo cotidiano. Mira el vídeo antes de la clase del viernes.</p>
+        <div style="position:relative;width:100%;max-width:720px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;margin-top:1rem">
+          <iframe src="https://www.youtube.com/embed/aWNNJaX_TWQ" title="Salmos y Proverbios: oración y sabiduría para vivir" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <p style="margin-top:1.5rem;font-weight:600">🎙️ Locución — escucha el resumen</p>
+          <p>Si prefieres escuchar, aquí tienes una locución en formato pódcast con los puntos clave de esta semana.</p>
+          <a href="https://notebook.google.com/notebook/37495db4-9e6f-44a4-b9f8-f5e9916460bf/artifact/8a353e22-da81-471a-98d6-8ffeacf8c8df" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🎙️ Escuchar locución</a>`,
+        "activity": `<p>Repasa los conceptos de esta semana con las tarjetas interactivas y la infografía.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:0.75rem">
+          <a href="https://notebook.google.com/notebook/37495db4-9e6f-44a4-b9f8-f5e9916460bf/artifact/dd66cf89-4593-43ce-ae64-24b012ebb98f" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🃏 Tarjetas Bíblicas</a>
+            <a href="https://claude.ai/artifact/7GG5gErXcS8qkj67349wUj" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">📊 Infografía Interactiva</a>
+            </div>`,
+        "testMakeupUrl": "https://notebook.google.com/notebook/37495db4-9e6f-44a4-b9f8-f5e9916460bf/artifact/12077306-6a96-4182-b950-1b9a17608d36",
+        "materialDriveUrl": "https://notebook.google.com/notebook/37495db4-9e6f-44a4-b9f8-f5e9916460bf/artifact/dc5bb60c-32f7-40ea-a60d-b59c658e5804"
   },
   {
         "id": 12,
