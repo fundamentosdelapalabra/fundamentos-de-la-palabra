@@ -471,19 +471,32 @@ export const courseData = [
             "materialDriveUrl": "https://notebooklm.link.google/QsyUBGP45K5n"
   },
   {
-    "id": 14,
-            "moduleId": 4,
-            "moduleTitle": "Jesucristo y el evangelio",
-            "weekLabel": "Semana 14",
-            "title": "Jesús: nacimiento, identidad y misión",
-            "date": "2026-10-10",
-            "disponible": false,
-            "verse": null,
-            "verseRef": null,
-            "summary": `Estamos preparando esta lección con cuidado. Estará disponible próximamente.`,
-            "activity": `Estamos preparando esta lección con cuidado. Estará disponible próximamente.`,
-            "testMakeupUrl": "#",
-            "materialDriveUrl": "#"
+        "id": 14,
+        "moduleId": 4,
+        "moduleTitle": "Jesucristo y el evangelio",
+        "weekLabel": "Semana 14",
+        "title": "Jesús: nacimiento, identidad y misión",
+        "date": "2026-10-10",
+        "disponible": true,
+        "verse": null,
+        "verseRef": null,
+        "summary": `<p>Esta semana damos un paso decisivo: dejamos atrás el Antiguo Testamento y entramos en el evangelio. Estudiamos quién es Jesús según los Evangelios — su nacimiento, su identidad y la misión que él mismo anuncia — como punto de partida para todo lo que viene después. Mira el vídeo antes de la clase.</p>
+            <div style="position:relative;width:100%;max-width:720px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;margin-top:1rem">
+                  <iframe src="https://www.youtube.com/embed/C9fZaKBoi0I" title="Jesús: nacimiento, identidad y misión" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      </div>
+                          <p style="margin-top:1.5rem;font-weight:600">Mapa mental</p>
+                              <p>Explora el mapa mental interactivo para ver cómo encaja esta lección en el gran relato de la Escritura.</p>
+                                  <a href="https://notebooklm.link.google/wkd1jDVZ3OQd" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🧠 Abrir Mapa Mental</a>
+                                      <p style="margin-top:1.5rem;font-weight:600">🎙️ Locución — escucha el resumen</p>
+                                          <p>Si prefieres escuchar, aquí tienes una locución en formato pódcast con los puntos clave de esta semana.</p>
+                                              <a href="https://notebooklm.link.google/6mW0AWQK4deA" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🎙️ Escuchar locución</a>`,
+        "activity": `<p>Repasa los conceptos de esta semana con las tarjetas interactivas y la infografía.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:0.75rem">
+                  <a href="https://notebooklm.link.google/q3NT3y7ZdNvf" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🃏 Abrir Tarjetas Bíblicas</a>
+                        <a href="https://claude.ai/artifact/7QaUfrdPsPmETGW6TurQ8h" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">📊 Abrir Infografía Interactiva</a>
+                            </div>`,
+        "testMakeupUrl": "https://notebooklm.link.google/ZYfdiRfItGkd",
+        "materialDriveUrl": "https://notebooklm.link.google/Wh1EeHR3oYhA"
   },
   {
             "id": 15,
