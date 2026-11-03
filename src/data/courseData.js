@@ -499,19 +499,32 @@ export const courseData = [
         "materialDriveUrl": "https://notebooklm.link.google/Wh1EeHR3oYhA"
   },
   {
-            "id": 15,
-            "moduleId": 4,
-            "moduleTitle": "Jesucristo y el evangelio",
-            "weekLabel": "Semana 15",
-            "title": "El Reino de Dios y las enseñanzas de Jesús",
-            "date": "2026-10-17",
-            "disponible": false,
-            "verse": null,
-            "verseRef": null,
-            "summary": `Estamos preparando esta lección con cuidado. Estará disponible próximamente.`,
-            "activity": `Estamos preparando esta lección con cuidado. Estará disponible próximamente.`,
-            "testMakeupUrl": "#",
-            "materialDriveUrl": "#"
+        "id": 15,
+        "moduleId": 4,
+        "moduleTitle": "Jesucristo y el evangelio",
+        "weekLabel": "Semana 15",
+        "title": "El Reino de Dios y las enseñanzas de Jesús",
+        "date": "2026-10-17",
+        "disponible": true,
+        "verse": null,
+        "verseRef": null,
+        "summary": `<p>Esta semana seguimos avanzando en el evangelio: después de conocer quién es Jesús, estudiamos el corazón de su predicación, el Reino de Dios, y cómo sus enseñanzas — parábolas, bienaventuranzas, llamadas a la conversión — revelan cómo es ese Reino y qué significa vivir bajo él. Mira el vídeo antes de la clase.</p>
+            <div style="position:relative;width:100%;max-width:720px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;margin-top:1rem">
+                  <iframe src="https://www.youtube.com/embed/gFd4KoRioys" title="El Reino de Dios y las enseñanzas de Jesús" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      </div>
+                          <p style="margin-top:1.5rem;font-weight:600">Mapa mental</p>
+                              <p>Explora el mapa mental interactivo para ver cómo encaja esta lección en el gran relato de la Escritura.</p>
+                                  <a href="https://notebooklm.link.google/n9SV1FqtvpO1" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🧠 Abrir Mapa Mental</a>
+                                      <p style="margin-top:1.5rem;font-weight:600">🎙️ Locución — escucha el resumen</p>
+                                          <p>Si prefieres escuchar, aquí tienes una locución en formato pódcast con los puntos clave de esta semana.</p>
+                                              <a href="https://notebooklm.link.google/Qc2Yoea7tGaW" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.75rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🎙️ Escuchar locución</a>`,
+        "activity": `<p>Repasa los conceptos de esta semana con las tarjetas interactivas y la infografía.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:0.75rem">
+                  <a href="https://notebooklm.link.google/2ytyiUlqtqLP" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">🃏 Abrir Tarjetas Bíblicas</a>
+                        <a href="https://claude.ai/artifact/WyyTvygDGKV4vBgFKneBRS" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;background:#295674;color:white;border-radius:8px;text-decoration:none;font-size:0.875rem;font-weight:600">📊 Abrir Infografía Interactiva</a>
+                            </div>`,
+        "testMakeupUrl": "https://notebooklm.link.google/pPk7lQkMEm2x",
+        "materialDriveUrl": "https://notebooklm.link.google/XgEj9sbTTqkD"
   },
   {
             "id": 16,
